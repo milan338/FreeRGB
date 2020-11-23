@@ -3,11 +3,13 @@ import json
 from os import path
 
 
-class Preferences():
-    def __init__(self, *args, **kwargs):
+class JsonIO():
+    def __init__(self, filename, *args, **kwargs):
         self.base_path = path.dirname(__file__)
+        # self.json_path = path.abspath(
+        #     path.join(self.base_path, 'preferences.json'))
         self.json_path = path.abspath(
-            path.join(self.base_path, '..', '..', 'preferences.json'))
+            path.join(self.base_path, filename))
 
         with open(self.json_path, 'r') as file:
             self.data = json.load(file)
@@ -32,4 +34,4 @@ class Preferences():
 
 
 if __name__ == '__main__':
-    Preferences()
+    JsonIO()

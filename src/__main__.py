@@ -23,11 +23,15 @@
 # store serial messages in array
 # clear array whenever reload / clear output button
 
+# Button to reset settings
+
 
 import sys
 
+from ui import getPath
+from ui.monitor.SerialMonitor import SerialMonitor
 from ui.widgets.ToggleSwitch import ToggleSwitch
-
+from ui.widgets.LargeButton import CreateLargeButton
 from ui.Ui_MainWindow import Ui_Form
 
 from PyQt5 import QtWidgets
@@ -51,15 +55,16 @@ class MainWindow(QtWidgets.QWidget):
         self.colour_picker = QtWidgets.QColorDialog(self)
         self.ui.context_menus.hide()
 
-    def mousePressEvent(self, event):
-        self.handleButton()
+        self.x = 0
 
     def setupButtons(self):
         # Bottom bar
         self.ui.btn_version.setText(self.version_name)
+        self.ui.btn_device_debug.clicked.connect(
+            lambda: self.initSerial())
         self.ui.btn_effect_off.clicked.connect(self.toggleLeds)
         self.ui.btn_device_information.clicked.connect(
-            lambda: QtWidgets.QMessageBox.information(self, 'Device Information', 'COM Port: \nStrips Connected: \nArduRGB Version: \nBoard: \nBaud Rate: '))
+            lambda: QtWidgets.QMessageBox.information(self, 'Device Information', 'Device Name: \nCOM Port: \nStrips Connected: \nArduRGB Version: \nBoard: \nBaud Rate: '))
         self.ui.slider_brightness.sliderReleased.connect(self.getBright)
 
         # Left bar
@@ -74,6 +79,8 @@ class MainWindow(QtWidgets.QWidget):
 
         # Effects menu
         self.ui.btn_effect_solid.clicked.connect(self.getColour)
+        self.ui.btn_menu_effect_new.clicked.connect(
+            lambda: self.addButton(self.ui.main_menu_button_layout))
 
         # Settings menu
         self.switch_advanced = ToggleSwitch()
@@ -119,13 +126,27 @@ class MainWindow(QtWidgets.QWidget):
         self.handleButton()
         print('serial sent')
 
+    def initSerial(self):
+        self.serial_monitor = SerialMonitor()
+        self.serial_monitor.show()
+
+    def mousePressEvent(self, event):
+        self.handleButton()
+
+    def addButton(self, vertical_layout):
+        # CreateLargeButton('text' + str(self.x), 'object', False, self.ui.effects_scroll_region,
+        #                   self.ui.verticalLayout_2, getPath('button_generic_primary.qss'))
+        CreateLargeButton('text' + str(self.x), 'object', False, self.ui.effects_scroll_region,
+                          vertical_layout, getPath('button_generic_primary.qss'))
+        self.x += 1
+
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
 
     window = MainWindow()
-    window.setWindowTitle('FreeRGB')
+    window.setWindowTitle('title')
     # window.setWindowIcon()
     window.show()
 
-    sys.exit(app.exec())
+    sys.exit(app.exec_())

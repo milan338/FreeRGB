@@ -1,6 +1,8 @@
+# minimum width for serial monitor lines i.e. if the message is too long then instead of shrinking text a horizontal scrollbar will appear - select only appear when need option
 import sys
+import os
 
-from Ui_SerialMonitor import Ui_Form  # type: ignore
+from ui.monitor.Ui_SerialMonitor import Ui_Form
 
 from PyQt5 import QtWidgets
 
@@ -12,8 +14,10 @@ class SerialMonitor(QtWidgets.QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
+        print(os.getcwd())
+
     def updateMonitor(self, entries=[]):
-        print('hi')
+        print('tmp')
 
 
 if __name__ == '__main__':
