@@ -4,7 +4,7 @@ from os import path
 
 
 class JsonIO():
-    def __init__(self, filename, *args, **kwargs):
+    def __init__(self, filename):
         self.base_path = path.dirname(__file__)
         # self.json_path = path.abspath(
         #     path.join(self.base_path, 'preferences.json'))
@@ -14,10 +14,12 @@ class JsonIO():
         with open(self.json_path, 'r') as file:
             self.data = json.load(file)
 
-        self.writeEntry('thing')
+        # self.writeEntry('thing')
+        # self.writeEntry(entry)
 
     def readEntry(self, entry):
         try:
+            # print(self.data[entry])
             return self.data[entry]
         except:
             return None
@@ -34,4 +36,14 @@ class JsonIO():
 
 
 if __name__ == '__main__':
-    JsonIO()
+    # JsonIO()
+    main = JsonIO('menus.json').readEntry('main_menu')
+    print(main)
+    for key, other in main.items():
+        print(key)
+        print(other)
+        JsonIO('menus.json').readEntry(key)
+        for element, attributes in other.items():
+            print(attributes)
+        # for thing, contents in key:
+        #     print(thing)

@@ -1,22 +1,15 @@
 from PyQt5 import QtCore
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QPushButton
 
 
 class CreateLargeButton():
-    def __init__(self, text, obj_name, toggle_button, scroll_element, vertical_element, style_sheet):
-        self.toggle_button = toggle_button
+    def __init__(self, vertical_element, spacer=False):
         self.vertical_element = vertical_element
-
         # Add spacer between buttons
-        self.vertical_element.addItem(QtWidgets.QSpacerItem(
-            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed))
+        if spacer:
+            self.vertical_element.addItem(QtWidgets.QSpacerItem(
+                20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed))
         self.translate = QtCore.QCoreApplication.translate
-
-        # If button is normal pushbutton
-        if not toggle_button:
-            self.createGenericButton(
-                text, obj_name, scroll_element, style_sheet)
 
     def createGenericButton(self, text, obj_name, scroll_element, style_sheet):
         self.btn = QtWidgets.QPushButton(scroll_element)
