@@ -129,12 +129,12 @@ QPushButton:pressed
     <string>Effect Payload</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_error_exists">
+  <widget class="QLabel" name="label_error">
    <property name="geometry">
     <rect>
      <x>30</x>
      <y>150</y>
-     <width>111</width>
+     <width>231</width>
      <height>20</height>
     </rect>
    </property>
@@ -142,23 +142,7 @@ QPushButton:pressed
     <string notr="true">color: rgb(255, 0, 0);</string>
    </property>
    <property name="text">
-    <string>Effect Already Exists</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_error_blank">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>150</y>
-     <width>121</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 0, 0);</string>
-   </property>
-   <property name="text">
-    <string>Entries cannot be blank</string>
+    <string/>
    </property>
   </widget>
  </widget>

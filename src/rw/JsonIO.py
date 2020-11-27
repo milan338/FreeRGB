@@ -25,8 +25,12 @@ class JsonIO():
             return None
         print(self.data['AdvancedMode'])
 
-    def writeEntry(self, entry):
-        # modify file here
+    def writeEntry(self, menu, layout, entry, entry_name, command):
+        self.new_json = {
+            'text': entry_name,
+            'command': command}
+        self.data[menu][layout][entry] = self.new_json
+
         try:
             with open(self.json_path, 'w') as file:
                 file.write(json.dumps(self.data, indent=4, sort_keys=True))

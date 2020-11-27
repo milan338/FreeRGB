@@ -93,7 +93,8 @@ class MainWindow(QtWidgets.QWidget):
         # self.ui.btn_menu_effect_new.clicked.connect(
         #     lambda: self.addButton(self.ui.main_menu_button_layout))
 
-        self.ui.btn_menu_effect_new.clicked.connect(self.initDialogue)
+        self.ui.btn_menu_effect_new.clicked.connect(
+            lambda: self.initDialogue('serial_direct', 'Create New Effect'))
 
         # Settings menu
         self.switch_advanced = ToggleSwitch()
@@ -149,9 +150,9 @@ class MainWindow(QtWidgets.QWidget):
         self.serial_monitor = SerialMonitor()
         self.setWindowParams(self.serial_monitor, 'ArduRGB Debug View')
 
-    def initDialogue(self):
-        self.input_dialogue = InputDialogue()
-        self.setWindowParams(self.input_dialogue, 'Create New Effect')
+    def initDialogue(self, input_type, window_title):
+        self.input_dialogue = InputDialogue(input_type)
+        self.setWindowParams(self.input_dialogue, window_title)
 
     def mousePressEvent(self, event):
         self.handleButton()
