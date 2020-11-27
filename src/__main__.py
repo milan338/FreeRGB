@@ -29,6 +29,10 @@
 
 # Attach scrollbar on side of menu to scroll the main window
 
+# Move effects to different positions in menu
+# Store current btn in desired position and current btn in original position
+# Replace the two btn
+
 import sys
 
 from rw.JsonIO import JsonIO
@@ -38,7 +42,7 @@ from ui.GenerateButtons import GenerateButtons
 from ui.monitor.SerialMonitor import SerialMonitor
 from ui.input.InputDialogue import InputDialogue
 from ui.widgets.ToggleSwitch import ToggleSwitch
-from ui.widgets.LargeButton import CreateLargeButton
+from ui.widgets.CreateLargeButton import CreateLargeButton
 from ui.Ui_MainWindow import Ui_Form
 
 from PyQt5 import QtWidgets
@@ -62,11 +66,15 @@ class MainWindow(QtWidgets.QWidget):
         self.colour_picker = QtWidgets.QColorDialog(self)
         self.ui.context_menus.hide()
 
-        self.x = 0
-
-    def setupButtons(self):
+    def refreshMenus(self):
+        GenerateButtons('main_menu').removeButtons(
+            self.ui.main_menu_button_layout)
         GenerateButtons('main_menu').generateGenericButtons(self.ui.main_menu_button_layout,
                                                             self.ui.effects_scroll_region, getPath('button_generic_primary.qss'), spacer=True)
+
+    def setupButtons(self):
+        self.refreshMenus()
+
         # Bottom bar
         self.ui.btn_version.setText(self.version_name)
         self.ui.btn_device_debug.clicked.connect(
@@ -93,8 +101,8 @@ class MainWindow(QtWidgets.QWidget):
         # self.ui.btn_menu_effect_new.clicked.connect(
         #     lambda: self.addButton(self.ui.main_menu_button_layout))
 
-        self.ui.btn_menu_effect_new.clicked.connect(
-            lambda: self.initDialogue('serial_direct', 'Create New Effect'))
+        self.ui.btn_menu_effect_new.clicked.connect(lambda: self.initDialogue(
+            'serial_direct', 'main_menu', 'main_menu_button_layout', 'Create New Effect'))
 
         # Settings menu
         self.switch_advanced = ToggleSwitch()
@@ -150,8 +158,9 @@ class MainWindow(QtWidgets.QWidget):
         self.serial_monitor = SerialMonitor()
         self.setWindowParams(self.serial_monitor, 'ArduRGB Debug View')
 
-    def initDialogue(self, input_type, window_title):
-        self.input_dialogue = InputDialogue(input_type)
+    def initDialogue(self, input_type, menu, layout, window_title):
+        self.input_dialogue = InputDialogue(
+            input_type, menu, layout, lambda: self.refreshMenus())
         self.setWindowParams(self.input_dialogue, window_title)
 
     def mousePressEvent(self, event):
@@ -164,7 +173,6 @@ class MainWindow(QtWidgets.QWidget):
         #     'text' + str(self.x), 'object', self.ui.effects_scroll_region, getPath('button_generic_primary.qss'))
         GenerateButtons('main_menu').generateGenericButtons(
             vertical_layout, self.ui.effects_scroll_region, getPath('button_generic_primary.qss'), spacer=True)
-        self.x += 1
 
 
 if __name__ == '__main__':

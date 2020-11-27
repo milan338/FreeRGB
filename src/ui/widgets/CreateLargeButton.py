@@ -9,6 +9,7 @@ class CreateLargeButton():
         if spacer:
             self.vertical_element.addItem(QtWidgets.QSpacerItem(
                 20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed))
+            print(self.vertical_element.findChildren(QtWidgets.QSpacerItem))
         self.translate = QtCore.QCoreApplication.translate
 
     def createGenericButton(self, text, obj_name, scroll_element, style_sheet):
