@@ -45,12 +45,12 @@ from ui.widgets.ToggleSwitch import ToggleSwitch
 from ui.widgets.CreateLargeButton import CreateLargeButton
 from ui.Ui_MainWindow import Ui_Form
 
-from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QWidget, QColorDialog, QMessageBox, QApplication
 from PyQt5 import QtCore
 from PyQt5 import QtGui
 
 
-class MainWindow(QtWidgets.QWidget):
+class MainWindow(QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # UI initialisation
@@ -63,7 +63,7 @@ class MainWindow(QtWidgets.QWidget):
         self.current_brightness = None
         # Setup UI elements
         self.setupButtons()
-        self.colour_picker = QtWidgets.QColorDialog(self)
+        self.colour_picker = QColorDialog(self)
         self.ui.context_menus.hide()
 
     def refreshMenus(self):
@@ -81,7 +81,7 @@ class MainWindow(QtWidgets.QWidget):
             lambda: self.initSerial())
         self.ui.btn_effect_off.clicked.connect(self.toggleLeds)
         self.ui.btn_device_information.clicked.connect(
-            lambda: QtWidgets.QMessageBox.information(self, 'Device Information', 'Device Name: \nCOM Port: \nStrips Connected: \nArduRGB Version: \nBoard: \nBaud Rate: '))
+            lambda: QMessageBox.information(self, 'Device Information', 'Device Name: \nCOM Port: \nStrips Connected: \nArduRGB Version: \nBoard: \nBaud Rate: '))
         self.ui.slider_brightness.sliderReleased.connect(self.getBright)
 
         # Left bar
@@ -176,7 +176,7 @@ class MainWindow(QtWidgets.QWidget):
 
 
 if __name__ == '__main__':
-    app = QtWidgets.QApplication(sys.argv)
+    app = QApplication(sys.argv)
 
     window = MainWindow()
     window.setWindowTitle('title')

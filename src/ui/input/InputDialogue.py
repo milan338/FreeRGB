@@ -4,10 +4,10 @@ from ui.input.Ui_InputDialogue import Ui_Form
 
 from rw.JsonIO import JsonIO
 
-from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QWidget
 
 
-class InputDialogue(QtWidgets.QWidget):
+class InputDialogue(QWidget):
     def __init__(self, input_type, menu, layout, refresh_menus, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

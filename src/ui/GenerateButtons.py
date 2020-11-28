@@ -4,8 +4,6 @@ from rw.JsonIO import JsonIO
 
 from ui.widgets.CreateLargeButton import CreateLargeButton
 
-from PyQt5 import QtWidgets
-
 
 class GenerateButtons():
     def __init__(self, page):
@@ -19,7 +17,6 @@ class GenerateButtons():
                 # for attribute_name, attribute_value in attributes.items():
 
     def removeButtons(self, layout):
-        print('tmp')
         for i in reversed(range(layout.count())):
             # Attempt to remove spacer item
             try:

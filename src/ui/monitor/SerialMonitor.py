@@ -6,10 +6,10 @@ if __name__ == '__main__':
 else:
     from ui.monitor.Ui_SerialMonitor import Ui_Form
 
-from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QWidget, QApplication
 
 
-class SerialMonitor(QtWidgets.QWidget):
+class SerialMonitor(QWidget):
     def __init__(self, baudrate=0, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -21,7 +21,7 @@ class SerialMonitor(QtWidgets.QWidget):
 
 
 if __name__ == '__main__':
-    app = QtWidgets.QApplication(sys.argv)
+    app = QApplication(sys.argv)
 
     window = SerialMonitor()
     window.setWindowTitle('ArduRGB Debug View')
