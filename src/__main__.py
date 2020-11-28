@@ -43,9 +43,11 @@ from ui.monitor.SerialMonitor import SerialMonitor
 from ui.input.InputDialogue import InputDialogue
 from ui.widgets.ToggleSwitch import ToggleSwitch
 from ui.widgets.CreateLargeButton import CreateLargeButton
+from ui.widgets.CreateMenuRC import CreateMenuRC
 from ui.Ui_MainWindow import Ui_Form
 
 from PyQt5.QtWidgets import QWidget, QColorDialog, QMessageBox, QApplication
+from PyQt5.QtCore import QObject, Qt, QEvent
 from PyQt5 import QtCore
 from PyQt5 import QtGui
 
@@ -62,6 +64,8 @@ class MainWindow(QWidget):
         self.current_colour = None
         self.current_brightness = None
         # Setup UI elements
+        self.right_click_menu = CreateMenuRC(
+            parent=self).effectsButtonMenu(getPath('right_click_menu.qss'))
         self.setupButtons()
         self.colour_picker = QColorDialog(self)
         self.ui.context_menus.hide()
@@ -69,8 +73,8 @@ class MainWindow(QWidget):
     def refreshMenus(self):
         GenerateButtons('main_menu').removeButtons(
             self.ui.main_menu_button_layout)
-        GenerateButtons('main_menu').generateGenericButtons(self.ui.main_menu_button_layout,
-                                                            self.ui.effects_scroll_region, getPath('button_generic_primary.qss'), spacer=True)
+        GenerateButtons('main_menu').generateGenericButtons(self.ui.main_menu_button_layout, self.ui.effects_scroll_region, getPath(
+            'button_generic_primary.qss'), self.right_click_menu, spacer=True)
 
     def setupButtons(self):
         self.refreshMenus()
@@ -165,6 +169,12 @@ class MainWindow(QWidget):
 
     def mousePressEvent(self, event):
         self.handleButton()
+
+    def eventFilter(self, widget, event):
+        if event.type() == QEvent.MouseButtonPress:
+            if event.button() == Qt.RightButton:
+                print(widget.objectName(), 'Right Click')
+        return QObject.event(widget, event)
 
     def addButton(self, vertical_layout):
         # CreateLargeButton('text' + str(self.x), 'object', False, self.ui.effects_scroll_region,
