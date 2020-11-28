@@ -68,16 +68,12 @@ class Ui_Form(object):
 "\n"
 "QPushButton:hover\n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(74, 74, 74);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(89, 89, 89);\n"
-"    border-radius: 10px;\n"
 "}")
         self.btn_serial_clear.setObjectName("btn_serial_clear")
         self.horizontalWidget_2 = QtWidgets.QWidget(Form)
@@ -103,16 +99,12 @@ class Ui_Form(object):
 "\n"
 "QPushButton:hover\n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(74, 74, 74);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(89, 89, 89);\n"
-"    border-radius: 10px;\n"
 "}")
         self.btn_serial_send.setObjectName("btn_serial_send")
 

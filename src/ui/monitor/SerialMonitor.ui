@@ -157,16 +157,12 @@ color: rgb(255, 255, 255);</string>
 
 QPushButton:hover
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(74, 74, 74);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(89, 89, 89);
-	border-radius: 10px;
 }</string>
    </property>
    <property name="text">
@@ -222,16 +218,12 @@ QPushButton:pressed
 
 QPushButton:hover
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(74, 74, 74);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(89, 89, 89);
-	border-radius: 10px;
 }</string>
    </property>
    <property name="text">

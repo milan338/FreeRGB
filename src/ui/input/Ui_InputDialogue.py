@@ -42,16 +42,12 @@ class Ui_Form(object):
 "\n"
 "QPushButton:hover\n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(51, 76, 100);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(90, 164, 253);\n"
-"    border-radius: 10px;\n"
 "}")
         self.btn_submit.setObjectName("btn_submit")
         self.label_effect_name = QtWidgets.QLabel(Form)

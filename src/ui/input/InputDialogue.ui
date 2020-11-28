@@ -81,16 +81,12 @@ border-radius: 10px;</string>
 
 QPushButton:hover
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(51, 76, 100);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(90, 164, 253);
-	border-radius: 10px;
 }</string>
    </property>
    <property name="text">

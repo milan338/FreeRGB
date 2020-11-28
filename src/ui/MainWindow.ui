@@ -55,16 +55,12 @@ background-color: rgb(43, 47, 59);</string>
 
 QPushButton:hover
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(74, 74, 74);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(89, 89, 89);
-	border-radius: 10px;
 }</string>
    </property>
    <property name="text">
@@ -100,16 +96,12 @@ QPushButton:pressed
 
 QPushButton:hover
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(74, 74, 74);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(89, 89, 89);
-	border-radius: 10px;
 }</string>
    </property>
    <property name="text">
@@ -173,13 +165,11 @@ QPushButton:pressed
 QPushButton:hover
 {
 	background-color: rgb(51, 58, 72);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
 	background-color: rgb(51, 76, 100);
-	border-radius: 10px;
 }</string>
    </property>
    <property name="text">
@@ -215,13 +205,11 @@ QPushButton:pressed
 QPushButton:hover
 {
 	background-color: rgb(51, 58, 72);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
 	background-color: rgb(51, 76, 100);
-	border-radius: 10px;
 }</string>
    </property>
    <property name="text">
@@ -257,13 +245,11 @@ QPushButton:pressed
 QPushButton:hover
 {
 	background-color: rgb(74, 74, 74);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
 	background-color: rgb(89, 89, 89);
-	border-radius: 10px;
 }</string>
    </property>
    <property name="text">
@@ -299,13 +285,11 @@ QPushButton:pressed
 QPushButton:hover
 {
 	background-color: rgb(74, 74, 74);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
 	background-color: rgb(89, 89, 89);
-	border-radius: 10px;
 }</string>
    </property>
    <property name="text">
@@ -341,13 +325,11 @@ QPushButton:pressed
 QPushButton:hover
 {
 	background-color: rgb(51, 58, 72);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
 	background-color: rgb(51, 76, 100);
-	border-radius: 10px;
 }</string>
    </property>
    <property name="text">
@@ -499,16 +481,12 @@ QPushButton:pressed
 
 QPushButton:hover
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(51, 76, 100);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(90, 164, 253);
-	border-radius: 10px;
 }</string>
          </property>
          <property name="text">
@@ -569,7 +547,7 @@ QPushButton:pressed
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>669</width>
+        <width>671</width>
         <height>666</height>
        </rect>
       </property>
@@ -832,16 +810,12 @@ border-radius: 10px;</string>
 
 QPushButton:hover
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(51, 76, 100);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(90, 164, 253);
-	border-radius: 10px;
 }</string>
          </property>
          <property name="text">
@@ -895,16 +869,12 @@ QPushButton:pressed
 
 QPushButton:hover
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(51, 76, 100);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(90, 164, 253);
-	border-radius: 10px;
 }</string>
          </property>
          <property name="text">
@@ -946,7 +916,7 @@ QPushButton:pressed
     <string notr="true">background-color: rgb(27, 27, 35);</string>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="context_device">
     <widget class="QScrollArea" name="context_devices">
@@ -972,8 +942,8 @@ border-radius: 10px;
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>119</width>
-        <height>189</height>
+        <width>121</width>
+        <height>191</height>
        </rect>
       </property>
       <widget class="QPushButton" name="stub_device">
@@ -1007,16 +977,12 @@ border-radius: 10px;
 
 QPushButton:hover
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(51, 76, 100);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(90, 164, 253);
-	border-radius: 10px;
 }</string>
        </property>
        <property name="text">
@@ -1085,16 +1051,12 @@ border-radius: 10px;
 
 QPushButton:hover
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(51, 76, 100);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(90, 164, 253);
-	border-radius: 10px;
 }</string>
        </property>
        <property name="text">
@@ -1124,16 +1086,12 @@ QPushButton:pressed
 
 QPushButton:hover
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(51, 58, 72);
-	border-radius: 10px;
 }
 
 QPushButton:pressed 
 {
-	color: rgb(255, 255, 255);
 	background-color: rgb(51, 76, 100);
-	border-radius: 10px;
 }</string>
    </property>
    <property name="text">
@@ -1196,24 +1154,12 @@ QSlider::handle:horizontal:hover
 { 
 	background-color: rgb(51, 76, 100);
 	border: 2px solid rgb(51, 76, 100);
-	width: 16px; 
-	height: 16px;
-	line-height: 20px; 
-	margin-top: -5px; 
-	margin-bottom: -5px; 
-	border-radius: 10px; 
 }
 
 QSlider::handle:horizontal:pressed
 { 
 	background-color: rgb(90, 164, 253);
 	border: 2px solid rgb(90, 164, 253);
-	width: 16px; 
-	height: 16px;
-	line-height: 20px; 
-	margin-top: -5px; 
-	margin-bottom: -5px; 
-	border-radius: 10px;
 }</string>
    </property>
    <property name="orientation">

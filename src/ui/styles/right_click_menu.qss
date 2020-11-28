@@ -11,13 +11,9 @@ QMenu::item {
 }
 
 QMenu::item:selected {
-  color: rgb(255, 255, 255);
   background-color: rgb(51, 58, 72);
-  border-radius: 10px;
 }
 
 QMenu::item:pressed {
-  color: rgb(255, 255, 255);
   background-color: rgb(51, 76, 100);
-  border-radius: 10px;
 }

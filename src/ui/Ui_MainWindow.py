@@ -35,16 +35,12 @@ class Ui_Form(object):
 "\n"
 "QPushButton:hover\n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(74, 74, 74);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(89, 89, 89);\n"
-"    border-radius: 10px;\n"
 "}")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\../assets/icons/ico_effects.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -62,16 +58,12 @@ class Ui_Form(object):
 "\n"
 "QPushButton:hover\n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(74, 74, 74);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(89, 89, 89);\n"
-"    border-radius: 10px;\n"
 "}")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\../assets/icons/ico_settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -103,13 +95,11 @@ class Ui_Form(object):
 "QPushButton:hover\n"
 "{\n"
 "    background-color: rgb(51, 58, 72);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
 "    background-color: rgb(51, 76, 100);\n"
-"    border-radius: 10px;\n"
 "}")
         self.btn_effect_off.setText("")
         icon2 = QtGui.QIcon()
@@ -128,13 +118,11 @@ class Ui_Form(object):
 "QPushButton:hover\n"
 "{\n"
 "    background-color: rgb(51, 58, 72);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
 "    background-color: rgb(51, 76, 100);\n"
-"    border-radius: 10px;\n"
 "}")
         self.btn_device_information.setText("")
         icon3 = QtGui.QIcon()
@@ -153,13 +141,11 @@ class Ui_Form(object):
 "QPushButton:hover\n"
 "{\n"
 "    background-color: rgb(74, 74, 74);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
 "    background-color: rgb(89, 89, 89);\n"
-"    border-radius: 10px;\n"
 "}")
         self.btn_list_device.setText("")
         icon4 = QtGui.QIcon()
@@ -178,13 +164,11 @@ class Ui_Form(object):
 "QPushButton:hover\n"
 "{\n"
 "    background-color: rgb(74, 74, 74);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
 "    background-color: rgb(89, 89, 89);\n"
-"    border-radius: 10px;\n"
 "}")
         self.btn_list_strip.setText("")
         icon5 = QtGui.QIcon()
@@ -203,13 +187,11 @@ class Ui_Form(object):
 "QPushButton:hover\n"
 "{\n"
 "    background-color: rgb(51, 58, 72);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
 "    background-color: rgb(51, 76, 100);\n"
-"    border-radius: 10px;\n"
 "}")
         self.btn_device_debug.setText("")
         icon6 = QtGui.QIcon()
@@ -274,16 +256,12 @@ class Ui_Form(object):
 "\n"
 "QPushButton:hover\n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(51, 76, 100);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(90, 164, 253);\n"
-"    border-radius: 10px;\n"
 "}")
         self.btn_menu_effect_new.setObjectName("btn_menu_effect_new")
         self.verticalLayout_2.addWidget(self.btn_menu_effect_new)
@@ -303,7 +281,7 @@ class Ui_Form(object):
         self.effects_scroll_region_2.setWidgetResizable(True)
         self.effects_scroll_region_2.setObjectName("effects_scroll_region_2")
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 669, 666))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 671, 666))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -392,16 +370,12 @@ class Ui_Form(object):
 "\n"
 "QPushButton:hover\n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(51, 76, 100);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(90, 164, 253);\n"
-"    border-radius: 10px;\n"
 "}")
         self.btn_support.setObjectName("btn_support")
         self.verticalLayout_3.addWidget(self.btn_support)
@@ -424,16 +398,12 @@ class Ui_Form(object):
 "\n"
 "QPushButton:hover\n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(51, 76, 100);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(90, 164, 253);\n"
-"    border-radius: 10px;\n"
 "}")
         self.btn_licenses.setObjectName("btn_licenses")
         self.verticalLayout_3.addWidget(self.btn_licenses)
@@ -456,7 +426,7 @@ class Ui_Form(object):
         self.context_devices.setWidgetResizable(True)
         self.context_devices.setObjectName("context_devices")
         self.scrollAreaWidgetContents_4 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 119, 189))
+        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 121, 191))
         self.scrollAreaWidgetContents_4.setObjectName("scrollAreaWidgetContents_4")
         self.stub_device = QtWidgets.QPushButton(self.scrollAreaWidgetContents_4)
         self.stub_device.setGeometry(QtCore.QRect(10, 20, 101, 30))
@@ -471,16 +441,12 @@ class Ui_Form(object):
 "\n"
 "QPushButton:hover\n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(51, 76, 100);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(90, 164, 253);\n"
-"    border-radius: 10px;\n"
 "}")
         self.stub_device.setObjectName("stub_device")
         self.context_devices.setWidget(self.scrollAreaWidgetContents_4)
@@ -511,16 +477,12 @@ class Ui_Form(object):
 "\n"
 "QPushButton:hover\n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(51, 76, 100);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(90, 164, 253);\n"
-"    border-radius: 10px;\n"
 "}")
         self.stub_strip.setObjectName("stub_strip")
         self.context_strips.setWidget(self.scrollAreaWidgetContents_5)
@@ -536,16 +498,12 @@ class Ui_Form(object):
 "\n"
 "QPushButton:hover\n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(51, 58, 72);\n"
-"    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(51, 76, 100);\n"
-"    border-radius: 10px;\n"
 "}")
         self.btn_version.setIconSize(QtCore.QSize(32, 32))
         self.btn_version.setObjectName("btn_version")
@@ -583,24 +541,12 @@ class Ui_Form(object):
 "{ \n"
 "    background-color: rgb(51, 76, 100);\n"
 "    border: 2px solid rgb(51, 76, 100);\n"
-"    width: 16px; \n"
-"    height: 16px;\n"
-"    line-height: 20px; \n"
-"    margin-top: -5px; \n"
-"    margin-bottom: -5px; \n"
-"    border-radius: 10px; \n"
 "}\n"
 "\n"
 "QSlider::handle:horizontal:pressed\n"
 "{ \n"
 "    background-color: rgb(90, 164, 253);\n"
 "    border: 2px solid rgb(90, 164, 253);\n"
-"    width: 16px; \n"
-"    height: 16px;\n"
-"    line-height: 20px; \n"
-"    margin-top: -5px; \n"
-"    margin-bottom: -5px; \n"
-"    border-radius: 10px;\n"
 "}")
         self.slider_brightness.setOrientation(QtCore.Qt.Horizontal)
         self.slider_brightness.setObjectName("slider_brightness")
@@ -620,7 +566,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         self.main_menus.setCurrentIndex(0)
-        self.context_menus.setCurrentIndex(1)
+        self.context_menus.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
