@@ -1,3 +1,5 @@
+import Globals
+
 from ui.GenerateButtons import GenerateButtons
 
 from PyQt5.QtWidgets import QMenu, QAction
@@ -15,19 +17,16 @@ class CreateMenuRC():
         return(self.menu)
 
     def addOption(self, menu, option_name, option_payload):
-        print(option_name)
-        print(option_payload)
         self.action = QAction(option_name, self.parent)
         self.action.triggered.connect(lambda: self.runFunction(option_payload))
         menu.addAction(self.action)
 
     def runFunction(self, function_name):
-        # GenerateButtons('right_click_menu.json', 'main_menu_right_click_menu').moveButtons(
-        #     'moveButtonUp', direction='down')
-        getattr(GenerateButtons('right_click_menu.json',
-                                'main_menu_right_click_menu'), function_name)('button')
+        print(Globals.current_hovered_btn)
+        # getattr(GenerateButtons('right_click_menu.json',
+        #                         'main_menu_right_click_menu'), function_name)('button')
         try:
             getattr(GenerateButtons('right_click_menu.json',
-                                    'main_menu_right_click_menu'), function_name)()
+                                    'main_menu_right_click_menu'), function_name)(Globals.current_hovered_btn)
         except:
             print('exception')

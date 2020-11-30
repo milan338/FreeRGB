@@ -2,7 +2,7 @@ from ui.Ui_MainWindow import Ui_Form
 
 from rw.JsonIO import JsonIO
 
-from ui.widgets.CreateLargeButton import CreateLargeButton
+from ui.generators.CreateLargeButton import CreateLargeButton
 
 
 class GenerateButtons():
@@ -12,7 +12,7 @@ class GenerateButtons():
     def generateGenericButtons(self, vertical_element, scroll_element, style_sheet, right_click_menu, spacer=False):
         for layout, elements in self.page_contents.items():
             for element, attributes in elements.items():
-                CreateLargeButton(vertical_element, spacer=spacer).createGenericButton(
+                self.btn = CreateLargeButton(vertical_element, spacer=spacer).createGenericButton(
                     attributes['text'], element, scroll_element, style_sheet, right_click_menu)
                 # for attribute_name, attribute_value in attributes.items():
 
@@ -34,6 +34,7 @@ class GenerateButtons():
             print('yes')
 
     def deleteButton(self, button):
+        button.deleteLater()
         print('delete')
 
     def moveButtonUp(self):

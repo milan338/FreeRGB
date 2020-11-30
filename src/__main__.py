@@ -40,8 +40,8 @@ from ui.GenerateButtons import GenerateButtons
 from ui.monitor.SerialMonitor import SerialMonitor
 from ui.input.InputDialogue import InputDialogue
 from ui.widgets.ToggleSwitch import ToggleSwitch
-from ui.widgets.CreateLargeButton import CreateLargeButton
-from ui.widgets.CreateMenuRC import CreateMenuRC
+from ui.generators.CreateLargeButton import CreateLargeButton
+from ui.generators.CreateMenuRC import CreateMenuRC
 from ui.Ui_MainWindow import Ui_Form
 
 from PyQt5.QtWidgets import QWidget, QColorDialog, QMessageBox, QApplication
