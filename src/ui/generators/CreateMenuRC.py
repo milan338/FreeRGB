@@ -22,11 +22,10 @@ class CreateMenuRC():
         menu.addAction(self.action)
 
     def runFunction(self, function_name):
-        print(Globals.current_hovered_btn)
-        # getattr(GenerateButtons('right_click_menu.json',
-        #                         'main_menu_right_click_menu'), function_name)('button')
+        getattr(GenerateButtons('menus.json', 'main_menu_right_click_menu'), function_name)(
+            Globals.current_hovered_btn)
         try:
-            getattr(GenerateButtons('right_click_menu.json',
-                                    'main_menu_right_click_menu'), function_name)(Globals.current_hovered_btn)
+            getattr(GenerateButtons('right_click_menu.json', 'main_menu_right_click_menu'), function_name)(
+                Globals.current_hovered_btn)
         except:
             print('exception')

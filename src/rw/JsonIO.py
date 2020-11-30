@@ -36,6 +36,19 @@ class JsonIO():
         except:
             return 0
 
+    def removeEntry(self, entry):
+        # Cycle through menus and layouts in json to find referenced button
+        for menu in self.data:
+            for layout in self.data[menu]:
+                self.data[menu][layout].pop(entry, None)
+        # Dump new data to file
+        try:
+            with open(self.json_path, 'w') as file:
+                file.write(json.dumps(self.data, indent=4))
+                return 1
+        except:
+            return 0
+
 
 # TMP
 if __name__ == '__main__':
