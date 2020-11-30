@@ -1,11 +1,8 @@
 # check for updates on startup, setting to disable that
 # scan for com ports, arduino gives back information such as number of strips, device name, local device name, other info?
 # option to select com port, option to select led strip
-# ensure QT assets referenced locally
-# patreon / buy coffee in options
 # debug menu / serial monitor -- only show if advanced mode selected in options -- also shows python print statements
 # version button goes to github page
-# make context menu invisible each time a button is pressed
 # On startup get current colour, brightness etc from arduino and adjust values in app
 # Loading bar
 
@@ -18,7 +15,6 @@
 # open file to write preferences in
 
 
-# for each element in scrollview first add spacer then add new element
 # Only open serial monitor if valid device is connect / selected
 # store serial messages in array
 # clear array whenever reload / clear output button
@@ -32,6 +28,8 @@
 # Move effects to different positions in menu
 # Store current btn in desired position and current btn in original position
 # Replace the two btn
+
+# Load version number from external file
 
 import sys
 
@@ -64,17 +62,16 @@ class MainWindow(QWidget):
         self.current_colour = None
         self.current_brightness = None
         # Setup UI elements
-        self.right_click_menu = CreateMenuRC(
-            parent=self).effectsButtonMenu(getPath('right_click_menu.qss'))
+        self.setRightClickMenu()
         self.setupButtons()
         self.colour_picker = QColorDialog(self)
         self.ui.context_menus.hide()
 
     def refreshMenus(self):
-        GenerateButtons('main_menu').removeButtons(
+        GenerateButtons('menus.json', 'main_menu').removeButtons(
             self.ui.main_menu_button_layout)
-        GenerateButtons('main_menu').generateGenericButtons(self.ui.main_menu_button_layout, self.ui.effects_scroll_region, getPath(
-            'button_generic_primary.qss'), self.right_click_menu, spacer=True)
+        GenerateButtons('menus.json', 'main_menu').generateGenericButtons(self.ui.main_menu_button_layout, self.ui.effects_scroll_region, getPath(
+            'button_generic_primary.qss'), self.right_click_menu_effects, spacer=True)
 
     def setupButtons(self):
         self.refreshMenus()
@@ -124,6 +121,18 @@ class MainWindow(QWidget):
 
     def handleSwitch(self):
         print('temp')
+
+    def setRightClickMenu(self):
+        # Read entries from JSON
+        self.right_click_menu_effects_options = JsonIO(
+            'right_click_menu.json').readEntry('main_menu_right_click_menu')
+        # Create new right click menu
+        self.right_click_menu_effects = CreateMenuRC(
+            parent=self).makeMenu(getPath('right_click_menu.qss'))
+        # Add all JSON entries as options to right click menu
+        for entry_name, entry_payload in self.right_click_menu_effects_options.items():
+            CreateMenuRC(parent=self).addOption(
+                self.right_click_menu_effects, entry_name, entry_payload)
 
     def changePage(self, widget, index, hide_context=True):
         widget.setCurrentIndex(index)
@@ -181,7 +190,7 @@ class MainWindow(QWidget):
         #                   self.ui.verticalLayout_2, getPath('button_generic_primary.qss'))
         # CreateLargeButton(vertical_layout, spacer=True).createGenericButton(
         #     'text' + str(self.x), 'object', self.ui.effects_scroll_region, getPath('button_generic_primary.qss'))
-        GenerateButtons('main_menu').generateGenericButtons(
+        GenerateButtons('menus.json', 'main_menu').generateGenericButtons(
             vertical_layout, self.ui.effects_scroll_region, getPath('button_generic_primary.qss'), spacer=True)
 
 

@@ -6,8 +6,8 @@ from ui.widgets.CreateLargeButton import CreateLargeButton
 
 
 class GenerateButtons():
-    def __init__(self, page):
-        self.page_contents = JsonIO('menus.json').readEntry(page)
+    def __init__(self, file, page):
+        self.page_contents = JsonIO(file).readEntry(page)
 
     def generateGenericButtons(self, vertical_element, scroll_element, style_sheet, right_click_menu, spacer=False):
         for layout, elements in self.page_contents.items():
@@ -27,3 +27,15 @@ class GenerateButtons():
                     layout.takeAt(i).widget().deleteLater()
                 except:
                     pass
+
+    def moveButtons(self, button, direction=None):
+        print(list(self.page_contents.values()))
+        if button in list(self.page_contents.values()):
+            print('yes')
+
+    def deleteButton(self, button):
+        print('delete')
+
+    def moveButtonUp(self):
+        print('tmp')
+        # self.moveButtons()

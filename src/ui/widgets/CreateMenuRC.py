@@ -1,27 +1,33 @@
+from ui.GenerateButtons import GenerateButtons
+
 from PyQt5.QtWidgets import QMenu, QAction
 
 
 class CreateMenuRC():
-    def __init__(self, parent=None, options={}):
+    def __init__(self, parent=None,):
         self.parent = parent
-        self.options = options
-        self.menu = QMenu(parent)
 
-    def effectsButtonMenu(self, style_sheet):
-        self.menu.addAction(QAction('test', self.parent))
-        self.menu.addAction(QAction('test', self.parent))
-        self.menu.addAction(QAction('test', self.parent))
-        self.menu.addAction(QAction('test', self.parent))
-        self.menu.addAction(QAction('test', self.parent))
-        self.menu.addAction(QAction('test', self.parent))
-
-        for entry_name, entry_payload in self.options.items():
-            self.menu.addAction(QAction(entry_name, entry_payload))
-            self.menu.action.triggered.connect(lambda: print('pressed'))
-
+    def makeMenu(self, style_sheet):
+        self.menu = QMenu(self.parent)
         # Set style
         with open(style_sheet) as style_file:
-            print(style_sheet)
             self.menu.setStyleSheet(style_file.read())
+        return(self.menu)
 
-        return self.menu
+    def addOption(self, menu, option_name, option_payload):
+        print(option_name)
+        print(option_payload)
+        self.action = QAction(option_name, self.parent)
+        self.action.triggered.connect(lambda: self.runFunction(option_payload))
+        menu.addAction(self.action)
+
+    def runFunction(self, function_name):
+        # GenerateButtons('right_click_menu.json', 'main_menu_right_click_menu').moveButtons(
+        #     'moveButtonUp', direction='down')
+        getattr(GenerateButtons('right_click_menu.json',
+                                'main_menu_right_click_menu'), function_name)('button')
+        try:
+            getattr(GenerateButtons('right_click_menu.json',
+                                    'main_menu_right_click_menu'), function_name)()
+        except:
+            print('exception')

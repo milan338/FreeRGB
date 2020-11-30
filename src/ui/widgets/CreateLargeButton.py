@@ -27,12 +27,12 @@ class CreateLargeButton():
         # Create context menu
         self.btn.setContextMenuPolicy(Qt.CustomContextMenu)
         self.btn.customContextMenuRequested.connect(
-            lambda: self.contextMenu(self.btn, right_click_menu))
+            lambda: self.contextMenu(right_click_menu))
         # Set style
         with open(style_sheet) as style_file:
             self.btn.setStyleSheet(style_file.read())
         # Show button
         self.btn.show()
 
-    def contextMenu(self, button, menu):
+    def contextMenu(self, menu):
         menu.exec(QCursor.pos())

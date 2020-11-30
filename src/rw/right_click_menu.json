@@ -1,0 +1,7 @@
+{
+    "main_menu_right_click_menu": {
+        "MOVE UP": "moveButtonUp",
+        "MOVE DOWN": "moveButtonDown",
+        "DELETE": "deleteButton"
+    }
+}
