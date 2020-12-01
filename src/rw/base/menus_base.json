@@ -1,14 +1,14 @@
 {
     "main_menu": {
         "main_menu_button_layout": {
-            "btn_effect_solid": {
+            "btn_effect_solid_colour": {
                 "text": "Solid Colour",
                 "command": {
                     "type": "colour_picker",
                     "payload": "None"
                 }
             },
-            "btn_effect_cycle_rainbow": {
+            "btn_effect_rainbow_cycle": {
                 "text": "Rainbow Cycle",
                 "command": {
                     "type": "serial_direct",

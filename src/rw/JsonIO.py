@@ -48,18 +48,3 @@ class JsonIO():
                 return 1
         except:
             return 0
-
-
-# TMP
-if __name__ == '__main__':
-    # JsonIO()
-    main = JsonIO('menus.json').readEntry('main_menu')
-    print(main)
-    for key, other in main.items():
-        print(key)
-        print(other)
-        JsonIO('menus.json').readEntry(key)
-        for element, attributes in other.items():
-            print(attributes)
-        # for thing, contents in key:
-        #     print(thing)

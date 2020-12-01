@@ -31,6 +31,8 @@
 
 # Load version number from external file
 
+# WHEN CHECKING FOR DUPLICATES CHECK ALL MENUS NOT JUST SELECT OTHERWISE CLASH WITH DELETION
+
 import sys
 
 from rw.JsonIO import JsonIO
@@ -173,7 +175,7 @@ class MainWindow(QWidget):
 
     def initDialogue(self, input_type, menu, layout, window_title):
         self.input_dialogue = InputDialogue(
-            input_type, menu, layout, lambda: self.refreshMenus())
+            input_type, menu, lambda: self.refreshMenus())
         self.setWindowParams(self.input_dialogue, window_title)
 
     def mousePressEvent(self, event):
