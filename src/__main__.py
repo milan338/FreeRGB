@@ -22,6 +22,8 @@
 
 # implement logging system
 
+# Get designer using stylesheets from external files
+
 import sys
 
 from rw.JsonIO import JsonIO
@@ -33,10 +35,10 @@ from ui.views.input.InputDialogue import InputDialogue
 from ui.widgets.ToggleSwitch import ToggleSwitch
 from ui.generators.CreateLargeButton import CreateLargeButton
 from ui.generators.CreateMenuRC import CreateMenuRC
+from ui.generators.CreateMessageBox import CreateMessageBox
 from ui.views.main.Ui_MainWindow import Ui_Form
 
 from PyQt5.QtWidgets import QWidget, QColorDialog, QMessageBox, QApplication
-from PyQt5.QtCore import QObject, Qt, QEvent
 from PyQt5 import QtCore
 from PyQt5 import QtGui
 
@@ -81,7 +83,7 @@ class MainWindow(QWidget):
         # Bottom bar
         self.ui.btn_version.setText(self.version_name)
         self.ui.btn_device_debug.clicked.connect(
-            lambda: self.initSerial())
+            lambda: self.initSerialMonitor())
         self.ui.btn_effect_off.clicked.connect(self.toggleLeds)
         self.ui.btn_device_information.clicked.connect(
             lambda: QMessageBox.information(self, 'Device Information', 'Device Name: \nCOM Port: \nStrips Connected: \nArduRGB Version: \nBoard: \nBaud Rate: '))
@@ -106,6 +108,9 @@ class MainWindow(QWidget):
 
         self.ui.btn_menu_effect_new.clicked.connect(lambda: self.initDialogue(
             'serial_direct', 'main_menu', 'main_menu_button_layout', 'Create New Effect'))
+        self.ui.btn_menu_effect_reset.clicked.connect(lambda: CreateMessageBox(
+            'Reset Effects Menu', 'This action will erase all custom effects you have specified. Continue?').resetPreferences(
+            file='menus.json', menu='main_menu', layout='main_menu_button_layout', refresh=lambda: self.refreshMenus()))
 
         # Settings menu
         self.switch_advanced = ToggleSwitch()
@@ -169,7 +174,7 @@ class MainWindow(QWidget):
         window.setWindowTitle(title)
         # window.setWindowIcon(icon)
 
-    def initSerial(self):
+    def initSerialMonitor(self):
         self.serial_monitor = SerialMonitor()
         self.setWindowParams(self.serial_monitor, 'ArduRGB Debug View')
 
@@ -180,12 +185,6 @@ class MainWindow(QWidget):
 
     def mousePressEvent(self, event):
         self.handleButton()
-
-    def eventFilter(self, widget, event):
-        if event.type() == QEvent.MouseButtonPress:
-            if event.button() == Qt.RightButton:
-                print(widget.objectName(), 'Right Click')
-        return QObject.event(widget, event)
 
     def addButton(self, vertical_layout):
         # CreateLargeButton('text' + str(self.x), 'object', False, self.ui.effects_scroll_region,

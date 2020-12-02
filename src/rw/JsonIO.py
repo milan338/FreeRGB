@@ -39,6 +39,29 @@ class JsonIO():
         except:
             pass
 
+    def clearLayout(self, menu, layout):
+        for element in list(self.data[menu][layout].keys()):
+            self.data[menu][layout].pop(element, None)
+        self.dumpJson()
+
+    def copyLayout(self, menu, layout):
+        # Remove entries from layout
+        self.clearLayout(menu, layout)
+        # Get Base file to copy from
+        self.json_path_base = path.abspath(path.join(
+            self.base_path, '..', '..', self.preferences_dir, 'base', self.filename_base))
+        # Get entries to copy from original file
+        self.data_base = None
+        try:
+            with open(self.json_path_base, 'r') as file:
+                self.data_base = json.load(file)
+        except:
+            pass
+        # Copy all elements from base layout
+        for element_name, element_contents in self.data_base[menu][layout].items():
+            self.data[menu][layout][element_name] = element_contents
+        self.dumpJson()
+
     def dumpJson(self, sort_keys=False):
         try:
             with open(self.json_path, 'w') as file:
