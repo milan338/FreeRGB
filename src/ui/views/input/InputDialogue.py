@@ -1,6 +1,6 @@
 import sys
 
-from ui.input.Ui_InputDialogue import Ui_Form
+from ui.views.input.Ui_InputDialogue import Ui_Form
 
 from rw.JsonIO import JsonIO
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\Milan\Documents\Software Projects\Python Projects\FreeRGB\src\ui\MainWindow.ui'
+# Form implementation generated from reading ui file 'c:\Users\Milan\Documents\Software Projects\Python Projects\FreeRGB\src\ui\views\main\MainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.1
 #
@@ -43,7 +43,7 @@ class Ui_Form(object):
 "    background-color: rgb(89, 89, 89);\n"
 "}")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\../assets/icons/ico_effects.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\views\\main\\../assets/icons/ico_effects.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_menu_effects.setIcon(icon)
         self.btn_menu_effects.setIconSize(QtCore.QSize(20, 20))
         self.btn_menu_effects.setObjectName("btn_menu_effects")
@@ -66,7 +66,7 @@ class Ui_Form(object):
 "    background-color: rgb(89, 89, 89);\n"
 "}")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\../assets/icons/ico_settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\views\\main\\../assets/icons/ico_settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_menu_settings.setIcon(icon1)
         self.btn_menu_settings.setIconSize(QtCore.QSize(20, 20))
         self.btn_menu_settings.setObjectName("btn_menu_settings")
@@ -103,7 +103,7 @@ class Ui_Form(object):
 "}")
         self.btn_effect_off.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\../assets/icons/ico_power.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\views\\main\\../assets/icons/ico_power.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_effect_off.setIcon(icon2)
         self.btn_effect_off.setIconSize(QtCore.QSize(32, 32))
         self.btn_effect_off.setObjectName("btn_effect_off")
@@ -126,7 +126,7 @@ class Ui_Form(object):
 "}")
         self.btn_device_information.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\../assets/icons/ico_information.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\views\\main\\../assets/icons/ico_information.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_device_information.setIcon(icon3)
         self.btn_device_information.setIconSize(QtCore.QSize(32, 32))
         self.btn_device_information.setObjectName("btn_device_information")
@@ -149,7 +149,7 @@ class Ui_Form(object):
 "}")
         self.btn_list_device.setText("")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\../assets/icons/ico_devices.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon4.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\views\\main\\../assets/icons/ico_devices.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_list_device.setIcon(icon4)
         self.btn_list_device.setIconSize(QtCore.QSize(32, 32))
         self.btn_list_device.setObjectName("btn_list_device")
@@ -172,7 +172,7 @@ class Ui_Form(object):
 "}")
         self.btn_list_strip.setText("")
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\../assets/icons/ico_strips.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon5.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\views\\main\\../assets/icons/ico_strips.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_list_strip.setIcon(icon5)
         self.btn_list_strip.setIconSize(QtCore.QSize(32, 32))
         self.btn_list_strip.setObjectName("btn_list_strip")
@@ -195,7 +195,7 @@ class Ui_Form(object):
 "}")
         self.btn_device_debug.setText("")
         icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\../assets/icons/ico_debug.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon6.addPixmap(QtGui.QPixmap("c:\\Users\\Milan\\Documents\\Software Projects\\Python Projects\\FreeRGB\\src\\ui\\views\\main\\../assets/icons/ico_debug.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_device_debug.setIcon(icon6)
         self.btn_device_debug.setIconSize(QtCore.QSize(32, 32))
         self.btn_device_debug.setObjectName("btn_device_debug")

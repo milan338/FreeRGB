@@ -1,4 +1,4 @@
-from ui.Ui_MainWindow import Ui_Form
+from ui.views.main.Ui_MainWindow import Ui_Form
 
 from rw.JsonIO import JsonIO
 

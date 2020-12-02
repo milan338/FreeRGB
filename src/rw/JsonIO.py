@@ -8,8 +8,9 @@ from os import path
 class JsonIO():
     def __init__(self, filename):
         self.base_path = path.dirname(__file__)
+        self.preferences_dir = 'preferences'
         self.json_path = path.abspath(
-            path.join(self.base_path, filename))
+            path.join(self.base_path, '..', '..', self.preferences_dir, filename))
 
         with open(self.json_path, 'r') as file:
             self.data = json.load(file)

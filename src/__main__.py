@@ -31,21 +31,18 @@
 
 # Load version number from external file
 
-# move jsons to separate folder
-# move windows to separate folder
-
 import sys
 
 from rw.JsonIO import JsonIO
 
 from ui import getPath
 from ui.GenerateButtons import GenerateButtons
-from ui.monitor.SerialMonitor import SerialMonitor
-from ui.input.InputDialogue import InputDialogue
+from ui.views.monitor.SerialMonitor import SerialMonitor
+from ui.views.input.InputDialogue import InputDialogue
 from ui.widgets.ToggleSwitch import ToggleSwitch
 from ui.generators.CreateLargeButton import CreateLargeButton
 from ui.generators.CreateMenuRC import CreateMenuRC
-from ui.Ui_MainWindow import Ui_Form
+from ui.views.main.Ui_MainWindow import Ui_Form
 
 from PyQt5.QtWidgets import QWidget, QColorDialog, QMessageBox, QApplication
 from PyQt5.QtCore import QObject, Qt, QEvent

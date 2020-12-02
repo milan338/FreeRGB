@@ -4,7 +4,7 @@ import sys
 if __name__ == '__main__':
     from Ui_SerialMonitor import Ui_Form  # type: ignore
 else:
-    from ui.monitor.Ui_SerialMonitor import Ui_Form
+    from ui.views.monitor.Ui_SerialMonitor import Ui_Form
 
 from PyQt5.QtWidgets import QWidget, QApplication
 
