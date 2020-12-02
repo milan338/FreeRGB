@@ -29,17 +29,14 @@ class GenerateButtons():
                 except:
                     pass
 
-    def moveButtons(self, button, direction=None):
-        print(list(self.page_contents.values()))
-        if button in list(self.page_contents.values()):
-            print('yes')
-
     def deleteButton(self, button):
         print(button.objectName())
         JsonIO(self.file).removeEntry(button.objectName())
         # button.deleteLater()
         print('delete')
 
-    def moveButtonUp(self):
-        print('tmp')
-        # self.moveButtons()
+    def moveButtonUp(self, button):
+        JsonIO(self.file).shiftEntry(button, -1)
+
+    def moveButtonDown(self, button):
+        JsonIO(self.file).shiftEntry(button, 1)

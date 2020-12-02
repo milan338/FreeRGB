@@ -1,5 +1,7 @@
 import json
 
+from copy import deepcopy
+
 from os import path
 
 
@@ -12,13 +14,20 @@ class JsonIO():
         with open(self.json_path, 'r') as file:
             self.data = json.load(file)
 
+    def dumpJson(self, sort_keys=False):
+        try:
+            with open(self.json_path, 'w') as file:
+                file.write(json.dumps(
+                    self.data, indent=4, sort_keys=sort_keys))
+                return 1
+        except:
+            return 0
+
     def readEntry(self, entry):
         try:
-            # print(self.data[entry])
             return self.data[entry]
         except:
             return None
-        print(self.data['AdvancedMode'])
 
     def writeEntry(self, menu, layout, entry, entry_name, command, sort_keys):
         # Create new json entry
@@ -28,23 +37,79 @@ class JsonIO():
         # Add new json entry to existing dictionary
         self.data[menu][layout][entry] = self.new_json
         # Dump new data to file
-        try:
-            with open(self.json_path, 'w') as file:
-                file.write(json.dumps(
-                    self.data, indent=4, sort_keys=sort_keys))
-            return 1
-        except:
-            return 0
+        self.dumpJson(sort_keys=sort_keys)
 
     def removeEntry(self, entry):
-        # Cycle through menus and layouts in json to find referenced button
+        # Cycle through menus and layouts in json to find referenced element
         for menu in self.data:
             for layout in self.data[menu]:
                 self.data[menu][layout].pop(entry, None)
         # Dump new data to file
-        try:
-            with open(self.json_path, 'w') as file:
-                file.write(json.dumps(self.data, indent=4))
-                return 1
-        except:
-            return 0
+        self.dumpJson()
+
+    def shiftEntry(self, entry, direction):
+        # Buffers for original element
+        self.element_name = None
+        self.element_contents = None
+        # Buffers for target element
+        self.target_name = None
+        self.target_contents = None
+        self.target_position = None
+        # Cycle through menus and layouts in json to find referenced element
+        for menu in self.data:
+            for layout in self.data[menu]:
+                self.n = 0
+                for element_name, element_contents in self.data[menu][layout].items():
+                    # When element is found
+                    if element_name == entry.objectName():
+                        # Store original element
+                        self.element_name = element_name
+                        self.element_contents = element_contents
+                        # Get element positions
+                        self.target_position = self.n + direction
+                        break
+                    else:
+                        self.n += 1
+
+                # Only run if original element found
+                if self.element_name:
+                    # Get data from target element
+                    self.n = 0
+                    for element_name, element_contents in self.data[menu][layout].items():
+                        if self.n == self.target_position:
+                            # Store target element
+                            self.target_name = element_name
+                            self.target_contents = element_contents
+                            break
+                        else:
+                            self.n += 1
+#
+                # Only run if target element found
+                if self.target_name:
+                    # Swap element contents
+                    self.data[menu][layout].update(
+                        {self.target_name: self.element_contents})
+                    self.data[menu][layout].update(
+                        {self.element_name: self.target_contents})
+                    # Swap element names
+                    # 1 - Create a deep copy of the original dictionary
+                    self.new_dict = deepcopy(self.data)
+                    # 2 - Remove all UI elements from target layout in new dictionary
+                    for element in list(self.new_dict[menu][layout].keys()):
+                        self.new_dict[menu][layout].pop(element, None)
+                    # 3 - Add all UI elements back in the same order,
+                    #     During this phase, swap the keys of the
+                    #     Element to be moved and its target
+                    for element_name, element_contents in self.data[menu][layout].items():
+                        # Change original element to target element
+                        if element_name == self.element_name:
+                            self.new_dict[menu][layout][self.target_name] = element_contents
+                        # Change target element to original element
+                        elif element_name == self.target_name:
+                            self.new_dict[menu][layout][self.element_name] = element_contents
+                        # Keep element the same
+                        else:
+                            self.new_dict[menu][layout][element_name] = element_contents
+                    # Dump new data to file
+                    self.data = self.new_dict
+                    self.dumpJson()

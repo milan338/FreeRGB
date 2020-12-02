@@ -31,7 +31,8 @@
 
 # Load version number from external file
 
-# WHEN CHECKING FOR DUPLICATES CHECK ALL MENUS NOT JUST SELECT OTHERWISE CLASH WITH DELETION
+# move jsons to separate folder
+# move windows to separate folder
 
 import sys
 
@@ -129,11 +130,11 @@ class MainWindow(QWidget):
         self.right_click_menu_effects_options = JsonIO(
             'right_click_menu.json').readEntry('main_menu_right_click_menu')
         # Create new right click menu
-        self.right_click_menu_effects = CreateMenuRC(
-            parent=self).makeMenu(getPath('right_click_menu.qss'))
+        self.right_click_menu_effects = CreateMenuRC(lambda: self.refreshMenus(
+        ), parent=self).makeMenu(getPath('right_click_menu.qss'))
         # Add all JSON entries as options to right click menu
         for entry_name, entry_payload in self.right_click_menu_effects_options.items():
-            CreateMenuRC(parent=self).addOption(
+            CreateMenuRC(lambda: self.refreshMenus(), parent=self).addOption(
                 self.right_click_menu_effects, entry_name, entry_payload)
 
     def changePage(self, widget, index, hide_context=True):
