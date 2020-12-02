@@ -12,22 +12,13 @@
 
 # check for set colour to not reset colour i.e. check for if user actually selected a colour
 
-# open file to write preferences in
-
-
 # Only open serial monitor if valid device is connect / selected
 # store serial messages in array
 # clear array whenever reload / clear output button
 
 # Button to reset settings
 
-# Ability to remove buttons (trash icon?), prompt for adding button (i.e. select serial message to send)
-
 # Attach scrollbar on side of menu to scroll the main window
-
-# Move effects to different positions in menu
-# Store current btn in desired position and current btn in original position
-# Replace the two btn
 
 # Load version number from external file
 
@@ -57,7 +48,7 @@ class MainWindow(QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         # Variable initialisation
-        self.version_name = 'Version 0.1.0'
+        self.version_name = JsonIO('app_Version.json').readEntry('version')
         self.current_context = None
         self.current_colour = None
         self.current_brightness = None
