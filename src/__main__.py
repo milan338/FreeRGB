@@ -20,8 +20,6 @@
 
 # Attach scrollbar on side of menu to scroll the main window
 
-# Localise UI icons
-
 import sys
 
 from rw.JsonIO import JsonIO
