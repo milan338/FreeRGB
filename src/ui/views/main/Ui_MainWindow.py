@@ -265,15 +265,15 @@ class Ui_Form(object):
 "}")
         self.btn_menu_effect_new.setObjectName("btn_menu_effect_new")
         self.verticalLayout_2.addWidget(self.btn_menu_effect_new)
-        self.btn_menu_effect_new_2 = QtWidgets.QPushButton(self.effects_scroll_region_widgets)
+        self.btn_menu_effect_reset = QtWidgets.QPushButton(self.effects_scroll_region_widgets)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.btn_menu_effect_new_2.sizePolicy().hasHeightForWidth())
-        self.btn_menu_effect_new_2.setSizePolicy(sizePolicy)
-        self.btn_menu_effect_new_2.setMinimumSize(QtCore.QSize(0, 40))
-        self.btn_menu_effect_new_2.setMaximumSize(QtCore.QSize(700, 40))
-        self.btn_menu_effect_new_2.setStyleSheet("QPushButton\n"
+        sizePolicy.setHeightForWidth(self.btn_menu_effect_reset.sizePolicy().hasHeightForWidth())
+        self.btn_menu_effect_reset.setSizePolicy(sizePolicy)
+        self.btn_menu_effect_reset.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_menu_effect_reset.setMaximumSize(QtCore.QSize(700, 40))
+        self.btn_menu_effect_reset.setStyleSheet("QPushButton\n"
 "{\n"
 "    background-color:rgb(43, 47, 59);\n"
 "    border-radius: 10px;\n"
@@ -288,8 +288,8 @@ class Ui_Form(object):
 "{\n"
 "    background-color: rgb(51, 76, 100);\n"
 "}")
-        self.btn_menu_effect_new_2.setObjectName("btn_menu_effect_new_2")
-        self.verticalLayout_2.addWidget(self.btn_menu_effect_new_2)
+        self.btn_menu_effect_reset.setObjectName("btn_menu_effect_reset")
+        self.verticalLayout_2.addWidget(self.btn_menu_effect_reset)
         self.effects_scroll_region.setWidget(self.effects_scroll_region_widgets)
         self.main_menus.addWidget(self.menu_effects)
         self.menu_settings = QtWidgets.QWidget()
@@ -598,7 +598,7 @@ class Ui_Form(object):
         self.btn_menu_effects.setText(_translate("Form", "  Effects"))
         self.btn_menu_settings.setText(_translate("Form", "  Settings"))
         self.btn_menu_effect_new.setText(_translate("Form", "+"))
-        self.btn_menu_effect_new_2.setText(_translate("Form", "Reset Layout"))
+        self.btn_menu_effect_reset.setText(_translate("Form", "Reset Layout"))
         self.label_settings_advanced.setText(_translate("Form", "Advanced Mode"))
         self.label_settings_update.setText(_translate("Form", "Check For Updates"))
         self.btn_support.setText(_translate("Form", "Support My Work"))

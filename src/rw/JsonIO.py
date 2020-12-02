@@ -4,6 +4,8 @@ from copy import deepcopy
 
 from os import path
 
+from shutil import copyfile
+
 
 class JsonIO():
     def __init__(self, filename):
@@ -11,9 +13,31 @@ class JsonIO():
         self.preferences_dir = 'preferences'
         self.json_path = path.abspath(
             path.join(self.base_path, '..', '..', self.preferences_dir, filename))
+        self.filename_base = filename.split('.')[0] + '_base.json'
 
-        with open(self.json_path, 'r') as file:
-            self.data = json.load(file)
+        try:
+            with open(self.json_path, 'r') as file:
+                self.data = json.load(file)
+        except:
+            pass
+
+    def fileExists(self):
+        try:
+            if path.isfile(self.json_path):
+                return True
+            else:
+                return False
+        except:
+            pass
+
+    def copyFromBase(self):
+        self.json_path_base = path.abspath(path.join(
+            self.base_path, '..', '..', self.preferences_dir, 'base', self.filename_base))
+        print(self.json_path_base)
+        try:
+            copyfile(self.json_path_base, self.json_path)
+        except:
+            pass
 
     def dumpJson(self, sort_keys=False):
         try:

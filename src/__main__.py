@@ -20,6 +20,8 @@
 
 # Attach scrollbar on side of menu to scroll the main window
 
+# implement logging system
+
 import sys
 
 from rw.JsonIO import JsonIO
@@ -42,6 +44,8 @@ from PyQt5 import QtGui
 class MainWindow(QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # Initialise settings
+        self.setupFiles()
         # UI initialisation
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -50,12 +54,20 @@ class MainWindow(QWidget):
         self.current_context = None
         self.current_colour = None
         self.current_brightness = None
-        # Initialise settings
         # Setup UI elements
         self.setRightClickMenu()
         self.setupButtons()
         self.colour_picker = QColorDialog(self)
         self.ui.context_menus.hide()
+
+    def setupFiles(self):
+        self.init_files = ['menus.json', 'preferences.json']
+        # Copy all files from base dir if they don't already exist
+        for file in self.init_files:
+            if JsonIO(file).fileExists():
+                pass
+            else:
+                JsonIO(file).copyFromBase()
 
     def refreshMenus(self):
         GenerateButtons('menus.json', 'main_menu').removeButtons(

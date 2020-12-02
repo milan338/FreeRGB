@@ -495,7 +495,7 @@ QPushButton:pressed
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btn_menu_effect_new_2">
+        <widget class="QPushButton" name="btn_menu_effect_reset">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
            <horstretch>0</horstretch>
