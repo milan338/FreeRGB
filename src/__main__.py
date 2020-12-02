@@ -20,7 +20,7 @@
 
 # Attach scrollbar on side of menu to scroll the main window
 
-# Load version number from external file
+# Localise UI icons
 
 import sys
 

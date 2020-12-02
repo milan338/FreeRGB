@@ -41,11 +41,8 @@ class CreateLargeButton():
     def setCurrentHoverButton(self, hovered):
         if hovered:
             Globals.current_hovered_btn = self.btn
-            # print('hovered')
         else:
             pass
-            # Globals.current_hovered_btn = None
-            # print('released')
 
     def contextMenu(self, menu):
         menu.exec(QCursor.pos())
