@@ -517,23 +517,22 @@ QPushButton:pressed
          <property name="styleSheet">
           <string notr="true">QPushButton
 {
-	color: rgb(255, 255, 255);
-	background-color: rgb(51, 58, 72);
+	background-color:rgb(43, 47, 59);
 	border-radius: 10px;
 }
 
 QPushButton:hover
 {
-	background-color: rgb(51, 76, 100);
+	background-color: rgb(51, 58, 72);
 }
 
 QPushButton:pressed 
 {
-	background-color: rgb(90, 164, 253);
+	background-color: rgb(51, 76, 100);
 }</string>
          </property>
          <property name="text">
-          <string>+</string>
+          <string>Reset Layout</string>
          </property>
         </widget>
        </item>

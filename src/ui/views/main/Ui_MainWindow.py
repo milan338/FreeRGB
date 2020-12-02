@@ -275,19 +275,18 @@ class Ui_Form(object):
         self.btn_menu_effect_new_2.setMaximumSize(QtCore.QSize(700, 40))
         self.btn_menu_effect_new_2.setStyleSheet("QPushButton\n"
 "{\n"
-"    color: rgb(255, 255, 255);\n"
-"    background-color: rgb(51, 58, 72);\n"
+"    background-color:rgb(43, 47, 59);\n"
 "    border-radius: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover\n"
 "{\n"
-"    background-color: rgb(51, 76, 100);\n"
+"    background-color: rgb(51, 58, 72);\n"
 "}\n"
 "\n"
 "QPushButton:pressed \n"
 "{\n"
-"    background-color: rgb(90, 164, 253);\n"
+"    background-color: rgb(51, 76, 100);\n"
 "}")
         self.btn_menu_effect_new_2.setObjectName("btn_menu_effect_new_2")
         self.verticalLayout_2.addWidget(self.btn_menu_effect_new_2)
@@ -599,7 +598,7 @@ class Ui_Form(object):
         self.btn_menu_effects.setText(_translate("Form", "  Effects"))
         self.btn_menu_settings.setText(_translate("Form", "  Settings"))
         self.btn_menu_effect_new.setText(_translate("Form", "+"))
-        self.btn_menu_effect_new_2.setText(_translate("Form", "+"))
+        self.btn_menu_effect_new_2.setText(_translate("Form", "Reset Layout"))
         self.label_settings_advanced.setText(_translate("Form", "Advanced Mode"))
         self.label_settings_update.setText(_translate("Form", "Check For Updates"))
         self.btn_support.setText(_translate("Form", "Support My Work"))

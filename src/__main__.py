@@ -50,6 +50,7 @@ class MainWindow(QWidget):
         self.current_context = None
         self.current_colour = None
         self.current_brightness = None
+        # Initialise settings
         # Setup UI elements
         self.setRightClickMenu()
         self.setupButtons()
