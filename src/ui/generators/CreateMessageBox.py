@@ -1,3 +1,5 @@
+import Globals
+
 from rw.JsonIO import JsonIO
 
 from PyQt5.QtWidgets import QMessageBox
@@ -16,11 +18,12 @@ class CreateMessageBox():
         # Return True for yes and False for no
         return self.input == self.message_box.Yes
 
-    def resetPreferences(self, file, menu=None, layout=None, refresh=None, reset_file=False):
+    def resetPreferences(self, file, menu=None, layout=None, reset_file=False):
         # Get input from user and continue only if input was 'yes'
         if self.getBool():
             if reset_file:
                 JsonIO(file).copyFromBase()
             else:
                 JsonIO(file).copyLayout(menu, layout)
-            refresh()
+            # Refresh menu button layout using JSON
+            Globals.refreshMenus()

@@ -1,5 +1,7 @@
 import sys
 
+import Globals
+
 from ui.views.input.Ui_InputDialogue import Ui_Form
 
 from rw.JsonIO import JsonIO
@@ -8,7 +10,7 @@ from PyQt5.QtWidgets import QWidget
 
 
 class InputDialogue(QWidget):
-    def __init__(self, input_type, menu, refresh_menus, *args, **kwargs):
+    def __init__(self, input_type, menu, new_entry=True, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.ui = Ui_Form()
@@ -19,7 +21,7 @@ class InputDialogue(QWidget):
 
         self.input_type = input_type
         self.menu = menu
-        self.refresh_menus = refresh_menus
+        self.new_entry = new_entry
 
         self.page_contents = JsonIO('menus.json').readEntry(self.menu)
 
@@ -54,9 +56,14 @@ class InputDialogue(QWidget):
                     # Raise error to user
                     self.ui.label_error.setText('Effect already exists')
                     return False
-        # Only runs if effect does not already exist
-        self.createEffect(
-            'main_menu', 'main_menu_button_layout', generated_object_name)
+        # Create new button
+        if self.new_entry:
+            # Only runs if effect does not already exist
+            self.createEffect(
+                'main_menu', 'main_menu_button_layout', generated_object_name)
+        # Edit existing entry
+        else:
+            print('tmp')
 
     def createEffect(self, menu, layout, entry_name):
         self.command = {
@@ -65,4 +72,7 @@ class InputDialogue(QWidget):
         }
         JsonIO('menus.json').writeEntry(menu, layout, entry_name,
                                         self.effect_name, self.command, sort_keys=False)
-        self.refresh_menus()
+        # Update menu layout with new JSON
+        Globals.refreshMenus()
+        # Close input menu
+        self.close()

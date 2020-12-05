@@ -1,5 +1,6 @@
 {
     "main_menu_right_click_menu": {
+        "EDIT": "editButton",
         "MOVE UP": "moveButtonUp",
         "MOVE DOWN": "moveButtonDown",
         "DELETE": "deleteButton"

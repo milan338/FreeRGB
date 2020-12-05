@@ -1,5 +1,6 @@
 from rw.JsonIO import JsonIO
 
+from ui.views.input.InputDialogue import InputDialogue
 from ui.generators.CreateLargeButton import CreateLargeButton
 
 
@@ -25,6 +26,12 @@ class GenerateButtons():
                     layout.takeAt(i).widget().deleteLater()
                 except:
                     pass
+
+    def editButton(self, button):
+        # self.initDialogue(
+        #     'serial_direct', 'main_menu', 'Create New Effect')
+        # self.input_dialogue = InputDialogue('serial_direct', 'main_menu', 'Edit Effect')
+        print('tmp')
 
     def deleteButton(self, button):
         JsonIO(self.file).removeEntry(button.objectName())

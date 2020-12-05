@@ -24,7 +24,11 @@
 
 # Get designer using stylesheets from external files
 
+# Edit button in right click
+
 import sys
+
+import Globals
 
 from rw.JsonIO import JsonIO
 
@@ -46,6 +50,8 @@ from PyQt5 import QtGui
 class MainWindow(QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # Allow global access to refresh main menu using JSON
+        Globals.refreshMenus = lambda: self.refreshMenus()
         # Initialise settings
         self.setupFiles()
         # UI initialisation
@@ -107,10 +113,10 @@ class MainWindow(QWidget):
         #     lambda: self.addButton(self.ui.main_menu_button_layout))
 
         self.ui.btn_menu_effect_new.clicked.connect(lambda: self.initDialogue(
-            'serial_direct', 'main_menu', 'main_menu_button_layout', 'Create New Effect'))
+            'serial_direct', 'main_menu', 'Create New Effect'))
         self.ui.btn_menu_effect_reset.clicked.connect(lambda: CreateMessageBox(
             'Reset Effects Menu', 'This action will erase all custom effects you have specified. Continue?').resetPreferences(
-            file='menus.json', menu='main_menu', layout='main_menu_button_layout', refresh=lambda: self.refreshMenus()))
+            file='menus.json', menu='main_menu', layout='main_menu_button_layout'))
 
         # Settings menu
         self.switch_advanced = ToggleSwitch()
@@ -134,11 +140,11 @@ class MainWindow(QWidget):
         self.right_click_menu_effects_options = JsonIO(
             'right_click_menu.json').readEntry('main_menu_right_click_menu')
         # Create new right click menu
-        self.right_click_menu_effects = CreateMenuRC(lambda: self.refreshMenus(
-        ), parent=self).makeMenu(getPath('right_click_menu.qss'))
+        self.right_click_menu_effects = CreateMenuRC(
+            parent=self).makeMenu(getPath('right_click_menu.qss'))
         # Add all JSON entries as options to right click menu
         for entry_name, entry_payload in self.right_click_menu_effects_options.items():
-            CreateMenuRC(lambda: self.refreshMenus(), parent=self).addOption(
+            CreateMenuRC(parent=self).addOption(
                 self.right_click_menu_effects, entry_name, entry_payload)
 
     def changePage(self, widget, index, hide_context=True):
@@ -178,7 +184,7 @@ class MainWindow(QWidget):
         self.serial_monitor = SerialMonitor()
         self.setWindowParams(self.serial_monitor, 'ArduRGB Debug View')
 
-    def initDialogue(self, input_type, menu, layout, window_title):
+    def initDialogue(self, input_type, menu, window_title):
         self.input_dialogue = InputDialogue(
             input_type, menu, lambda: self.refreshMenus())
         self.setWindowParams(self.input_dialogue, window_title)

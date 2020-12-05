@@ -1,8 +1,7 @@
 from os import path
 
+
 # Get path of stylesheet
-
-
 def getPath(style):
     ui_path = path.dirname(__file__)
     styles_path = path.abspath(path.join(ui_path, 'styles'))

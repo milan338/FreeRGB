@@ -6,8 +6,7 @@ from PyQt5.QtWidgets import QMenu, QAction
 
 
 class CreateMenuRC():
-    def __init__(self, run_refresh, parent=None):
-        self.run_refresh = run_refresh
+    def __init__(self, parent=None):
         self.parent = parent
 
     def makeMenu(self, style_sheet):
@@ -26,6 +25,7 @@ class CreateMenuRC():
         try:
             getattr(GenerateButtons('menus.json', 'main_menu_right_click_menu'), function_name)(
                 Globals.current_hovered_btn)
-            self.run_refresh()
+            # Refresh menu layout using JSON
+            Globals.refreshMenus()
         except:
             print('exception')
