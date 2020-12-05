@@ -21,6 +21,15 @@ class JsonIO():
         except:
             pass
 
+    def dumpJson(self, sort_keys=False):
+        try:
+            with open(self.json_path, 'w') as file:
+                file.write(json.dumps(
+                    self.data, indent=4, sort_keys=sort_keys))
+                return 1
+        except:
+            return 0
+
     def fileExists(self):
         try:
             if path.isfile(self.json_path):
@@ -29,6 +38,14 @@ class JsonIO():
                 return False
         except:
             pass
+
+    def findElement(self, element):
+        for menu in self.data.values():
+            for layout in menu.values():
+                for element_name, element_contents in layout.items():
+                    if element_name == element:
+                        return(element_contents['text'], element_contents['command']['payload'])
+        return None
 
     def copyFromBase(self):
         self.json_path_base = path.abspath(path.join(
@@ -61,15 +78,6 @@ class JsonIO():
         for element_name, element_contents in self.data_base[menu][layout].items():
             self.data[menu][layout][element_name] = element_contents
         self.dumpJson()
-
-    def dumpJson(self, sort_keys=False):
-        try:
-            with open(self.json_path, 'w') as file:
-                file.write(json.dumps(
-                    self.data, indent=4, sort_keys=sort_keys))
-                return 1
-        except:
-            return 0
 
     def readEntry(self, entry):
         try:
@@ -131,7 +139,7 @@ class JsonIO():
                             break
                         else:
                             self.n += 1
-#
+
                 # Only run if target element found
                 if self.target_name:
                     # Swap element contents
@@ -139,15 +147,10 @@ class JsonIO():
                         {self.target_name: self.element_contents})
                     self.data[menu][layout].update(
                         {self.element_name: self.target_contents})
-                    # Swap element names
-                    # 1 - Create a deep copy of the original dictionary
-                    self.new_dict = deepcopy(self.data)
-                    # 2 - Remove all UI elements from target layout in new dictionary
-                    for element in list(self.new_dict[menu][layout].keys()):
-                        self.new_dict[menu][layout].pop(element, None)
-                    # 3 - Add all UI elements back in the same order,
-                    #     During this phase, swap the keys of the
-                    #     Element to be moved and its target
+                    # Create blank copy of main data
+                    self.blankCopy(menu, layout)
+                    # Add all UI elements back to blank copy in the same order,
+                    # During this phase, swap the keys of the Element to be moved and its target
                     for element_name, element_contents in self.data[menu][layout].items():
                         # Change original element to target element
                         if element_name == self.element_name:
@@ -161,3 +164,37 @@ class JsonIO():
                     # Dump new data to file
                     self.data = self.new_dict
                     self.dumpJson()
+
+    def replaceEntry(self, old_element, new_element, new_element_name, new_element_contents):
+        # Go through JSON to find element
+        for menu_name, menu_contents in self.data.items():
+            for layout_name, layout_contents in menu_contents.items():
+                for element in layout_contents.keys():
+                    if element == old_element:
+                        # Create blank copy of main data
+                        self.blankCopy(menu_name, layout_name)
+                        # Element contents
+                        self.new_element_contents = {'text': new_element_name,
+                                                     'command': {
+                                                         'type': 'serial_direct',
+                                                         'command': new_element_contents}}
+                        # Add original UI elements back to blank copy
+                        # Replace original element with new name
+                        for element_name, element_contents in layout_contents.items():
+                            # Add modified element
+                            if element_name == old_element:
+                                self.new_dict[menu_name][layout_name][new_element] = self.new_element_contents
+                            # Add original element
+                            else:
+                                self.new_dict[menu_name][layout_name][element_name] = element_contents
+                                print('else', element_name, element_contents)
+                        # Dump new data to file
+                        self.data = self.new_dict
+                        self.dumpJson()
+
+    def blankCopy(self, menu, layout):
+        # Create a deep copy of the original dictionary
+        self.new_dict = deepcopy(self.data)
+        # Remove all UI elements from target layout in new dictionary
+        for element in list(self.new_dict[menu][layout].keys()):
+            self.new_dict[menu][layout].pop(element, None)

@@ -25,6 +25,7 @@
 # Get designer using stylesheets from external files
 
 # Edit button in right click
+# Support leaving the effect name the same i.e. don't check if effect already exists
 
 import sys
 
@@ -78,10 +79,13 @@ class MainWindow(QWidget):
                 JsonIO(file).copyFromBase()
 
     def refreshMenus(self):
-        GenerateButtons('menus.json', 'main_menu').removeButtons(
-            self.ui.main_menu_button_layout)
-        GenerateButtons('menus.json', 'main_menu').generateGenericButtons(self.ui.main_menu_button_layout, self.ui.effects_scroll_region, getPath(
-            'button_generic_primary.qss'), self.right_click_menu_effects, spacer=True)
+        try:
+            GenerateButtons('menus.json', 'main_menu').removeButtons(
+                self.ui.main_menu_button_layout)
+            GenerateButtons('menus.json', 'main_menu').generateGenericButtons(self.ui.main_menu_button_layout, self.ui.effects_scroll_region, getPath(
+                'button_generic_primary.qss'), self.right_click_menu_effects, spacer=True)
+        except:
+            pass
 
     def setupButtons(self):
         self.refreshMenus()
@@ -176,8 +180,8 @@ class MainWindow(QWidget):
 
     def setWindowParams(self, window, title, icon=None):
         self.handleButton()
-        window.show()
         window.setWindowTitle(title)
+        window.show()
         # window.setWindowIcon(icon)
 
     def initSerialMonitor(self):
@@ -185,8 +189,7 @@ class MainWindow(QWidget):
         self.setWindowParams(self.serial_monitor, 'ArduRGB Debug View')
 
     def initDialogue(self, input_type, menu, window_title):
-        self.input_dialogue = InputDialogue(
-            input_type, menu, lambda: self.refreshMenus())
+        self.input_dialogue = InputDialogue(input_type, menu)
         self.setWindowParams(self.input_dialogue, window_title)
 
     def mousePressEvent(self, event):

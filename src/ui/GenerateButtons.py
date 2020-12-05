@@ -1,3 +1,5 @@
+import Globals
+
 from rw.JsonIO import JsonIO
 
 from ui.views.input.InputDialogue import InputDialogue
@@ -28,10 +30,13 @@ class GenerateButtons():
                     pass
 
     def editButton(self, button):
-        # self.initDialogue(
-        #     'serial_direct', 'main_menu', 'Create New Effect')
-        # self.input_dialogue = InputDialogue('serial_direct', 'main_menu', 'Edit Effect')
-        print('tmp')
+        # Reset input window
+        Globals.edit_effect_menu = None
+        # Set up input window
+        Globals.edit_effect_menu = InputDialogue(
+            'serial_direct', 'main_menu', new_entry=False, btn_name=button.objectName())
+        Globals.edit_effect_menu.setWindowTitle('Edit Effect')
+        Globals.edit_effect_menu.show()
 
     def deleteButton(self, button):
         JsonIO(self.file).removeEntry(button.objectName())
