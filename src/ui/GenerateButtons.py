@@ -40,6 +40,7 @@ class GenerateButtons():
         Globals.edit_effect_menu.show()
 
     def deleteButton(self, button):
+        # Delete button if user confirms in message box
         if CreateMessageBox('Delete Effect', 'This action will remove this button. Continue?').confirmDelete():
             JsonIO(self.file).removeEntry(button.objectName())
 

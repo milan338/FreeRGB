@@ -19,7 +19,6 @@ class InputDialogue(QWidget):
         # Initialise variables
         self.effect_name = None
         self.effect_payload = None
-        Globals.popup_menu_selection = None
         self.menu = menu
         self.new_entry = new_entry
         self.btn_name = btn_name
@@ -33,13 +32,18 @@ class InputDialogue(QWidget):
         # Add functionality to 'submit' button
         self.ui.btn_submit.clicked.connect(self.getInputs)
         # Get existing data from button if editing
-        if not new_entry:
+        if new_entry:
+            # Clear current menu selection
+            Globals.popup_menu_selection = None
+        else:
             # Get button data
             self.btn = JsonIO('menus.json').findElement(self.btn_name)
             # Set existing text entry fields
             self.ui.input_effect_name.setText(self.btn[0])
             self.ui.btn_effect_types.setText(self.btn[1])
             self.ui.input_effect_payload.setText(self.btn[2])
+            # Set current menu selection
+            Globals.popup_menu_selection = self.btn[3]
 
     def effectTypeSelect(self):
         # Read entries from JSON

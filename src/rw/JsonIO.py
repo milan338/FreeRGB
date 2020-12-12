@@ -38,25 +38,30 @@ class JsonIO():
         except:
             pass
 
+    def getEffectType(self, effect):
+        # Get name of effect
+        self.effects_path = path.abspath(
+            path.join(self.base_path, '..', '..', self.preferences_dir, 'effects.json'))
+        try:
+            # Open effects file
+            with open(self.effects_path, 'r') as file:
+                self.effects_data = json.load(file)
+                for effect_name, effect_data in self.effects_data['effects'].items():
+                    if effect_data == effect:
+                        return effect_name
+                return None
+        except:
+            pass
+
     def findElement(self, element):
         for menu in self.data.values():
             for layout in menu.values():
                 for element_name, element_contents in layout.items():
                     if element_name == element:
-                        # Get name of effect
-                        self.effects_path = path.abspath(
-                            path.join(self.base_path, '..', '..', self.preferences_dir, 'effects.json'))
-                        try:
-                            # Open effects file
-                            with open(self.effects_path, 'r') as file:
-                                self.effects_data = json.load(file)
-                                for effect_name, effect_data in self.effects_data['effects'].items():
-                                    if effect_data == element_contents['command']['type']:
-                                        self.effect_name = effect_name
-                            # Return element data
-                            return(element_contents['text'], self.effect_name, element_contents['command']['payload'])
-                        except:
-                            pass
+                        self.effect_name = self.getEffectType(
+                            element_contents['command']['type'])
+                        # Return element data
+                        return(element_contents['text'], self.effect_name, element_contents['command']['payload'], element_contents['command']['type'])
         return None
 
     def copyFromBase(self):
