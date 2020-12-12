@@ -177,7 +177,7 @@ class JsonIO():
                     self.data = self.new_dict
                     self.dumpJson(self.data)
 
-    def replaceEntry(self, old_element, new_element, new_element_name, new_element_contents):
+    def replaceEntry(self, old_element, new_element, new_element_name, new_element_type, new_element_contents):
         # Go through JSON to find element
         for menu_name, menu_contents in self.data.items():
             for layout_name, layout_contents in menu_contents.items():
@@ -188,7 +188,7 @@ class JsonIO():
                         # Element contents
                         self.new_element_contents = {'text': new_element_name,
                                                      'command': {
-                                                         'type': 'serial_direct',
+                                                         'type': new_element_type,
                                                          'payload': new_element_contents}}
                         # Add original UI elements back to blank copy
                         # Replace original element with new name
