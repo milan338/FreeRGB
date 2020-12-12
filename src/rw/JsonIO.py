@@ -21,11 +21,10 @@ class JsonIO():
         except:
             pass
 
-    def dumpJson(self, sort_keys=False):
+    def dumpJson(self, data, sort_keys=False):
         try:
             with open(self.json_path, 'w') as file:
-                file.write(json.dumps(
-                    self.data, indent=4, sort_keys=sort_keys))
+                file.write(json.dumps(data, indent=4, sort_keys=sort_keys))
                 return 1
         except:
             return 0
@@ -59,7 +58,7 @@ class JsonIO():
     def clearLayout(self, menu, layout):
         for element in list(self.data[menu][layout].keys()):
             self.data[menu][layout].pop(element, None)
-        self.dumpJson()
+        self.dumpJson(self.data)
 
     def copyLayout(self, menu, layout):
         # Remove entries from layout
@@ -77,7 +76,7 @@ class JsonIO():
         # Copy all elements from base layout
         for element_name, element_contents in self.data_base[menu][layout].items():
             self.data[menu][layout][element_name] = element_contents
-        self.dumpJson()
+        self.dumpJson(self.data)
 
     def readEntry(self, entry):
         try:
@@ -93,7 +92,7 @@ class JsonIO():
         # Add new json entry to existing dictionary
         self.data[menu][layout][entry] = self.new_json
         # Dump new data to file
-        self.dumpJson(sort_keys=sort_keys)
+        self.dumpJson(self.data, sort_keys=sort_keys)
 
     def removeEntry(self, entry):
         # Cycle through menus and layouts in json to find referenced element
@@ -101,7 +100,7 @@ class JsonIO():
             for layout in self.data[menu]:
                 self.data[menu][layout].pop(entry, None)
         # Dump new data to file
-        self.dumpJson()
+        self.dumpJson(self.data)
 
     def shiftEntry(self, entry, direction):
         # Buffers for original element
@@ -163,7 +162,7 @@ class JsonIO():
                             self.new_dict[menu][layout][element_name] = element_contents
                     # Dump new data to file
                     self.data = self.new_dict
-                    self.dumpJson()
+                    self.dumpJson(self.data)
 
     def replaceEntry(self, old_element, new_element, new_element_name, new_element_contents):
         # Go through JSON to find element
@@ -177,7 +176,7 @@ class JsonIO():
                         self.new_element_contents = {'text': new_element_name,
                                                      'command': {
                                                          'type': 'serial_direct',
-                                                         'command': new_element_contents}}
+                                                         'payload': new_element_contents}}
                         # Add original UI elements back to blank copy
                         # Replace original element with new name
                         for element_name, element_contents in layout_contents.items():
@@ -187,10 +186,9 @@ class JsonIO():
                             # Add original element
                             else:
                                 self.new_dict[menu_name][layout_name][element_name] = element_contents
-                                print('else', element_name, element_contents)
                         # Dump new data to file
                         self.data = self.new_dict
-                        self.dumpJson()
+                        self.dumpJson(self.data)
 
     def blankCopy(self, menu, layout):
         # Create a deep copy of the original dictionary

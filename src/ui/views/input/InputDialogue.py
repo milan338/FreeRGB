@@ -2,6 +2,8 @@ import sys
 
 import Globals
 
+from ui import getPath
+from ui.generators.CreateMenuContext import CreateMenuContext
 from ui.views.input.Ui_InputDialogue import Ui_Form
 
 from rw.JsonIO import JsonIO
@@ -35,6 +37,18 @@ class InputDialogue(QWidget):
             self.ui.input_effect_name.setText(self.btn[0])
             self.ui.input_effect_payload.setText(self.btn[1])
 
+    # def effectTypeSelect(self):
+    #     # Read entries from JSON
+    #     self.right_click_menu_effects_options = JsonIO(
+    #         'effects.json').readEntry('effects')
+    #     # Create new right click menu
+    #     self.right_click_menu_effects = CreateMenuContext(
+    #         parent=self).makeMenu(getPath('right_click_menu.qss'))
+    #     # Add all JSON entries as options to right click menu
+    #     for effect_name, effect_payload in self.right_click_menu_effects_options.items():
+    #         CreateMenuEffectEdit(parent=self).addOption(
+    #             self.right_click_menu_effects, entry_name, entry_payload)
+
     def getInputs(self):
         # Reset user presented error
         self.ui.label_error.setText('')
@@ -65,8 +79,6 @@ class InputDialogue(QWidget):
                         # Raise error to user
                         self.ui.label_error.setText('Effect already exists')
                         return False
-        # Create new button
-        if self.new_entry:
             # Only runs if effect does not already exist
             self.createEffect(
                 'main_menu', 'main_menu_button_layout', generated_object_name)
