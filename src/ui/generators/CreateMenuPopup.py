@@ -5,7 +5,7 @@ from ui.GenerateButtons import GenerateButtons
 from PyQt5.QtWidgets import QMenu, QAction
 
 
-class CreateMenuRC():
+class CreateMenuPopup():
     def __init__(self, parent=None):
         self.parent = parent
 
@@ -20,12 +20,3 @@ class CreateMenuRC():
         self.action = QAction(option_name, self.parent)
         self.action.triggered.connect(lambda: self.runFunction(option_payload))
         menu.addAction(self.action)
-
-    def runFunction(self, function_name):
-        try:
-            getattr(GenerateButtons('menus.json', 'main_menu_right_click_menu'), function_name)(
-                Globals.current_hovered_btn)
-            # Refresh menu layout using JSON
-            Globals.refreshMenus()
-        except:
-            print('exception')

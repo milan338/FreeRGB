@@ -24,8 +24,14 @@
 
 # Get designer using stylesheets from external files
 
-# Edit button in right click
-# Support leaving the effect name the same i.e. don't check if effect already exists
+# Highlight current effect
+
+# Custom effect types - effect input dialogue select effect from json list
+# - main class to import all user defined 'effect type' classes - get 'effect action' from effect class definitions
+
+# Confirm delete button
+
+# Replace current context menu in main menu with new dynamic context menu
 
 import sys
 
@@ -39,7 +45,7 @@ from ui.views.monitor.SerialMonitor import SerialMonitor
 from ui.views.input.InputDialogue import InputDialogue
 from ui.widgets.ToggleSwitch import ToggleSwitch
 from ui.generators.CreateLargeButton import CreateLargeButton
-from ui.generators.CreateMenuRC import CreateMenuRC
+from ui.generators.CreateMenuEffectEdit import CreateMenuEffectEdit
 from ui.generators.CreateMessageBox import CreateMessageBox
 from ui.views.main.Ui_MainWindow import Ui_Form
 
@@ -66,11 +72,12 @@ class MainWindow(QWidget):
         # Setup UI elements
         self.setRightClickMenu()
         self.setupButtons()
-        self.colour_picker = QColorDialog(self)
+        # self.colour_picker = QColorDialog(self)
+        Globals.colour_picker = QColorDialog(self)
         self.ui.context_menus.hide()
 
     def setupFiles(self):
-        self.init_files = ['menus.json', 'preferences.json']
+        self.init_files = ['menus.json', 'preferences.json', 'effects.json']
         # Copy all files from base dir if they don't already exist
         for file in self.init_files:
             if JsonIO(file).fileExists():
@@ -144,11 +151,11 @@ class MainWindow(QWidget):
         self.right_click_menu_effects_options = JsonIO(
             'right_click_menu.json').readEntry('main_menu_right_click_menu')
         # Create new right click menu
-        self.right_click_menu_effects = CreateMenuRC(
+        self.right_click_menu_effects = CreateMenuEffectEdit(
             parent=self).makeMenu(getPath('right_click_menu.qss'))
         # Add all JSON entries as options to right click menu
         for entry_name, entry_payload in self.right_click_menu_effects_options.items():
-            CreateMenuRC(parent=self).addOption(
+            CreateMenuEffectEdit(parent=self).addOption(
                 self.right_click_menu_effects, entry_name, entry_payload)
 
     def changePage(self, widget, index, hide_context=True):
@@ -163,11 +170,11 @@ class MainWindow(QWidget):
                 self.ui.context_menus.show()
                 self.current_context = index
 
-    def getColour(self):
-        self.handleButton()
-        self.colour_picker.exec()
-        self.current_colour = self.colour_picker.currentColor().getRgb()
-        print(self.current_colour)
+    # def getColour(self):
+    #     self.handleButton()
+    #     self.colour_picker.exec()
+    #     self.current_colour = self.colour_picker.currentColor().getRgb()
+    #     print(self.current_colour)
 
     def getBright(self):
         self.handleButton()
