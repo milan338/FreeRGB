@@ -123,8 +123,8 @@ class MainWindow(QWidget):
         # self.ui.btn_menu_effect_new.clicked.connect(
         #     lambda: self.addButton(self.ui.main_menu_button_layout))
 
-        self.ui.btn_menu_effect_new.clicked.connect(lambda: self.initDialogue(
-            'serial_direct', 'main_menu', 'Create New Effect'))
+        self.ui.btn_menu_effect_new.clicked.connect(
+            lambda: self.initDialogue('main_menu', 'Create New Effect'))
         self.ui.btn_menu_effect_reset.clicked.connect(lambda: CreateMessageBox(
             'Reset Effects Menu', 'This action will erase all custom effects you have specified. Continue?').resetPreferences(
             file='menus.json', menu='main_menu', layout='main_menu_button_layout'))
@@ -195,8 +195,8 @@ class MainWindow(QWidget):
         self.serial_monitor = SerialMonitor()
         self.setWindowParams(self.serial_monitor, 'ArduRGB Debug View')
 
-    def initDialogue(self, input_type, menu, window_title):
-        self.input_dialogue = InputDialogue(input_type, menu)
+    def initDialogue(self, menu, window_title):
+        self.input_dialogue = InputDialogue(menu)
         self.setWindowParams(self.input_dialogue, window_title)
 
     def mousePressEvent(self, event):

@@ -4,8 +4,6 @@ from os import listdir, path
 
 from rw.JsonIO import JsonIO
 
-# from ui.effects.base import *
-
 
 class Effects():
     def __init__(self):
@@ -18,13 +16,14 @@ class Effects():
         self.findEffects()
 
     def findEffects(self):
+        # Store effects dict
+        self.effects_dict = {'effects': {}}
         # Find all valid python files
         for file in self.effects_files:
             self.file_path = path.abspath(path.join(self.effects_path, file))
             if path.isfile(self.file_path) and file.endswith('.py') and file != '__init__.py':
                 # Format file name
                 self.effect = file.split('.py')[0]
-                print(file)
                 # Import file
                 try:
                     self.module = __import__(
@@ -33,5 +32,9 @@ class Effects():
                     # Get effect name
                     self.effect_name = getattr(
                         self.effect_class, 'effectData')()
+                    self.effects_dict['effects'][self.effect_name] = self.effect
                 except:
                     pass
+        print(self.effects_dict)
+        # Write effect data to file
+        JsonIO('effects.json').dumpJson(self.effects_dict)

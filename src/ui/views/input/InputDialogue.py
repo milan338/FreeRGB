@@ -1,5 +1,3 @@
-import sys
-
 import Globals
 
 from ui import getPath
@@ -9,45 +7,55 @@ from ui.views.input.Ui_InputDialogue import Ui_Form
 from rw.JsonIO import JsonIO
 
 from PyQt5.QtWidgets import QWidget
+from PyQt5.QtGui import QCursor
 
 
 class InputDialogue(QWidget):
-    def __init__(self, input_type, menu, new_entry=True, btn_name=None, *args, **kwargs):
+    def __init__(self, menu, new_entry=True, btn_name=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
+        # Setup UI
         self.ui = Ui_Form()
         self.ui.setupUi(self)
-
+        # Initialise variables
         self.effect_name = None
         self.effect_payload = None
-
-        self.input_type = input_type
+        Globals.popup_menu_selection = None
         self.menu = menu
         self.new_entry = new_entry
         self.btn_name = btn_name
-
+        # Get buttons from current menu
         self.page_contents = JsonIO('menus.json').readEntry(self.menu)
-
+        # Initialise effect type selection menu
+        self.effectTypeSelect()
+        # Open effect drop down when 'effects' button clicked
+        self.ui.btn_effect_types.clicked.connect(
+            lambda: self.contextMenu(self.menu_effects))
+        # Add functionality to 'submit' button
         self.ui.btn_submit.clicked.connect(self.getInputs)
-
+        # Get existing data from button if editing
         if not new_entry:
             # Get button data
             self.btn = JsonIO('menus.json').findElement(self.btn_name)
             # Set existing text entry fields
             self.ui.input_effect_name.setText(self.btn[0])
-            self.ui.input_effect_payload.setText(self.btn[1])
+            self.ui.btn_effect_types.setText(self.btn[1])
+            self.ui.input_effect_payload.setText(self.btn[2])
 
-    # def effectTypeSelect(self):
-    #     # Read entries from JSON
-    #     self.right_click_menu_effects_options = JsonIO(
-    #         'effects.json').readEntry('effects')
-    #     # Create new right click menu
-    #     self.right_click_menu_effects = CreateMenuContext(
-    #         parent=self).makeMenu(getPath('right_click_menu.qss'))
-    #     # Add all JSON entries as options to right click menu
-    #     for effect_name, effect_payload in self.right_click_menu_effects_options.items():
-    #         CreateMenuEffectEdit(parent=self).addOption(
-    #             self.right_click_menu_effects, entry_name, entry_payload)
+    def effectTypeSelect(self):
+        # Read entries from JSON
+        self.effect_types = JsonIO('effects.json').readEntry('effects')
+        # Create new right click menu
+        self.menu_effects = CreateMenuContext(
+            parent=self).makeMenu(getPath('right_click_menu.qss'))
+        # Add all JSON entries as options to right click menu
+        for effect_name, effect_class in self.effect_types.items():
+            self.menu_args = (self.ui.btn_effect_types, effect_class)
+            CreateMenuContext(parent=self).addOption(
+                self.menu_effects, effect_name, (self.menu_args))
+
+    def contextMenu(self, menu):
+        # Place context menu at cursor position
+        menu.exec(QCursor.pos())
 
     def getInputs(self):
         # Reset user presented error
@@ -56,7 +64,7 @@ class InputDialogue(QWidget):
         self.effect_name = self.ui.input_effect_name.text()
         self.effect_payload = self.ui.input_effect_payload.text()
         # Ensure no input is blank - falsy when blank
-        if not self.effect_name or not self.effect_payload:
+        if not self.effect_name or not self.effect_payload or not Globals.popup_menu_selection:
             # Raise error to user
             self.ui.label_error.setText('Input(s) cannot be left empty')
         else:
@@ -92,7 +100,7 @@ class InputDialogue(QWidget):
 
     def createEffect(self, menu, layout, entry_name):
         self.command = {
-            'type': self.input_type,
+            'type': Globals.popup_menu_selection,
             'payload': self.effect_payload
         }
         JsonIO('menus.json').writeEntry(menu, layout, entry_name,

@@ -1,7 +1,3 @@
-import Globals
-
-from ui.GenerateButtons import GenerateButtons
-
 from PyQt5.QtWidgets import QMenu, QAction
 
 
@@ -17,6 +13,7 @@ class CreateMenuPopup():
         return(self.menu)
 
     def addOption(self, menu, option_name, option_payload):
+        self.option_name = option_name
         self.action = QAction(option_name, self.parent)
         self.action.triggered.connect(lambda: self.runFunction(option_payload))
         menu.addAction(self.action)

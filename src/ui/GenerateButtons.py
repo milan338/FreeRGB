@@ -34,7 +34,7 @@ class GenerateButtons():
         Globals.edit_effect_menu = None
         # Set up input window
         Globals.edit_effect_menu = InputDialogue(
-            'serial_direct', 'main_menu', new_entry=False, btn_name=button.objectName())
+            'main_menu', new_entry=False, btn_name=button.objectName())
         Globals.edit_effect_menu.setWindowTitle('Edit Effect')
         Globals.edit_effect_menu.show()
 

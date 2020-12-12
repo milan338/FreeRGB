@@ -43,7 +43,20 @@ class JsonIO():
             for layout in menu.values():
                 for element_name, element_contents in layout.items():
                     if element_name == element:
-                        return(element_contents['text'], element_contents['command']['payload'])
+                        # Get name of effect
+                        self.effects_path = path.abspath(
+                            path.join(self.base_path, '..', '..', self.preferences_dir, 'effects.json'))
+                        try:
+                            # Open effects file
+                            with open(self.effects_path, 'r') as file:
+                                self.effects_data = json.load(file)
+                                for effect_name, effect_data in self.effects_data['effects'].items():
+                                    if effect_data == element_contents['command']['type']:
+                                        self.effect_name = effect_name
+                            # Return element data
+                            return(element_contents['text'], self.effect_name, element_contents['command']['payload'])
+                        except:
+                            pass
         return None
 
     def copyFromBase(self):

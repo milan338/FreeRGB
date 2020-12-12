@@ -1,6 +1,6 @@
 {
     "effects": {
-        "SerialDirect": "None",
-        "SolidColour": "None"
+        "Serial Direct": "SerialDirect",
+        "Solid Colour": "SolidColour"
     }
 }

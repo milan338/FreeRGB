@@ -8,9 +8,12 @@ edit_effect_menu = None
 colour_picker = None
 
 # Store currently selected context menu items
-selected_effect_type = None
+popup_menu_selection = None
 selected_device = None
 selected_strip = None
+# Remove device and strip
+# - just dynamically replace stylesheet
+# of its UI element
 
 # Refresh main menu layout from JSON lambda
 refreshMenus = None
