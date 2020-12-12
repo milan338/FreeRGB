@@ -1,5 +1,3 @@
-import sys
-
 from os import listdir, path
 
 from rw.JsonIO import JsonIO

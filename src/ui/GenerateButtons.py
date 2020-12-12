@@ -4,6 +4,7 @@ from rw.JsonIO import JsonIO
 
 from ui.views.input.InputDialogue import InputDialogue
 from ui.generators.CreateLargeButton import CreateLargeButton
+from ui.generators.CreateMessageBox import CreateMessageBox
 
 
 class GenerateButtons():
@@ -39,7 +40,8 @@ class GenerateButtons():
         Globals.edit_effect_menu.show()
 
     def deleteButton(self, button):
-        JsonIO(self.file).removeEntry(button.objectName())
+        if CreateMessageBox('Delete Effect', 'This action will remove this button. Continue?').confirmDelete():
+            JsonIO(self.file).removeEntry(button.objectName())
 
     def moveButtonUp(self, button):
         JsonIO(self.file).shiftEntry(button, -1)
