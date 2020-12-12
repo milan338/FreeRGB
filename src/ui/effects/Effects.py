@@ -35,6 +35,5 @@ class Effects():
                     self.effects_dict['effects'][self.effect_name] = self.effect
                 except:
                     pass
-        print(self.effects_dict)
         # Write effect data to file
         JsonIO('effects.json').dumpJson(self.effects_dict)

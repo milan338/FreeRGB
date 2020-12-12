@@ -40,6 +40,7 @@ import Globals
 from rw.JsonIO import JsonIO
 
 from ui import getPath
+from ui.effects.Effects import Effects
 from ui.GenerateButtons import GenerateButtons
 from ui.views.monitor.SerialMonitor import SerialMonitor
 from ui.views.input.InputDialogue import InputDialogue
@@ -64,6 +65,8 @@ class MainWindow(QWidget):
         # UI initialisation
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        # Update available effects
+        Effects()
         # Variable initialisation
         self.version_name = JsonIO('app_Version.json').readEntry('version')
         self.current_context = None
