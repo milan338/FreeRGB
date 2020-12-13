@@ -1,3 +1,5 @@
+import Globals
+
 from os import listdir, path
 
 from rw.JsonIO import JsonIO
@@ -9,7 +11,6 @@ class Effects():
         self.base_path = path.dirname(__file__)
         self.effects_path = path.abspath(path.join(self.base_path, 'effect'))
         self.effects_files = listdir(self.effects_path)
-        self.import_path = 'ui.effects.effect'
         # Find valid effects
         self.findEffects()
 
@@ -25,7 +26,7 @@ class Effects():
                 # Import file
                 try:
                     self.module = __import__(
-                        f'{self.import_path}.{self.effect}', fromlist=[None])
+                        f'{Globals.effect_import_path}.{self.effect}', fromlist=[None])
                     self.effect_class = getattr(self.module, self.effect)
                     # Get effect name
                     self.effect_name = getattr(

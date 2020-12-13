@@ -12,11 +12,11 @@ class GenerateButtons():
         self.file = file
         self.page_contents = JsonIO(file).readEntry(page)
 
-    def generateGenericButtons(self, vertical_element, scroll_element, style_sheet, right_click_menu, spacer=False):
+    def generateGenericButtons(self, vertical_element, scroll_element, style_sheet, right_click_menu, spacer=False, effect_btn=False):
         for elements in self.page_contents.values():
             for element, attributes in elements.items():
-                self.btn = CreateLargeButton(vertical_element, spacer=spacer).createGenericButton(
-                    attributes['text'], element, scroll_element, style_sheet, right_click_menu)
+                self.btn = CreateLargeButton(vertical_element, spacer=spacer, effect_btn=effect_btn).createGenericButton(
+                    attributes['text'], element, scroll_element, style_sheet, right_click_menu, attributes['command']['type'])
 
     def removeButtons(self, layout):
         for i in reversed(range(layout.count())):

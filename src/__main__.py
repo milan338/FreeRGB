@@ -93,7 +93,7 @@ class MainWindow(QWidget):
             GenerateButtons('menus.json', 'main_menu').removeButtons(
                 self.ui.main_menu_button_layout)
             GenerateButtons('menus.json', 'main_menu').generateGenericButtons(self.ui.main_menu_button_layout, self.ui.effects_scroll_region, getPath(
-                'button_generic_primary.qss'), self.right_click_menu_effects, spacer=True)
+                'button_generic_primary.qss'), self.right_click_menu_effects, spacer=True, effect_btn=True)
         except:
             pass
 

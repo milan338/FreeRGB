@@ -15,5 +15,8 @@ selected_strip = None
 # - just dynamically replace stylesheet
 # of its UI element
 
+# Import location for effect definitions
+effect_import_path = 'ui.effects.effect'
+
 # Refresh main menu layout from JSON lambda
 refreshMenus = None

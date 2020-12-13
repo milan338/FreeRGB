@@ -6,9 +6,9 @@ class SolidColour():
         self.getColour()
 
     def getColour(self):
-        self.handleButton()
+        # self.handleButton()
         Globals.colour_picker.exec()
-        self.current_colour = self.colour_picker.currentColor().getRgb()
+        self.current_colour = Globals.colour_picker.currentColor().getRgb()
         print(self.current_colour)
 
     @staticmethod
