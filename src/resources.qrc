@@ -1,12 +1,12 @@
 <RCC>
   <qresource prefix="icons">
-    <file>icons/ico_brightness.png</file>
-    <file>icons/ico_debug.png</file>
-    <file>icons/ico_devices.png</file>
-    <file>icons/ico_effects.png</file>
-    <file>icons/ico_information.png</file>
-    <file>icons/ico_power.png</file>
-    <file>icons/ico_settings.png</file>
-    <file>icons/ico_strips.png</file>
+    <file>assets/icons/ico_brightness.png</file>
+    <file>assets/icons/ico_debug.png</file>
+    <file>assets/icons/ico_devices.png</file>
+    <file>assets/icons/ico_effects.png</file>
+    <file>assets/icons/ico_information.png</file>
+    <file>assets/icons/ico_power.png</file>
+    <file>assets/icons/ico_settings.png</file>
+    <file>assets/icons/ico_strips.png</file>
   </qresource>
 </RCC>
