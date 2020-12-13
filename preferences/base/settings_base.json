@@ -2,65 +2,58 @@
     "settings": {
         "settings_button_layout": {
             "advanced_mode": {
-                "text": "toggle",
+                "text": "Advanced Mode",
                 "command": {
                     "type": "toggleBool" ,
-                    "payload": "False"
+                    "payload": false
                 }
             },
             "update_check": {
-                "text": "toggle",
+                "text": "Check For Updates",
                 "command": {
                     "type": "toggleBool" ,
-                    "payload": "False"
+                    "payload": true
                 }
             },
             "do_logs": {
-                "text": "toggle",
+                "text": "Enable Logging",
                 "command": {
                     "type": "toggleBool" ,
-                    "payload": "False"
+                    "payload": true
                 }
             },
             "startup_run": {
-                "text": "toggle",
+                "text": "Run On Startup",
                 "command": {
                     "type": "toggleBool" ,
-                    "payload": "False"
+                    "payload": false
                 }
             },
             "background_activity": {
-                "text": "toggle",
+                "text": "Enable Background Service",
                 "command": {
                     "type": "toggleBool" ,
-                    "payload": "False"
+                    "payload": false
                 }
             },
             "get_help": {
-                "text": "push",
+                "text": "Get Help",
                 "command": {
                     "type": "openURL" ,
                     "payload": "https://www.google.com"
                 }
             },
             "support": {
-                "text": "push",
+                "text": "Support My Work",
                 "command": {
                     "type": "openURL" ,
                     "payload": "https://www.google.com"
                 }
             },
             "licenses": {
-                "text": "push",
+                "text": "Open Source Licenses",
                 "command": {
                     "type": "showLicenses" ,
-                    "payload": "None"
-                }
-            },
-            "reset_settings": {
-                "text": "push",
-                "command": {
-                    "type": "resetSettings" ,
                     "payload": "None"
                 }
             }

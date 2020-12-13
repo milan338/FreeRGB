@@ -446,7 +446,7 @@ QPushButton:pressed
         </layout>
        </item>
        <item>
-        <spacer name="verticalSpacer_8">
+        <spacer name="menu_effect_bottom_spacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -589,25 +589,12 @@ QPushButton:pressed
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <spacer name="verticalSpacer_5">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
+        <layout class="QVBoxLayout" name="settings_button_layout"/>
        </item>
        <item>
-        <widget class="QWidget" name="settings_toggle_advanced" native="true">
+        <widget class="QPushButton" name="btn_settings_reset">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -615,90 +602,39 @@ QPushButton:pressed
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>100</height>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>700</width>
-           <height>100</height>
+           <height>40</height>
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(39, 43, 54);
-border-radius: 10px;</string>
+          <string notr="true">QPushButton
+{
+	background-color:rgb(43, 47, 59);
+	border-radius: 10px;
+}
+
+QPushButton:hover
+{
+	background-color: rgb(51, 58, 72);
+}
+
+QPushButton:pressed 
+{
+	background-color: rgb(51, 76, 100);
+}</string>
          </property>
-         <widget class="QWidget" name="horizontalLayoutWidget">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>3</y>
-            <width>631</width>
-            <height>102</height>
-           </rect>
-          </property>
-          <layout class="QHBoxLayout" name="settings_toggle_advanced_layout">
-           <property name="sizeConstraint">
-            <enum>QLayout::SetMinAndMaxSize</enum>
-           </property>
-           <item>
-            <spacer name="horizontalSpacer_4">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Fixed</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="tmp_layout_settings_advanced"/>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_settings_advanced">
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>100</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Advanced Mode</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Fixed</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </widget>
+         <property name="text">
+          <string>Reset Settings</string>
+         </property>
         </widget>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="settings_button_layout"/>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_3">
+        <spacer name="menu_settings_bottom_spacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -708,7 +644,7 @@ border-radius: 10px;</string>
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>40</height>
+           <height>10</height>
           </size>
          </property>
         </spacer>
@@ -731,7 +667,7 @@ border-radius: 10px;</string>
     <string notr="true">background-color: rgb(27, 27, 35);</string>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="context_device">
     <widget class="QScrollArea" name="context_devices">

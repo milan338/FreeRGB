@@ -311,44 +311,36 @@ class Ui_Form(object):
         self.settings_scroll_region_widgets.setObjectName("settings_scroll_region_widgets")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.settings_scroll_region_widgets)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.verticalLayout_3.addItem(spacerItem1)
-        self.settings_toggle_advanced = QtWidgets.QWidget(self.settings_scroll_region_widgets)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.settings_toggle_advanced.sizePolicy().hasHeightForWidth())
-        self.settings_toggle_advanced.setSizePolicy(sizePolicy)
-        self.settings_toggle_advanced.setMinimumSize(QtCore.QSize(0, 100))
-        self.settings_toggle_advanced.setMaximumSize(QtCore.QSize(700, 100))
-        self.settings_toggle_advanced.setStyleSheet("color: rgb(255, 255, 255);\n"
-"background-color: rgb(39, 43, 54);\n"
-"border-radius: 10px;")
-        self.settings_toggle_advanced.setObjectName("settings_toggle_advanced")
-        self.horizontalLayoutWidget = QtWidgets.QWidget(self.settings_toggle_advanced)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 3, 631, 102))
-        self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
-        self.settings_toggle_advanced_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
-        self.settings_toggle_advanced_layout.setSizeConstraint(QtWidgets.QLayout.SetMinAndMaxSize)
-        self.settings_toggle_advanced_layout.setContentsMargins(0, 0, 0, 0)
-        self.settings_toggle_advanced_layout.setObjectName("settings_toggle_advanced_layout")
-        spacerItem2 = QtWidgets.QSpacerItem(100, 100, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.settings_toggle_advanced_layout.addItem(spacerItem2)
-        self.tmp_layout_settings_advanced = QtWidgets.QHBoxLayout()
-        self.tmp_layout_settings_advanced.setObjectName("tmp_layout_settings_advanced")
-        self.settings_toggle_advanced_layout.addLayout(self.tmp_layout_settings_advanced)
-        self.label_settings_advanced = QtWidgets.QLabel(self.horizontalLayoutWidget)
-        self.label_settings_advanced.setMaximumSize(QtCore.QSize(16777215, 100))
-        self.label_settings_advanced.setObjectName("label_settings_advanced")
-        self.settings_toggle_advanced_layout.addWidget(self.label_settings_advanced)
-        spacerItem3 = QtWidgets.QSpacerItem(100, 100, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.settings_toggle_advanced_layout.addItem(spacerItem3)
-        self.verticalLayout_3.addWidget(self.settings_toggle_advanced)
         self.settings_button_layout = QtWidgets.QVBoxLayout()
         self.settings_button_layout.setObjectName("settings_button_layout")
         self.verticalLayout_3.addLayout(self.settings_button_layout)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.verticalLayout_3.addItem(spacerItem4)
+        self.btn_settings_reset = QtWidgets.QPushButton(self.settings_scroll_region_widgets)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_settings_reset.sizePolicy().hasHeightForWidth())
+        self.btn_settings_reset.setSizePolicy(sizePolicy)
+        self.btn_settings_reset.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_settings_reset.setMaximumSize(QtCore.QSize(700, 40))
+        self.btn_settings_reset.setStyleSheet("QPushButton\n"
+"{\n"
+"    background-color:rgb(43, 47, 59);\n"
+"    border-radius: 10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
+"    background-color: rgb(51, 58, 72);\n"
+"}\n"
+"\n"
+"QPushButton:pressed \n"
+"{\n"
+"    background-color: rgb(51, 76, 100);\n"
+"}")
+        self.btn_settings_reset.setObjectName("btn_settings_reset")
+        self.verticalLayout_3.addWidget(self.btn_settings_reset)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_3.addItem(spacerItem1)
         self.settings_scroll_region.setWidget(self.settings_scroll_region_widgets)
         self.main_menus.addWidget(self.menu_settings)
         self.context_menus = QtWidgets.QStackedWidget(Form)
@@ -506,7 +498,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         self.main_menus.setCurrentIndex(0)
-        self.context_menus.setCurrentIndex(0)
+        self.context_menus.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
@@ -516,7 +508,7 @@ class Ui_Form(object):
         self.btn_menu_settings.setText(_translate("Form", "  Settings"))
         self.btn_menu_effect_new.setText(_translate("Form", "+"))
         self.btn_menu_effect_reset.setText(_translate("Form", "Reset Layout"))
-        self.label_settings_advanced.setText(_translate("Form", "Advanced Mode"))
+        self.btn_settings_reset.setText(_translate("Form", "Reset Settings"))
         self.stub_device.setText(_translate("Form", "stub device"))
         self.stub_strip.setText(_translate("Form", "stub strip"))
         self.btn_version.setText(_translate("Form", "Version 0.0.1"))

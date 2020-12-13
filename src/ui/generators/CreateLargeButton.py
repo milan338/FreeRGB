@@ -19,6 +19,8 @@ import Globals
 from ui.widgets.HoverButton import HoverButton
 from ui.widgets.ToggleSwitch import ToggleSwitch
 
+from rw.JsonIO import JsonIO
+
 from PyQt5.QtCore import Qt, QCoreApplication, QSize, QRect
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QSpacerItem, QSizePolicy, QWidget, QLayout, QHBoxLayout, QLabel
@@ -80,26 +82,34 @@ class CreateLargeButton():
             f'{obj_name}_h_layout_widget')
         self.btn_layout = QHBoxLayout(self.horizontal_layout_widget)
         self.btn_layout.setSizeConstraint(QLayout.SetMinAndMaxSize)
-        # Maybe try replacing spacers with margins?
-        self.btn_layout.setContentsMargins(100, 37, 0, 0)
+        self.btn_layout.setContentsMargins(100, 0, 0, 0)
         self.btn_layout.setObjectName(f'{obj_name}_layout')
-        # Create spacers for boundaries
-        # self.spacer_left = QSpacerItem(
-        #     100, 100, QSizePolicy.Fixed, QSizePolicy.Minimum)
-        # self.spacer_right = QSpacerItem(
-        #     100, 100, QSizePolicy.Fixed, QSizePolicy.Minimum)  # Maybe use only one spacer and place twice
-        # self.btn_layout.addItem(self.spacer_right)
+        # Create spacer between text and switch
+        self.spacer = QSpacerItem(
+            100, 100, QSizePolicy.Fixed, QSizePolicy.Minimum)
+        self.btn_layout.addItem(self.spacer)
         # Create toggle switch element
         self.switch = ToggleSwitch()
+        # self.switch.toggled.connect(lambda: print(self.switch.isChecked()))
+        self.switch.toggled.connect(lambda: self.updateBool(
+            text, obj_name, action, self.switch))
         self.btn_layout.addWidget(self.switch)
+        # Set toggle switch status
+        if action['payload']:
+            self.switch.setChecked(True)
         # Add button label
         self.btn_label = QLabel(self.horizontal_layout_widget)
-        self.btn_label.setMaximumSize(QSize(200, 100))
+        self.btn_label.setMaximumSize(QSize(400, 100))
         self.btn_label.setObjectName(f'{obj_name}_label')
-        # self.btn_layout.addWidget(self.btn_label)
-        # self.btn_layout.addItem(self.spacer_left)
+        self.btn_label.setText(self.translate("Form", text))
+        self.btn_layout.addWidget(self.btn_label)
         # Show button
         self.btn.show()
+
+    def updateBool(self, text, entry_name, entry_contents, switch):
+        # Update settings file
+        JsonIO('settings.json').replaceEntry(entry_name, entry_name,
+                                             text, entry_contents['type'], switch.isChecked())
 
     def runEffect(self, effect):
         try:
