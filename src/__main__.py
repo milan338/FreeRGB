@@ -71,19 +71,21 @@ class MainWindow(QWidget):
 
     def refreshMenus(self):
         try:
+            # Reset main menu
             GenerateButtons('menus.json', 'main_menu').removeButtons(
                 self.ui.main_menu_button_layout)
             GenerateButtons('menus.json', 'main_menu').generateGenericButtons(self.ui.main_menu_button_layout, self.ui.effects_scroll_region, getPath(
                 'button_generic_primary.qss'), self.right_click_menu_effects, spacer=True, effect_btn=True)
+            # Reset settings menu
+            GenerateButtons('settings.json', 'settings').removeButtons(
+                self.ui.settings_button_layout)
+            GenerateButtons('settings.json', 'settings').generateGenericButtons(
+                self.ui.settings_button_layout, self.ui.settings_scroll_region, getPath('button_generic_primary.qss'), spacer=True)
         except:
             pass
-        GenerateButtons('settings.json', 'settings').generateGenericButtons(
-            self.ui.settings_button_layout, self.ui.settings_scroll_region, getPath('button_generic_primary.qss'), spacer=True)
-        print('2')
 
     def setupButtons(self):
         self.refreshMenus()
-
         # Bottom bar
         self.ui.btn_version.setText(self.version_name)
         self.ui.btn_device_debug.clicked.connect(
@@ -92,7 +94,6 @@ class MainWindow(QWidget):
         self.ui.btn_device_information.clicked.connect(
             lambda: QMessageBox.information(self, 'Device Information', 'Device Name: \nCOM Port: \nStrips Connected: \nArduRGB Version: \nBoard: \nBaud Rate: '))
         self.ui.slider_brightness.sliderReleased.connect(self.getBright)
-
         # Left bar
         self.ui.btn_menu_effects.clicked.connect(
             lambda: self.changePage(self.ui.main_menus, 0))
@@ -102,23 +103,15 @@ class MainWindow(QWidget):
             lambda: self.changePage(self.ui.context_menus, 0, False))
         self.ui.btn_list_strip.clicked.connect(
             lambda: self.changePage(self.ui.context_menus, 1, False))
-
         # Effects menu
         self.ui.btn_menu_effect_new.clicked.connect(
             lambda: self.initDialogue('main_menu', 'Create New Effect'))
         self.ui.btn_menu_effect_reset.clicked.connect(lambda: CreateMessageBox(
             'Reset Effects Menu', 'This action will erase all custom effects you have specified. Continue?').resetPreferences(
             file='menus.json', menu='main_menu', layout='main_menu_button_layout'))
-
         # Settings menu
-        # self.switch_advanced = ToggleSwitch()
-        # self.switch_updates = ToggleSwitch()
-        # self.ui.tmp_layout_settings_advanced.addWidget(self.switch_advanced)
-        # self.ui.tmp_layout_settings_updates.addWidget(self.switch_updates)
-        # self.switch_advanced.toggled.connect(
-        #     lambda: print(self.switch_advanced))
-        # self.switch_updates.toggled.connect(
-        #     lambda: print(self.switch_advanced))
+        self.ui.btn_settings_reset.clicked.connect(lambda: CreateMessageBox(
+            'Reset Settings', 'This action will revert all settings to their default. Continue?').resetPreferences(file='settings.json', reset_file=True))
 
     def handleButton(self):
         self.ui.context_menus.hide()
@@ -151,12 +144,6 @@ class MainWindow(QWidget):
                 self.ui.context_menus.show()
                 self.current_context = index
 
-    # def getColour(self):
-    #     self.handleButton()
-    #     self.colour_picker.exec()
-    #     self.current_colour = self.colour_picker.currentColor().getRgb()
-    #     print(self.current_colour)
-
     def getBright(self):
         self.handleButton()
         self.current_brightness = self.ui.slider_brightness.value()
@@ -182,14 +169,6 @@ class MainWindow(QWidget):
 
     def mousePressEvent(self, event):
         self.handleButton()
-
-    # def addButton(self, vertical_layout):
-    #     # CreateLargeButton('text' + str(self.x), 'object', False, self.ui.effects_scroll_region,
-    #     #                   self.ui.verticalLayout_2, getPath('button_generic_primary.qss'))
-    #     # CreateLargeButton(vertical_layout, spacer=True).createGenericButton(
-    #     #     'text' + str(self.x), 'object', self.ui.effects_scroll_region, getPath('button_generic_primary.qss'))
-    #     GenerateButtons('menus.json', 'main_menu').generateGenericButtons(
-    #         vertical_layout, self.ui.effects_scroll_region, getPath('button_generic_primary.qss'), spacer=True)
 
 
 if __name__ == '__main__':

@@ -1,5 +1,4 @@
 <RCC>
-  <author>milan338</author>
   <qresource prefix="icons">
     <file>assets/icons/ico_brightness.png</file>
     <file>assets/icons/ico_debug.png</file>

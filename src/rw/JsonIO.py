@@ -30,7 +30,6 @@ class JsonIO():
         self.json_path = path.abspath(
             path.join(self.base_path, '..', '..', self.preferences_dir, filename))
         self.filename_base = filename.split('.')[0] + '_base.json'
-
         try:
             with open(self.json_path, 'r') as file:
                 self.data = json.load(file)
@@ -83,7 +82,6 @@ class JsonIO():
     def copyFromBase(self):
         self.json_path_base = path.abspath(path.join(
             self.base_path, '..', '..', self.preferences_dir, 'base', self.filename_base))
-        print(self.json_path_base)
         try:
             copyfile(self.json_path_base, self.json_path)
         except:

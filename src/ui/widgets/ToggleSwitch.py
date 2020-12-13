@@ -6,8 +6,8 @@
 # You should have received a copy of the license along with this file.
 # If not, see <https://creativecommons.org/licenses/by-sa/4.0/>.
 #
-# The original file is located at <https://stackoverflow.com/a/51825815>.
-# This file has been modified.
+# The original file can be located at <https://stackoverflow.com/a/51825815>.
+# This file has been modified from the original source.
 
 
 from PyQt5.QtCore import QPropertyAnimation, QRectF, QSize, Qt, pyqtProperty
