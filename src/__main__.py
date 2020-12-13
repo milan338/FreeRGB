@@ -61,7 +61,7 @@ class MainWindow(QWidget):
         self.ui.context_menus.hide()
 
     def setupFiles(self):
-        self.init_files = ['menus.json', 'preferences.json', 'effects.json']
+        self.init_files = ['menus.json', 'settings.json', 'effects.json']
         # Copy all files from base dir if they don't already exist
         for file in self.init_files:
             if JsonIO(file).fileExists():
@@ -77,6 +77,9 @@ class MainWindow(QWidget):
                 'button_generic_primary.qss'), self.right_click_menu_effects, spacer=True, effect_btn=True)
         except:
             pass
+        GenerateButtons('settings.json', 'settings').generateGenericButtons(
+            self.ui.settings_button_layout, self.ui.settings_scroll_region, getPath('button_generic_primary.qss'), spacer=True)
+        print('2')
 
     def setupButtons(self):
         self.refreshMenus()
@@ -101,12 +104,6 @@ class MainWindow(QWidget):
             lambda: self.changePage(self.ui.context_menus, 1, False))
 
         # Effects menu
-        # self.ui.btn_effect_solid.clicked.connect(self.getColour)
-        # self.ui.btn_effect_solid.clicked.connect(
-        #     lambda: JsonIO('preferences.json').writeEntry('advanced_mode'))
-        # self.ui.btn_menu_effect_new.clicked.connect(
-        #     lambda: self.addButton(self.ui.main_menu_button_layout))
-
         self.ui.btn_menu_effect_new.clicked.connect(
             lambda: self.initDialogue('main_menu', 'Create New Effect'))
         self.ui.btn_menu_effect_reset.clicked.connect(lambda: CreateMessageBox(
@@ -114,14 +111,14 @@ class MainWindow(QWidget):
             file='menus.json', menu='main_menu', layout='main_menu_button_layout'))
 
         # Settings menu
-        self.switch_advanced = ToggleSwitch()
-        self.switch_updates = ToggleSwitch()
-        self.ui.tmp_layout_settings_advanced.addWidget(self.switch_advanced)
-        self.ui.tmp_layout_settings_updates.addWidget(self.switch_updates)
-        self.switch_advanced.toggled.connect(
-            lambda: print(self.switch_advanced))
-        self.switch_updates.toggled.connect(
-            lambda: print(self.switch_advanced))
+        # self.switch_advanced = ToggleSwitch()
+        # self.switch_updates = ToggleSwitch()
+        # self.ui.tmp_layout_settings_advanced.addWidget(self.switch_advanced)
+        # self.ui.tmp_layout_settings_updates.addWidget(self.switch_updates)
+        # self.switch_advanced.toggled.connect(
+        #     lambda: print(self.switch_advanced))
+        # self.switch_updates.toggled.connect(
+        #     lambda: print(self.switch_advanced))
 
     def handleButton(self):
         self.ui.context_menus.hide()
@@ -186,13 +183,13 @@ class MainWindow(QWidget):
     def mousePressEvent(self, event):
         self.handleButton()
 
-    def addButton(self, vertical_layout):
-        # CreateLargeButton('text' + str(self.x), 'object', False, self.ui.effects_scroll_region,
-        #                   self.ui.verticalLayout_2, getPath('button_generic_primary.qss'))
-        # CreateLargeButton(vertical_layout, spacer=True).createGenericButton(
-        #     'text' + str(self.x), 'object', self.ui.effects_scroll_region, getPath('button_generic_primary.qss'))
-        GenerateButtons('menus.json', 'main_menu').generateGenericButtons(
-            vertical_layout, self.ui.effects_scroll_region, getPath('button_generic_primary.qss'), spacer=True)
+    # def addButton(self, vertical_layout):
+    #     # CreateLargeButton('text' + str(self.x), 'object', False, self.ui.effects_scroll_region,
+    #     #                   self.ui.verticalLayout_2, getPath('button_generic_primary.qss'))
+    #     # CreateLargeButton(vertical_layout, spacer=True).createGenericButton(
+    #     #     'text' + str(self.x), 'object', self.ui.effects_scroll_region, getPath('button_generic_primary.qss'))
+    #     GenerateButtons('menus.json', 'main_menu').generateGenericButtons(
+    #         vertical_layout, self.ui.effects_scroll_region, getPath('button_generic_primary.qss'), spacer=True)
 
 
 if __name__ == '__main__':

@@ -27,12 +27,23 @@ class GenerateButtons():
     def __init__(self, file, page):
         self.file = file
         self.page_contents = JsonIO(file).readEntry(page)
+        print(file, page)
 
-    def generateGenericButtons(self, vertical_element, scroll_element, style_sheet, right_click_menu, spacer=False, effect_btn=False):
+    def generateGenericButtons(self, vertical_element, scroll_element, style_sheet, right_click_menu=None, spacer=False, effect_btn=False):
         for elements in self.page_contents.values():
             for element, attributes in elements.items():
-                self.btn = CreateLargeButton(vertical_element, spacer=spacer, effect_btn=effect_btn).createGenericButton(
-                    attributes['text'], element, scroll_element, style_sheet, right_click_menu, attributes['command']['type'])
+                # Create toggle button
+                if attributes['command']['type'] == 'toggleBool':
+                    self.btn = CreateLargeButton(
+                        vertical_element, spacer=spacer).createToggleButton(attributes['text'], element, scroll_element, style_sheet, attributes['command'])
+                # Create pushbutton
+                else:
+                    self.btn = CreateLargeButton(vertical_element, spacer=spacer, effect_btn=effect_btn).createGenericButton(
+                        attributes['text'], element, scroll_element, style_sheet, right_click_menu, attributes['command']['type'])
+
+    # def generateSettingsButtons(self, vertical_element, scroll_element, style_sheet, spacer=True):
+    #     # for elements in
+    #     print('tmp')
 
     def removeButtons(self, layout):
         for i in reversed(range(layout.count())):
