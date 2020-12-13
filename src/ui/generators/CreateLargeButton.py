@@ -17,10 +17,11 @@
 import Globals
 
 from ui.widgets.HoverButton import HoverButton
+from ui.widgets.ToggleSwitch import ToggleSwitch
 
-from PyQt5.QtCore import Qt, QCoreApplication, QSize
+from PyQt5.QtCore import Qt, QCoreApplication, QSize, QRect
 from PyQt5.QtGui import QCursor
-from PyQt5.QtWidgets import QSpacerItem, QSizePolicy
+from PyQt5.QtWidgets import QSpacerItem, QSizePolicy, QWidget, QLayout, QHBoxLayout, QLabel
 
 
 class CreateLargeButton():
@@ -40,8 +41,8 @@ class CreateLargeButton():
         self.btn.setObjectName(obj_name)
         self.btn.setText(self.translate("Form", text))
         # Set size
-        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-        self.btn.setSizePolicy(sizePolicy)
+        self.sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        self.btn.setSizePolicy(self.sizePolicy)
         self.btn.setMinimumSize(QSize(0, 100))
         self.btn.setMaximumSize(QSize(700, 100))
         # Create context menu
@@ -56,6 +57,47 @@ class CreateLargeButton():
         if self.effect_btn:
             # Connect click action
             self.btn.clicked.connect(lambda: self.runEffect(action))
+        # Show button
+        self.btn.show()
+
+    def createToggleButton(self, text, obj_name, scroll_element, style_sheet, action):
+        # Initialise button
+        self.btn = QWidget(scroll_element)
+        self.vertical_element.addWidget(self.btn)
+        self.btn.setObjectName(obj_name)
+        # Set size
+        self.sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        self.btn.setSizePolicy(self.sizePolicy)
+        self.btn.setMinimumSize(QSize(0, 100))
+        self.btn.setMaximumSize(QSize(700, 100))
+        # Set style
+        with open(style_sheet) as style_file:
+            self.btn.setStyleSheet(style_file.read())
+        # Create horizontal layout for elements
+        self.horizontal_layout_widget = QWidget(self.btn)
+        self.horizontal_layout_widget.setGeometry(QRect(10, 3, 631, 102))
+        self.horizontal_layout_widget.setObjectName(
+            f'{obj_name}_h_layout_widget')
+        self.btn_layout = QHBoxLayout(self.horizontal_layout_widget)
+        self.btn_layout.setSizeConstraint(QLayout.SetMinAndMaxSize)
+        # Maybe try replacing spacers with margins?
+        self.btn_layout.setContentsMargins(100, 37, 0, 0)
+        self.btn_layout.setObjectName(f'{obj_name}_layout')
+        # Create spacers for boundaries
+        # self.spacer_left = QSpacerItem(
+        #     100, 100, QSizePolicy.Fixed, QSizePolicy.Minimum)
+        # self.spacer_right = QSpacerItem(
+        #     100, 100, QSizePolicy.Fixed, QSizePolicy.Minimum)  # Maybe use only one spacer and place twice
+        # self.btn_layout.addItem(self.spacer_right)
+        # Create toggle switch element
+        self.switch = ToggleSwitch()
+        self.btn_layout.addWidget(self.switch)
+        # Add button label
+        self.btn_label = QLabel(self.horizontal_layout_widget)
+        self.btn_label.setMaximumSize(QSize(200, 100))
+        self.btn_label.setObjectName(f'{obj_name}_label')
+        # self.btn_layout.addWidget(self.btn_label)
+        # self.btn_layout.addItem(self.spacer_left)
         # Show button
         self.btn.show()
 

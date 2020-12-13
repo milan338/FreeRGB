@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <author>Milan338</author>
+ <author>milan338</author>
  <class>Form</class>
  <widget class="QWidget" name="Form">
   <property name="geometry">
@@ -67,7 +67,7 @@ QPushButton:pressed
     <string>  Effects</string>
    </property>
    <property name="icon">
-    <iconset resource="../../../resources.qrc">
+    <iconset>
      <normaloff>:/icons/assets/icons/ico_effects.png</normaloff>:/icons/assets/icons/ico_effects.png</iconset>
    </property>
    <property name="iconSize">
@@ -108,7 +108,7 @@ QPushButton:pressed
     <string>  Settings</string>
    </property>
    <property name="icon">
-    <iconset resource="../../../resources.qrc">
+    <iconset>
      <normaloff>:/icons/assets/icons/ico_settings.png</normaloff>:/icons/assets/icons/ico_settings.png</iconset>
    </property>
    <property name="iconSize">
@@ -176,7 +176,7 @@ QPushButton:pressed
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../../../resources.qrc">
+    <iconset>
      <normaloff>:/icons/assets/icons/ico_power.png</normaloff>:/icons/assets/icons/ico_power.png</iconset>
    </property>
    <property name="iconSize">
@@ -216,7 +216,7 @@ QPushButton:pressed
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../../../resources.qrc">
+    <iconset>
      <normaloff>:/icons/assets/icons/ico_information.png</normaloff>:/icons/assets/icons/ico_information.png</iconset>
    </property>
    <property name="iconSize">
@@ -256,7 +256,7 @@ QPushButton:pressed
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../../../resources.qrc">
+    <iconset>
      <normaloff>:/icons/assets/icons/ico_devices.png</normaloff>:/icons/assets/icons/ico_devices.png</iconset>
    </property>
    <property name="iconSize">
@@ -296,7 +296,7 @@ QPushButton:pressed
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../../../resources.qrc">
+    <iconset>
      <normaloff>:/icons/assets/icons/ico_strips.png</normaloff>:/icons/assets/icons/ico_strips.png</iconset>
    </property>
    <property name="iconSize">
@@ -336,7 +336,7 @@ QPushButton:pressed
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../../../resources.qrc">
+    <iconset>
      <normaloff>:/icons/assets/icons/ico_debug.png</normaloff>:/icons/assets/icons/ico_debug.png</iconset>
    </property>
    <property name="iconSize">
@@ -373,7 +373,7 @@ QPushButton:pressed
       <rect>
        <x>20</x>
        <y>0</y>
-       <width>671</width>
+       <width>661</width>
        <height>541</height>
       </rect>
      </property>
@@ -415,7 +415,7 @@ QPushButton:pressed
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>671</width>
+        <width>661</width>
         <height>541</height>
        </rect>
       </property>
@@ -433,7 +433,17 @@ QPushButton:pressed
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QVBoxLayout" name="main_menu_button_layout"/>
+        <layout class="QVBoxLayout" name="main_menu_button_layout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="sizeConstraint">
+          <enum>QLayout::SetDefaultConstraint</enum>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+        </layout>
        </item>
        <item>
         <spacer name="verticalSpacer_8">
@@ -541,12 +551,12 @@ QPushButton:pressed
     </widget>
    </widget>
    <widget class="QWidget" name="menu_settings">
-    <widget class="QScrollArea" name="effects_scroll_region_2">
+    <widget class="QScrollArea" name="settings_scroll_region">
      <property name="geometry">
       <rect>
        <x>20</x>
        <y>0</y>
-       <width>671</width>
+       <width>661</width>
        <height>551</height>
       </rect>
      </property>
@@ -568,13 +578,13 @@ QPushButton:pressed
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents_3">
+     <widget class="QWidget" name="settings_scroll_region_widgets">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>671</width>
-        <height>666</height>
+        <width>661</width>
+        <height>551</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -622,9 +632,9 @@ border-radius: 10px;</string>
          <widget class="QWidget" name="horizontalLayoutWidget">
           <property name="geometry">
            <rect>
-            <x>0</x>
+            <x>10</x>
             <y>3</y>
-            <width>681</width>
+            <width>631</width>
             <height>102</height>
            </rect>
           </property>
@@ -685,228 +695,7 @@ border-radius: 10px;</string>
         </widget>
        </item>
        <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QWidget" name="settings_toggle_update" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>100</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>700</width>
-           <height>100</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(39, 43, 54);
-border-radius: 10px;</string>
-         </property>
-         <widget class="QWidget" name="horizontalLayoutWidget_3">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>3</y>
-            <width>681</width>
-            <height>102</height>
-           </rect>
-          </property>
-          <layout class="QHBoxLayout" name="settings_option_update_layout">
-           <property name="sizeConstraint">
-            <enum>QLayout::SetMinAndMaxSize</enum>
-           </property>
-           <item>
-            <spacer name="horizontalSpacer_5">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Fixed</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="tmp_layout_settings_updates"/>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_settings_update">
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>100</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Check For Updates</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_3">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Fixed</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>100</width>
-               <height>100</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </widget>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btn_support">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>100</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>700</width>
-           <height>100</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton
-{
-	color: rgb(255, 255, 255);
-	background-color: rgb(39, 43, 54);
-	border-radius: 10px;
-}
-
-QPushButton:hover
-{
-	background-color: rgb(51, 76, 100);
-}
-
-QPushButton:pressed 
-{
-	background-color: rgb(90, 164, 253);
-}</string>
-         </property>
-         <property name="text">
-          <string>Support My Work</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btn_licenses">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>100</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>700</width>
-           <height>100</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton
-{
-	color: rgb(255, 255, 255);
-	background-color: rgb(39, 43, 54);
-	border-radius: 10px;
-}
-
-QPushButton:hover
-{
-	background-color: rgb(51, 76, 100);
-}
-
-QPushButton:pressed 
-{
-	background-color: rgb(90, 164, 253);
-}</string>
-         </property>
-         <property name="text">
-          <string>Open Source Licenses</string>
-         </property>
-        </widget>
+        <layout class="QVBoxLayout" name="settings_button_layout"/>
        </item>
        <item>
         <spacer name="verticalSpacer_3">

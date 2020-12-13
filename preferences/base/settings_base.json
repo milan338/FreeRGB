@@ -1,0 +1,69 @@
+{
+    "settings": {
+        "settings_button_layout": {
+            "advanced_mode": {
+                "text": "toggle",
+                "command": {
+                    "type": "toggleBool" ,
+                    "payload": "False"
+                }
+            },
+            "update_check": {
+                "text": "toggle",
+                "command": {
+                    "type": "toggleBool" ,
+                    "payload": "False"
+                }
+            },
+            "do_logs": {
+                "text": "toggle",
+                "command": {
+                    "type": "toggleBool" ,
+                    "payload": "False"
+                }
+            },
+            "startup_run": {
+                "text": "toggle",
+                "command": {
+                    "type": "toggleBool" ,
+                    "payload": "False"
+                }
+            },
+            "background_activity": {
+                "text": "toggle",
+                "command": {
+                    "type": "toggleBool" ,
+                    "payload": "False"
+                }
+            },
+            "get_help": {
+                "text": "push",
+                "command": {
+                    "type": "openURL" ,
+                    "payload": "https://www.google.com"
+                }
+            },
+            "support": {
+                "text": "push",
+                "command": {
+                    "type": "openURL" ,
+                    "payload": "https://www.google.com"
+                }
+            },
+            "licenses": {
+                "text": "push",
+                "command": {
+                    "type": "showLicenses" ,
+                    "payload": "None"
+                }
+            },
+            "reset_settings": {
+                "text": "push",
+                "command": {
+                    "type": "resetSettings" ,
+                    "payload": "None"
+                }
+            }
+        }
+    }
+}
