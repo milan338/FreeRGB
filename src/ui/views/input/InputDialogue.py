@@ -8,6 +8,7 @@ from rw.JsonIO import JsonIO
 
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtGui import QCursor
+from PyQt5.QtCore import Qt
 
 
 class InputDialogue(QWidget):
@@ -44,6 +45,8 @@ class InputDialogue(QWidget):
             self.ui.input_effect_payload.setText(self.btn[2])
             # Set current menu selection
             Globals.popup_menu_selection = self.btn[3]
+        # Block inputs to application while dialogue active
+        self.setWindowModality(Qt.ApplicationModal)
 
     def effectTypeSelect(self):
         # Read entries from JSON

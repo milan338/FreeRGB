@@ -2,7 +2,7 @@ import Globals
 
 from ui.widgets.HoverButton import HoverButton
 
-from PyQt5.QtCore import Qt, QCoreApplication, QSize, pyqtSignal
+from PyQt5.QtCore import Qt, QCoreApplication, QSize
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QSpacerItem, QSizePolicy
 
