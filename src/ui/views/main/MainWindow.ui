@@ -67,8 +67,8 @@ QPushButton:pressed
     <string>  Effects</string>
    </property>
    <property name="icon">
-    <iconset resource="../../../assets/resources.qrc">
-     <normaloff>:/icons/icons/ico_effects.png</normaloff>:/icons/icons/ico_effects.png</iconset>
+    <iconset resource="../../../resources.qrc">
+     <normaloff>:/icons/assets/icons/ico_effects.png</normaloff>:/icons/assets/icons/ico_effects.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -108,8 +108,8 @@ QPushButton:pressed
     <string>  Settings</string>
    </property>
    <property name="icon">
-    <iconset resource="../../../assets/resources.qrc">
-     <normaloff>:/icons/icons/ico_settings.png</normaloff>:/icons/icons/ico_settings.png</iconset>
+    <iconset resource="../../../resources.qrc">
+     <normaloff>:/icons/assets/icons/ico_settings.png</normaloff>:/icons/assets/icons/ico_settings.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -176,8 +176,8 @@ QPushButton:pressed
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../../../assets/resources.qrc">
-     <normaloff>:/icons/icons/ico_power.png</normaloff>:/icons/icons/ico_power.png</iconset>
+    <iconset resource="../../../resources.qrc">
+     <normaloff>:/icons/assets/icons/ico_power.png</normaloff>:/icons/assets/icons/ico_power.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -216,8 +216,8 @@ QPushButton:pressed
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../../../assets/resources.qrc">
-     <normaloff>:/icons/icons/ico_information.png</normaloff>:/icons/icons/ico_information.png</iconset>
+    <iconset resource="../../../resources.qrc">
+     <normaloff>:/icons/assets/icons/ico_information.png</normaloff>:/icons/assets/icons/ico_information.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -256,8 +256,8 @@ QPushButton:pressed
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../../../assets/resources.qrc">
-     <normaloff>:/icons/icons/ico_devices.png</normaloff>:/icons/icons/ico_devices.png</iconset>
+    <iconset resource="../../../resources.qrc">
+     <normaloff>:/icons/assets/icons/ico_devices.png</normaloff>:/icons/assets/icons/ico_devices.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -296,8 +296,8 @@ QPushButton:pressed
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../../../assets/resources.qrc">
-     <normaloff>:/icons/icons/ico_strips.png</normaloff>:/icons/icons/ico_strips.png</iconset>
+    <iconset resource="../../../resources.qrc">
+     <normaloff>:/icons/assets/icons/ico_strips.png</normaloff>:/icons/assets/icons/ico_strips.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -336,8 +336,8 @@ QPushButton:pressed
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../../../assets/resources.qrc">
-     <normaloff>:/icons/icons/ico_debug.png</normaloff>:/icons/icons/ico_debug.png</iconset>
+    <iconset resource="../../../resources.qrc">
+     <normaloff>:/icons/assets/icons/ico_debug.png</normaloff>:/icons/assets/icons/ico_debug.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -1207,7 +1207,7 @@ QSlider::handle:horizontal:pressed
   <zorder>slider_brightness</zorder>
  </widget>
  <resources>
-  <include location="../../../assets/resources.qrc"/>
+  <include location="../../../resources.qrc"/>
  </resources>
  <connections/>
 </ui>

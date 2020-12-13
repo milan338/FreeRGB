@@ -1,5 +1,14 @@
-# Original code from https://stackoverflow.com/a/51825815
-# Original code developed by https://stackoverflow.com/users/3564517/stefan-scherfke
+# Python 3 / PyQt5 implementation of Toggle Switch Widget (C) by Stefan Scherfke.
+#
+# This file is licensed under a
+# Creative Commons Attribution-ShareAlike 4.0 International License.
+#
+# You should have received a copy of the license along with this file.
+# If not, see <https://creativecommons.org/licenses/by-sa/4.0/>.
+#
+# The original file is located at <https://stackoverflow.com/a/51825815>.
+# This file has been modified.
+
 
 from PyQt5.QtCore import QPropertyAnimation, QRectF, QSize, Qt, pyqtProperty
 from PyQt5.QtGui import QPainter

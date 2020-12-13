@@ -1,37 +1,18 @@
-# check for updates on startup, setting to disable that
-# scan for com ports, arduino gives back information such as number of strips, device name, local device name, other info?
-# option to select com port, option to select led strip
-# debug menu / serial monitor -- only show if advanced mode selected in options -- also shows python print statements
-# version button goes to github page
-# On startup get current colour, brightness etc from arduino and adjust values in app
-# Loading bar
-
-# PROVIDE OPEN-SOURCE LICENSE WITH ALL LICENSES
-# CURRENT STUFF - TOGGLE SWITCH
-#               - MATERIAL ICONS
-
-# check for set colour to not reset colour i.e. check for if user actually selected a colour
-
-# Only open serial monitor if valid device is connect / selected
-# store serial messages in array
-# clear array whenever reload / clear output button
-
-# Button to reset settings
-
-# Attach scrollbar on side of menu to scroll the main window
-
-# implement logging system
-
-# Get designer using stylesheets from external files
-
-# Highlight current effect
-
-# Custom effect types - effect input dialogue select effect from json list
-# - main class to import all user defined 'effect type' classes - get 'effect action' from effect class definitions
-
-# Confirm delete button
-
-# Replace current context menu in main menu with new dynamic context menu
+# This file is part of FreeRGB, an app to control lighting devices.
+# Copyright (C) 2020 milan338.
+#
+# FreeRGB is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# FreeRGB is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with FreeRGB. If not, see <https://www.gnu.org/licenses/>.
 
 import sys
 
