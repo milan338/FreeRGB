@@ -12,7 +12,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with FreeRGB. If not, see <https://www.gnu.org/licenses/>.
+# along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
 import sys
 
@@ -112,7 +112,7 @@ class MainWindow(QWidget):
             file='menus.json', menu='main_menu', layout='main_menu_button_layout'))
         # Settings menu
         self.ui.btn_settings_reset.clicked.connect(lambda: CreateMessageBox(
-            'Reset Settings', 'This action will revert all settings to their defaults. Continue?').resetPreferences(file='settings.json', reset_file=True))
+            'Reset Settings', 'This action will revert all settings to their defaults. Continue?').resetPreferences(file='settings.json', reset_file=True, reload_settings=True))
 
     def handleButton(self):
         self.ui.context_menus.hide()

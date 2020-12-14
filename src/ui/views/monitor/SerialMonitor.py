@@ -12,7 +12,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with FreeRGB. If not, see <https://www.gnu.org/licenses/>.
+# along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
 # minimum width for serial monitor lines i.e. if the message is too long then instead of shrinking text a horizontal scrollbar will appear - select only appear when need option
 import sys
