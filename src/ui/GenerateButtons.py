@@ -30,15 +30,15 @@ class GenerateButtons():
 
     def generateGenericButtons(self, vertical_element, scroll_element, style_sheet, right_click_menu=None, spacer=False, effect_btn=False):
         for elements in self.page_contents.values():
-            for element, attributes in elements.items():
+            for element_name, element_attributes in elements.items():
                 # Create toggle button
-                if attributes['command']['type'] == 'toggleBool':
-                    self.btn = CreateLargeButton(
-                        vertical_element, spacer=spacer).createToggleButton(attributes['text'], element, scroll_element, style_sheet, attributes['command'])
+                if element_attributes['command']['type'] == 'toggleBool':
+                    self.btn = CreateLargeButton(vertical_element, spacer=spacer).createToggleButton(
+                        element_name, element_attributes, scroll_element, style_sheet)
                 # Create pushbutton
                 else:
                     self.btn = CreateLargeButton(vertical_element, spacer=spacer, effect_btn=effect_btn).createGenericButton(
-                        attributes['text'], element, scroll_element, style_sheet, right_click_menu, attributes['command']['type'])
+                        element_name, element_attributes, scroll_element, style_sheet, right_click_menu)
 
     def removeButtons(self, layout):
         for i in reversed(range(layout.count())):
