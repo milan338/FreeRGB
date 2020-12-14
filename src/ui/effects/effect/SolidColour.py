@@ -18,7 +18,7 @@ import Globals
 
 
 class SolidColour():
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.getColour()
 
     def getColour(self):

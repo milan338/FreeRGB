@@ -62,7 +62,8 @@ class CreateLargeButton():
         self.btn.mouse_hovered.connect(self.setCurrentHoverButton)
         # Connect click action if button should run effect
         if self.effect_btn:
-            self.btn.clicked.connect(lambda: self.runEffect(self.command_type))
+            self.btn.clicked.connect(lambda: self.runEffect(
+                self.command_type, self.command_payload))
         # Connect click action if button should not run effect
         else:
             self.btn.clicked.connect(lambda: getattr(
@@ -121,14 +122,14 @@ class CreateLargeButton():
         # Run toggle action
         ButtonActions.toggleBool()
 
-    def runEffect(self, effect):
+    def runEffect(self, effect, payload):
         try:
             # Import effect file
             self.module = __import__(
                 f'{Globals.effect_import_path}.{effect}', fromlist=[None])
             # Create new effect instance
             self.effect_class = getattr(self.module, effect)
-            self.effect_class()
+            self.effect_class(payload)
         except:
             pass
 
