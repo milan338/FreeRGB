@@ -38,6 +38,9 @@ class CreateLargeButton():
         self.translate = QCoreApplication.translate
 
     def createGenericButton(self, button_name, button_attributes, scroll_element, style_sheet, right_click_menu):
+        # Get individual attributes
+        self.command_type = button_attributes['command']['type']
+        self.command_payload = button_attributes['command']['payload']
         # Initialise button
         self.btn = HoverButton(scroll_element)
         self.vertical_element.addWidget(self.btn)
@@ -59,12 +62,11 @@ class CreateLargeButton():
         self.btn.mouse_hovered.connect(self.setCurrentHoverButton)
         # Connect click action if button should run effect
         if self.effect_btn:
-            self.btn.clicked.connect(lambda: self.runEffect(
-                button_attributes['command']['type']))
-        # Connect cl;ick action if button should not run effect
+            self.btn.clicked.connect(lambda: self.runEffect(self.command_type))
+        # Connect click action if button should not run effect
         else:
-            print('tmp')
-            # self.btn.clicked.connect(lambda: getattr(ButtonActions, action()))
+            self.btn.clicked.connect(lambda: getattr(
+                ButtonActions, self.command_type)(self.command_payload))
         # Show button
         self.btn.show()
 

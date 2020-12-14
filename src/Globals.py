@@ -34,5 +34,5 @@ selected_strip = None
 # Import location for effect definitions
 effect_import_path = 'ui.effects.effect'
 
-# Refresh main menu layout from JSON lambda
+# Refresh menus from any package
 refreshMenus = None

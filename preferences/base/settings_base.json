@@ -54,7 +54,7 @@
                 "text": "Open Source Licenses",
                 "command": {
                     "type": "showLicenses" ,
-                    "payload": "None"
+                    "payload": null
                 }
             }
         }

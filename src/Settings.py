@@ -14,22 +14,22 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB. If not, see <https://www.gnu.org/licenses/>.
 
-import Settings
+from rw.JsonIO import JsonIO
+
+# Store settings
+advanced_mode = None
+update_check = None
+do_logs = None
+startup_run = None
+background_activity = None
 
 
-class ButtonActions():
-    @staticmethod
-    def toggleBool(*args, **kwargs):
-        Settings.reloadSettings()
-
-    @staticmethod
-    def openURL(url, *args, **kwargs):
-        print('url')
-
-    @staticmethod
-    def showLicenses(*args, **kwargs):
-        print('license')
-
-    @staticmethod
-    def resetSettings(*args, **kwargs):
-        print('tmp')
+# Load settings from disk
+def reloadSettings():
+    ld_settings = JsonIO('settings.json').readEntry('settings')
+    settings = ld_settings['settings_button_layout']
+    for option_name, option_contents in settings.items():
+        # Ensure option is toggle
+        if option_contents['command']['type'] == 'toggleBool':
+            # Update each option with value from file
+            globals()[option_name] = option_contents['command']['payload']

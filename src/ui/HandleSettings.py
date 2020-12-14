@@ -13,23 +13,3 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB. If not, see <https://www.gnu.org/licenses/>.
-
-import Settings
-
-
-class ButtonActions():
-    @staticmethod
-    def toggleBool(*args, **kwargs):
-        Settings.reloadSettings()
-
-    @staticmethod
-    def openURL(url, *args, **kwargs):
-        print('url')
-
-    @staticmethod
-    def showLicenses(*args, **kwargs):
-        print('license')
-
-    @staticmethod
-    def resetSettings(*args, **kwargs):
-        print('tmp')
