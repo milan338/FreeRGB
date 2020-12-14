@@ -13,28 +13,3 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
-
-# Store currently hovered button
-current_hovered_btn = None
-
-# Store popup menus
-edit_effect_menu = None
-licenses_view = None
-colour_picker = None
-
-# Store currently selected context menu items
-popup_menu_selection = None
-selected_device = None
-selected_strip = None
-# Remove device and strip
-# - just dynamically replace stylesheet
-# of its UI element
-
-# Store elements controlled by advanced mode
-advanced_mode_elements = []
-
-# Import location for effect definitions
-effect_import_path = 'ui.effects.effect'
-
-# Refresh menus from any package (called as function)
-refreshMenus = None
