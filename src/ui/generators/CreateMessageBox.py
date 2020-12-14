@@ -12,9 +12,10 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with FreeRGB. If not, see <https://www.gnu.org/licenses/>.
+# along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
 import Globals
+import Settings
 
 from rw.JsonIO import JsonIO
 
@@ -37,7 +38,7 @@ class CreateMessageBox():
     def confirmDelete(self):
         return self.getBool()
 
-    def resetPreferences(self, file, menu=None, layout=None, reset_file=False):
+    def resetPreferences(self, file, menu=None, layout=None, reset_file=False, reload_settings=False):
         # Get input from user and continue only if input was 'yes'
         if self.getBool():
             if reset_file:
@@ -46,3 +47,6 @@ class CreateMessageBox():
                 JsonIO(file).copyLayout(menu, layout)
             # Refresh menu button layout using JSON
             Globals.refreshMenus()
+            # Reload settings
+            if reload_settings:
+                Settings.reloadSettings()

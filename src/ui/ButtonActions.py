@@ -12,9 +12,11 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with FreeRGB. If not, see <https://www.gnu.org/licenses/>.
+# along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
 import Settings
+
+from webbrowser import open as openWebPage
 
 
 class ButtonActions():
@@ -24,12 +26,8 @@ class ButtonActions():
 
     @staticmethod
     def openURL(url, *args, **kwargs):
-        print('url')
+        openWebPage(url)
 
     @staticmethod
     def showLicenses(*args, **kwargs):
         print('license')
-
-    @staticmethod
-    def resetSettings(*args, **kwargs):
-        print('tmp')
