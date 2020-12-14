@@ -45,8 +45,8 @@ class CreateMessageBox():
                 JsonIO(file).copyFromBase()
             else:
                 JsonIO(file).copyLayout(menu, layout)
-            # Refresh menu button layout using JSON
-            Globals.refreshMenus()
             # Reload settings
             if reload_settings:
                 Settings.reloadSettings()
+            # Refresh menu button layout using JSON
+            Globals.refreshMenus()

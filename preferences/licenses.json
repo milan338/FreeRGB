@@ -1,0 +1,27 @@
+{
+    "licenses": {
+        "license_button_layout": {
+            "gnu_gpl": {
+                "text": "GNU General Public License v3.0\n________________________________________________________________________________\n\nFreeRGB - Copyright milan338",
+                "command": {
+                    "type": "openURL",
+                    "payload": "https://www.gnu.org/licenses/gpl-3.0.en.html"
+                }
+            },
+            "apache_2_0": {
+                "text": "Apache License 2.0\n________________________________________________________________________________\n\nMaterial Design Icons - Copyright Google",
+                "command": {
+                    "type": "openURL",
+                    "payload": "https://www.apache.org/licenses/LICENSE-2.0"
+                }
+            },
+            "cc_by_sa_4_0": {
+                "text": "Creative Commons Attribution-ShareAlike 4.0 International\n________________________________________________________________________________\n\nToggle Switch Widget - Copyright Stefan Scherfke",
+                "command": {
+                    "type": "openURL",
+                    "payload": "https://creativecommons.org/licenses/by-sa/4.0/legalcode"
+                }
+            }
+        }
+    }
+}

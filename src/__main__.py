@@ -22,12 +22,10 @@ import Settings
 from rw.JsonIO import JsonIO
 
 from ui import getPath
-from ui.effects.Effects import Effects
 from ui.GenerateButtons import GenerateButtons
+from ui.effects.Effects import Effects
 from ui.views.monitor.SerialMonitor import SerialMonitor
 from ui.views.input.InputDialogue import InputDialogue
-from ui.widgets.ToggleSwitch import ToggleSwitch
-from ui.generators.CreateLargeButton import CreateLargeButton
 from ui.generators.CreateMenuEffectEdit import CreateMenuEffectEdit
 from ui.generators.CreateMessageBox import CreateMessageBox
 from ui.views.main.Ui_MainWindow import Ui_Form
@@ -57,7 +55,6 @@ class MainWindow(QWidget):
         # Setup UI elements
         self.setRightClickMenu()
         self.setupButtons()
-        # self.colour_picker = QColorDialog(self)
         Globals.colour_picker = QColorDialog(self)
         self.ui.context_menus.hide()
 
@@ -86,6 +83,10 @@ class MainWindow(QWidget):
             pass
 
     def setupButtons(self):
+        # Add elements controlled by advanced mode to global list
+        Globals.advanced_mode_elements.append(self.ui.btn_device_debug)
+        Globals.advanced_mode_elements.append(self.ui.btn_device_information)
+        # Refresh menus
         self.refreshMenus()
         # Bottom bar
         self.ui.btn_version.setText(self.version_name)

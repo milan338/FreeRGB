@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
+import Globals
+
 from rw.JsonIO import JsonIO
 
 # Store settings
@@ -33,3 +35,12 @@ def reloadSettings():
         if option_contents['command']['type'] == 'toggleBool':
             # Update each option with value from file
             globals()[option_name] = option_contents['command']['payload']
+            # Change visibility of advanced mode elements
+            if option_name == 'advanced_mode':
+                setAdvancedModeVisible()
+
+
+def setAdvancedModeVisible():
+    global advanced_mode
+    for element in Globals.advanced_mode_elements:
+        element.setVisible(advanced_mode)
