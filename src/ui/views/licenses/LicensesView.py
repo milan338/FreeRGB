@@ -40,4 +40,3 @@ class LicensesView(QWidget):
         # Additional spacer below buttons for better separation between border and bottom button
         self.ui.license_button_layout.addItem(QSpacerItem(
             20, 40, QSizePolicy.Minimum, QSizePolicy.Fixed))
-        print('tmp')

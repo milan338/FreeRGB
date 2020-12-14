@@ -15,11 +15,11 @@
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
 class SerialDirect():
-    def __init__(self):
-        self.sendSerial()
+    def __init__(self, message, *args, **kwargs):
+        self.sendSerial(message)
 
-    def sendSerial(self):
-        print('serial direct')
+    def sendSerial(self, message):
+        print(message)
 
     @staticmethod
     def effectData():
