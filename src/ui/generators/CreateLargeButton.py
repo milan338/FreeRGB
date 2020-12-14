@@ -16,10 +16,11 @@
 
 import Globals
 
+from rw.JsonIO import JsonIO
+
+from ui.ButtonActions import ButtonActions
 from ui.widgets.HoverButton import HoverButton
 from ui.widgets.ToggleSwitch import ToggleSwitch
-
-from rw.JsonIO import JsonIO
 
 from PyQt5.QtCore import Qt, QCoreApplication, QSize, QRect
 from PyQt5.QtGui import QCursor
@@ -36,12 +37,12 @@ class CreateLargeButton():
                 20, 40, QSizePolicy.Minimum, QSizePolicy.Fixed))
         self.translate = QCoreApplication.translate
 
-    def createGenericButton(self, text, obj_name, scroll_element, style_sheet, right_click_menu, action):
+    def createGenericButton(self, button_name, button_attributes, scroll_element, style_sheet, right_click_menu):
         # Initialise button
         self.btn = HoverButton(scroll_element)
         self.vertical_element.addWidget(self.btn)
-        self.btn.setObjectName(obj_name)
-        self.btn.setText(self.translate("Form", text))
+        self.btn.setObjectName(button_name)
+        self.btn.setText(self.translate("Form", button_attributes['text']))
         # Set size
         self.sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
         self.btn.setSizePolicy(self.sizePolicy)
@@ -56,17 +57,22 @@ class CreateLargeButton():
             self.btn.setStyleSheet(style_file.read())
         # Set up hover detection
         self.btn.mouse_hovered.connect(self.setCurrentHoverButton)
+        # Connect click action if button should run effect
         if self.effect_btn:
-            # Connect click action
-            self.btn.clicked.connect(lambda: self.runEffect(action))
+            self.btn.clicked.connect(lambda: self.runEffect(
+                button_attributes['command']['type']))
+        # Connect cl;ick action if button should not run effect
+        else:
+            print('tmp')
+            # self.btn.clicked.connect(lambda: getattr(ButtonActions, action()))
         # Show button
         self.btn.show()
 
-    def createToggleButton(self, text, obj_name, scroll_element, style_sheet, action):
+    def createToggleButton(self, button_name, button_attributes, scroll_element, style_sheet):
         # Initialise button
         self.btn = QWidget(scroll_element)
         self.vertical_element.addWidget(self.btn)
-        self.btn.setObjectName(obj_name)
+        self.btn.setObjectName(button_name)
         # Set size
         self.sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
         self.btn.setSizePolicy(self.sizePolicy)
@@ -79,37 +85,39 @@ class CreateLargeButton():
         self.horizontal_layout_widget = QWidget(self.btn)
         self.horizontal_layout_widget.setGeometry(QRect(10, 3, 631, 102))
         self.horizontal_layout_widget.setObjectName(
-            f'{obj_name}_h_layout_widget')
+            f'{button_name}_h_layout_widget')
         self.btn_layout = QHBoxLayout(self.horizontal_layout_widget)
         self.btn_layout.setSizeConstraint(QLayout.SetMinAndMaxSize)
         self.btn_layout.setContentsMargins(100, 0, 0, 0)
-        self.btn_layout.setObjectName(f'{obj_name}_layout')
+        self.btn_layout.setObjectName(f'{button_name}_layout')
         # Create spacer between text and switch
         self.spacer = QSpacerItem(
             100, 100, QSizePolicy.Fixed, QSizePolicy.Minimum)
         self.btn_layout.addItem(self.spacer)
         # Create toggle switch element
         self.switch = ToggleSwitch()
-        # self.switch.toggled.connect(lambda: print(self.switch.isChecked()))
         self.switch.toggled.connect(lambda: self.updateBool(
-            text, obj_name, action, self.switch))
+            button_attributes['text'], button_name, self.switch))
         self.btn_layout.addWidget(self.switch)
         # Set toggle switch status
-        if action['payload']:
+        if button_attributes['command']['payload']:
             self.switch.setChecked(True)
         # Add button label
         self.btn_label = QLabel(self.horizontal_layout_widget)
         self.btn_label.setMaximumSize(QSize(400, 100))
-        self.btn_label.setObjectName(f'{obj_name}_label')
-        self.btn_label.setText(self.translate("Form", text))
+        self.btn_label.setObjectName(f'{button_name}_label')
+        self.btn_label.setText(self.translate(
+            "Form", button_attributes['text']))
         self.btn_layout.addWidget(self.btn_label)
         # Show button
         self.btn.show()
 
-    def updateBool(self, text, entry_name, entry_contents, switch):
+    def updateBool(self, text, entry_name, switch):
         # Update settings file
         JsonIO('settings.json').replaceEntry(entry_name, entry_name,
-                                             text, entry_contents['type'], switch.isChecked())
+                                             text, 'toggleBool', switch.isChecked())
+        # Run toggle action
+        ButtonActions.toggleBool()
 
     def runEffect(self, effect):
         try:
