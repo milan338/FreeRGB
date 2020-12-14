@@ -17,6 +17,7 @@
 import sys
 
 import Globals
+import Settings
 
 from rw.JsonIO import JsonIO
 
@@ -111,7 +112,7 @@ class MainWindow(QWidget):
             file='menus.json', menu='main_menu', layout='main_menu_button_layout'))
         # Settings menu
         self.ui.btn_settings_reset.clicked.connect(lambda: CreateMessageBox(
-            'Reset Settings', 'This action will revert all settings to their default. Continue?').resetPreferences(file='settings.json', reset_file=True))
+            'Reset Settings', 'This action will revert all settings to their defaults. Continue?').resetPreferences(file='settings.json', reset_file=True))
 
     def handleButton(self):
         self.ui.context_menus.hide()

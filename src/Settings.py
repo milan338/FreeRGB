@@ -14,25 +14,22 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB. If not, see <https://www.gnu.org/licenses/>.
 
-# Store currently hovered button
-current_hovered_btn = None
+from rw.JsonIO import JsonIO
 
-# Store edit effect menu
-edit_effect_menu = None
+# Store settings
+advanced_mode = None
+update_check = None
+do_logs = None
+startup_run = None
+background_activity = None
 
-# Store colour picker menu
-colour_picker = None
 
-# Store currently selected context menu items
-popup_menu_selection = None
-selected_device = None
-selected_strip = None
-# Remove device and strip
-# - just dynamically replace stylesheet
-# of its UI element
-
-# Import location for effect definitions
-effect_import_path = 'ui.effects.effect'
-
-# Refresh menus from any package
-refreshMenus = None
+# Load settings from disk
+def reloadSettings():
+    ld_settings = JsonIO('settings.json').readEntry('settings')
+    settings = ld_settings['settings_button_layout']
+    for option_name, option_contents in settings.items():
+        # Ensure option is toggle
+        if option_contents['command']['type'] == 'toggleBool':
+            # Update each option with value from file
+            globals()[option_name] = option_contents['command']['payload']
