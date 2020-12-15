@@ -53,8 +53,6 @@ class MainWindow(QWidget):
         # Update available devices
         self.connected_dict = {'devices': 'device_1',
                                'strips': 'strip_1'}  # TODO tmp
-        # self.connected_device = 'device_1'  # TODO tmp
-        # self.connected_strip = 'strip_1'  # TODO tmp
         # Variable initialisation
         self.version_name = JsonIO('app_Version.json').readEntry('version')
         self.current_context = None
@@ -196,12 +194,11 @@ class MainWindow(QWidget):
             # Set highlighted entry
             if device_name == self.connected_dict[menu]:
                 CreateMenuContext(parent=self).addOption(
-                    self.list_menu, device_name, (False, device_attributes['text']), highlighted=True)
-                print(device_name)
+                    self.list_menu, device_name, (None, device_attributes['text']), highlighted=True)
             # Set non-highlighted entry
             else:
                 CreateMenuContext(parent=self).addOption(
-                    self.list_menu, device_name, (False, device_attributes['text']))
+                    self.list_menu, device_name, (None, device_attributes['text']))
         # Place context menu at cursor position
         self.list_menu.exec(QCursor.pos())
 
