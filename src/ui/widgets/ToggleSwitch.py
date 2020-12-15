@@ -11,7 +11,7 @@
 
 
 from PyQt5.QtCore import QPropertyAnimation, QRectF, QSize, Qt, pyqtProperty
-from PyQt5.QtGui import QPainter
+from PyQt5.QtGui import QColor, QPainter, QPalette
 from PyQt5.QtWidgets import QAbstractButton, QSizePolicy
 
 
@@ -32,7 +32,11 @@ class ToggleSwitch(QAbstractButton):
         }
         self._offset = self._base_offset
 
+        # Set widget colours
         palette = self.palette()
+        palette.setColor(QPalette.Highlight, QColor(90, 164, 253))
+        palette.setColor(QPalette.Dark, QColor(27, 27, 35))
+        # Slider style where thumb circle extends past the track
         if self._thumb_radius > self._track_radius:
             self._track_color = {
                 True: palette.highlight(),
@@ -51,6 +55,7 @@ class ToggleSwitch(QAbstractButton):
                 False: '',
             }
             self._track_opacity = 0.5
+        # Slider style where the thumb circle is enclosed within the track
         else:
             self._thumb_color = {
                 True: palette.highlightedText(),
