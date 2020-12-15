@@ -28,8 +28,13 @@ class CreateMenuPopup():
             self.menu.setStyleSheet(style_file.read())
         return(self.menu)
 
-    def addOption(self, menu, option_name, option_payload):
+    def addOption(self, menu, option_name, option_payload, highlighted=False):
         self.option_name = option_name
         self.action = QAction(option_name, self.parent)
         self.action.triggered.connect(lambda: self.runFunction(option_payload))
+        # Set entry style as highlighted
+        if highlighted:
+            self.action.setObjectName('highlighted')
+            # self.action.setStyleSheet('background-color: rgb(90, 164, 253)')
+        print(self.action.objectName())
         menu.addAction(self.action)

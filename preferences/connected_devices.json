@@ -1,0 +1,32 @@
+{
+    "main_devices": {
+        "devices": {
+            "device_1": {
+                "text": "Device 1",
+                "port": null
+            },
+            "device_2": {
+                "text": "Device 1",
+                "port": null
+            },
+            "device_3": {
+                "text": "Device 1",
+                "port": null
+            }
+        },
+        "strips": {
+            "strip_1": {
+                "text": "Strip 1",
+                "port": null
+            },
+            "strip_2": {
+                "text": "Strip 1",
+                "port": null
+            },
+            "strip_3": {
+                "text": "Strip 1",
+                "port": null
+            }
+        }
+    }
+}

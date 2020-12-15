@@ -21,6 +21,10 @@ QMenu {
   margin: 10px;
 }
 
+QMenu::item#highlighted {
+  background-color: rgb(90, 164, 253);
+}
+
 QMenu::item {
   color: rgb(255, 255, 255);
   background-color: rgb(39, 43, 54);

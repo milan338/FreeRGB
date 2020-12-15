@@ -24,6 +24,8 @@ from rw.JsonIO import JsonIO
 from ui import getPath
 from ui.GenerateButtons import GenerateButtons
 from ui.effects.Effects import Effects
+from ui.generators.CreateMenuContext import CreateMenuContext
+from ui.generators.CreateMenuPopup import CreateMenuPopup
 from ui.views.monitor.SerialMonitor import SerialMonitor
 from ui.views.input.InputDialogue import InputDialogue
 from ui.generators.CreateMenuEffectEdit import CreateMenuEffectEdit
@@ -31,6 +33,7 @@ from ui.generators.CreateMessageBox import CreateMessageBox
 from ui.views.main.Ui_MainWindow import Ui_Form
 
 from PyQt5.QtWidgets import QWidget, QColorDialog, QMessageBox, QApplication
+from PyQt5.QtGui import QCursor
 from PyQt5 import QtCore
 from PyQt5 import QtGui
 
@@ -47,6 +50,11 @@ class MainWindow(QWidget):
         self.ui.setupUi(self)
         # Update available effects
         Effects()
+        # Update available devices
+        self.connected_dict = {'devices': 'device_1',
+                               'strips': 'strip_1'}  # TODO tmp
+        # self.connected_device = 'device_1'  # TODO tmp
+        # self.connected_strip = 'strip_1'  # TODO tmp
         # Variable initialisation
         self.version_name = JsonIO('app_Version.json').readEntry('version')
         self.current_context = None
@@ -57,6 +65,8 @@ class MainWindow(QWidget):
         self.setupButtons()
         Globals.colour_picker = QColorDialog(self)
         self.ui.context_menus.hide()
+        self.list_menu = CreateMenuContext(parent=self).makeMenu(
+            getPath('right_click_menu.qss'))
 
     def setupFiles(self):
         self.init_files = ['menus.json', 'settings.json', 'effects.json']
@@ -66,6 +76,8 @@ class MainWindow(QWidget):
                 pass
             else:
                 JsonIO(file).copyFromBase()
+        # Create fresh copy of connected devices list
+        # JsonIO('connected_devices.json').copyFromBase()
 
     def refreshMenus(self):
         try:
@@ -101,10 +113,14 @@ class MainWindow(QWidget):
             lambda: self.changePage(self.ui.main_menus, 0))
         self.ui.btn_menu_settings.clicked.connect(
             lambda: self.changePage(self.ui.main_menus, 1))
+        # self.ui.btn_list_device.clicked.connect(
+        #     lambda: self.changePage(self.ui.context_menus, 0, False))
+        # self.ui.btn_list_strip.clicked.connect(
+        #     lambda: self.changePage(self.ui.context_menus, 1, False))
         self.ui.btn_list_device.clicked.connect(
-            lambda: self.changePage(self.ui.context_menus, 0, False))
+            lambda: self.initListMenu('devices'))
         self.ui.btn_list_strip.clicked.connect(
-            lambda: self.changePage(self.ui.context_menus, 1, False))
+            lambda: self.initListMenu('strips'))
         # Effects menu
         self.ui.btn_menu_effect_new.clicked.connect(
             lambda: self.initDialogue('main_menu', 'Create New Effect'))
@@ -168,6 +184,26 @@ class MainWindow(QWidget):
     def initDialogue(self, menu, window_title):
         self.input_dialogue = InputDialogue(menu)
         self.setWindowParams(self.input_dialogue, window_title)
+
+    def initListMenu(self, menu):
+        # Clear menu actions
+        self.list_menu.clear()
+        # Get actions from file
+        self.connected_devices = JsonIO(
+            'connected_devices.json').readEntry('main_devices')
+        self.device_list = self.connected_devices[menu]
+        for device_name, device_attributes in self.device_list.items():
+            # Set highlighted entry
+            if device_name == self.connected_dict[menu]:
+                CreateMenuContext(parent=self).addOption(
+                    self.list_menu, device_name, (False, device_attributes['text']), highlighted=True)
+                print(device_name)
+            # Set non-highlighted entry
+            else:
+                CreateMenuContext(parent=self).addOption(
+                    self.list_menu, device_name, (False, device_attributes['text']))
+        # Place context menu at cursor position
+        self.list_menu.exec(QCursor.pos())
 
     def mousePressEvent(self, event):
         self.handleButton()
