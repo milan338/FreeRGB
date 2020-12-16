@@ -3,6 +3,9 @@ menus.json
 settings.json
 effects.json
 
+# Auto generated
+main_ld.qss
+
 # Vscode
 .vscode
 .vscode/*

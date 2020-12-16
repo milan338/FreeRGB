@@ -20,6 +20,7 @@ import Globals
 import Settings
 
 from rw.JsonIO import JsonIO
+from rw.QssRead import QssRead
 
 from ui import getPath
 from ui.GenerateButtons import GenerateButtons
@@ -102,7 +103,7 @@ class MainWindow(QWidget):
             lambda: self.initSerialMonitor())
         self.ui.btn_effect_off.clicked.connect(self.toggleLeds)
         self.ui.btn_device_information.clicked.connect(
-            lambda: QMessageBox.information(self, 'Device Information', 'Device Name: \nCOM Port: \nStrips Connected: \nArduRGB Version: \nBoard: \nBaud Rate: '))
+            lambda: QMessageBox.information(self, 'Device Information', 'Device Name: \nCOM Port: \nStrips Connected: \nArduRGB Version: \nBoard: \nBaud Rate: '))  # TODO tmp
         self.ui.slider_brightness.sliderReleased.connect(self.getBright)
         self.ui.slider_brightness.setValue(self.current_brightness)
         # Left bar
@@ -183,13 +184,17 @@ class MainWindow(QWidget):
 
 
 if __name__ == '__main__':
+    # Initialise application
     app = QApplication(sys.argv)
-
+    # Setup main window
     window = MainWindow()
     window.setWindowTitle('title')
     # window.setWindowIcon()
-    with open(getPath('main.qss'), 'r') as style_file:
+    # Set main window styles
+    QssRead('main')
+    with open(getPath('main_ld.qss'), 'r') as style_file:
         window.setStyleSheet(style_file.read())
+    # Display main window
     window.show()
-
+    # Run application and provide exit code
     sys.exit(app.exec())
