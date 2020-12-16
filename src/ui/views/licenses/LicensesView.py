@@ -33,10 +33,9 @@ class LicensesView(QWidget):
 
     def addLicenses(self):
         # Imports done here to prevent circular imports
-        from ui import getPath
         from ui.GenerateButtons import GenerateButtons
         GenerateButtons('licenses.json', 'licenses').generateGenericButtons(
-            self.ui.license_button_layout, self.ui.license_scroll_region, getPath('button_generic_primary.qss'), spacer=True)
+            self.ui.license_button_layout, self.ui.license_scroll_region, 'primary', spacer=True)
         # Additional spacer below buttons for better separation between border and bottom button
         self.ui.license_button_layout.addItem(QSpacerItem(
             20, 40, QSizePolicy.Minimum, QSizePolicy.Fixed))

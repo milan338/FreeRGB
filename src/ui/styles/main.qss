@@ -16,12 +16,16 @@ You should have received a copy of the GNU General Public License
 along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-@import 'button_generic_primary.qss';
-@import 'button_generic_secondary.qss';
-@import 'button_generic_tertiary.qss';
+@import 'button_generic.qss';
+@import 'button_toggle.qss';
 @import 'button_sidebars.qss';
-@import 'button_right_click_menu.qss';
+@import 'right_click_menu.qss';
 @import 'slider.qss';
+
+/* Text colour */
+QLabel {
+  color: rgb(255, 255, 255);
+}
 
 /* Main form */
 QWidget[style='main'] {
@@ -48,6 +52,11 @@ QWidget[style='scrollregion'] {
   background-color: rgb(43, 47, 59);
 }
 
+/* Colour dialogue */
+QColorDialog {
+  background-color: rgb(43, 47, 59);
+}
+
 /* Base buttons */
 QPushButton {
   color: rgb(255, 255, 255);
@@ -57,16 +66,4 @@ QPushButton {
 QWidget[type='toggle-button'] {
   color: rgb(255, 255, 255);
   border-radius: 10px;
-}
-
-/* Main form */
-QWidget[style='main'] {
-  color: rgb(255, 255, 255);
-  background-color: rgb(43, 47, 59);
-}
-
-/* Scroll Region */
-QScrollArea {
-  color: rgb(43, 47, 59);
-  background-color: rgb(43, 47, 59);
 }

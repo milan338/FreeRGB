@@ -16,7 +16,33 @@ You should have received a copy of the GNU General Public License
 along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-/* Regular button */
+/* Primary style */
+QPushButton[style='primary'] {
+  background-color: rgb(39, 43, 54);
+}
+
+QPushButton:hover[style='primary'] {
+  background-color: rgb(51, 76, 100);
+}
+
+QPushButton:pressed[style='primary'] {
+  background-color: rgb(90, 164, 253);
+}
+
+/* Secondary style */
+QPushButton[style='secondary'] {
+  background-color: rgb(51, 58, 72);
+}
+
+QPushButton:hover[style='secondary'] {
+  background-color: rgb(51, 76, 100);
+}
+
+QPushButton:pressed[style='secondary'] {
+  background-color: rgb(90, 164, 253);
+}
+
+/* Tertiary style */
 QPushButton[style='tertiary'] {
   background-color: rgb(43, 47, 59);
 }
@@ -27,9 +53,4 @@ QPushButton:hover[style='tertiary'] {
 
 QPushButton:pressed[style='tertiary'] {
   background-color: rgb(51, 76, 100);
-}
-
-/* Toggle Button */
-QWidget[type='toggle-button'][style='tertiary'] {
-  background-color: rgb(43, 47, 59);
 }
