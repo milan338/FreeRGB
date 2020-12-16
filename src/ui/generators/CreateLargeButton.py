@@ -37,7 +37,7 @@ class CreateLargeButton():
                 20, 40, QSizePolicy.Minimum, QSizePolicy.Fixed))
         self.translate = QCoreApplication.translate
 
-    def createGenericButton(self, button_name, button_attributes, scroll_element, style_sheet, right_click_menu):
+    def createGenericButton(self, button_name, button_attributes, scroll_element, style, right_click_menu):
         # Get individual attributes
         self.command_type = button_attributes['command']['type']
         self.command_payload = button_attributes['command']['payload']
@@ -56,8 +56,7 @@ class CreateLargeButton():
         self.btn.customContextMenuRequested.connect(
             lambda: self.contextMenu(right_click_menu))
         # Set style
-        with open(style_sheet) as style_file:
-            self.btn.setStyleSheet(style_file.read())
+        self.btn.setProperty('style', style)
         # Set up hover detection
         self.btn.mouse_hovered.connect(self.setCurrentHoverButton)
         # Connect click action if button should run effect
@@ -71,7 +70,7 @@ class CreateLargeButton():
         # Show button
         self.btn.show()
 
-    def createToggleButton(self, button_name, button_attributes, scroll_element, style_sheet):
+    def createToggleButton(self, button_name, button_attributes, scroll_element, style):
         # Initialise button
         self.btn = QWidget(scroll_element)
         self.vertical_element.addWidget(self.btn)
@@ -82,8 +81,8 @@ class CreateLargeButton():
         self.btn.setMinimumSize(QSize(0, 100))
         self.btn.setMaximumSize(QSize(700, 100))
         # Set style
-        with open(style_sheet) as style_file:
-            self.btn.setStyleSheet(style_file.read())
+        self.btn.setProperty('type', 'toggle-button')
+        self.btn.setProperty('style', style)
         # Create horizontal layout for elements
         self.horizontal_layout_widget = QWidget(self.btn)
         self.horizontal_layout_widget.setGeometry(QRect(10, 3, 631, 102))

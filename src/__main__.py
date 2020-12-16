@@ -81,13 +81,13 @@ class MainWindow(QWidget):
             # Reset main menu
             GenerateButtons('menus.json', 'main_menu').removeButtons(
                 self.ui.main_menu_button_layout)
-            GenerateButtons('menus.json', 'main_menu').generateGenericButtons(self.ui.main_menu_button_layout, self.ui.effects_scroll_region, getPath(
-                'button_generic_primary.qss'), self.right_click_menu_effects, spacer=True, effect_btn=True)
+            GenerateButtons('menus.json', 'main_menu').generateGenericButtons(self.ui.main_menu_button_layout,
+                                                                              self.ui.effects_scroll_region, 'primary', self.right_click_menu_effects, spacer=True, effect_btn=True)
             # Reset settings menu
             GenerateButtons('settings.json', 'settings').removeButtons(
                 self.ui.settings_button_layout)
             GenerateButtons('settings.json', 'settings').generateGenericButtons(
-                self.ui.settings_button_layout, self.ui.settings_scroll_region, getPath('button_generic_primary.qss'), spacer=True)
+                self.ui.settings_button_layout, self.ui.settings_scroll_region, 'primary', spacer=True)
         except:
             pass
 
