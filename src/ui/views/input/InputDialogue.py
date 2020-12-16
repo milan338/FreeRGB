@@ -68,8 +68,7 @@ class InputDialogue(QWidget):
         # Read entries from JSON
         self.effect_types = JsonIO('effects.json').readEntry('effects')
         # Create new right click menu
-        self.menu_effects = CreateMenuContext(
-            parent=self).makeMenu(getPath('right_click_menu.qss'))
+        self.menu_effects = CreateMenuContext(parent=self).makeMenu()
         # Add all JSON entries as options to right click menu
         for effect_name, effect_class in self.effect_types.items():
             self.menu_args = (self.ui.btn_effect_types, effect_class)

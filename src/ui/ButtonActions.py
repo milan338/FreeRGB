@@ -17,6 +17,7 @@
 import Globals
 import Settings
 
+from ui import getPath
 from ui.views.licenses.LicensesView import LicensesView
 
 from webbrowser import open as openWebPage
