@@ -55,8 +55,8 @@ class MainWindow(QWidget):
                                'strips': 'strip_1'}  # TODO tmp
         # Variable initialisation
         self.version_name = JsonIO('app_Version.json').readEntry('version')
-        self.current_colour = None
-        self.current_brightness = None
+        self.current_colour = None  # TODO tmp
+        self.current_brightness = 60  # TODO tmp
         # Setup UI elements
         self.setRightClickMenu()
         self.setupButtons()
@@ -104,6 +104,7 @@ class MainWindow(QWidget):
         self.ui.btn_device_information.clicked.connect(
             lambda: QMessageBox.information(self, 'Device Information', 'Device Name: \nCOM Port: \nStrips Connected: \nArduRGB Version: \nBoard: \nBaud Rate: '))
         self.ui.slider_brightness.sliderReleased.connect(self.getBright)
+        self.ui.slider_brightness.setValue(self.current_brightness)
         # Left bar
         self.ui.btn_menu_effects.clicked.connect(
             lambda: self.changePage(self.ui.main_menus, 0))
@@ -123,8 +124,8 @@ class MainWindow(QWidget):
         self.ui.btn_settings_reset.clicked.connect(lambda: CreateMessageBox(
             'Reset Settings', 'This action will revert all settings to their defaults. Continue?').resetPreferences(file='settings.json', reset_file=True, reload_settings=True))
 
-    def handleSwitch(self):
-        print('temp')
+    def changePage(self, widget, index):
+        widget.setCurrentIndex(index)
 
     def setRightClickMenu(self):
         # Read entries from JSON
@@ -187,6 +188,8 @@ if __name__ == '__main__':
     window = MainWindow()
     window.setWindowTitle('title')
     # window.setWindowIcon()
+    with open(getPath('main.qss'), 'r') as style_file:
+        window.setStyleSheet(style_file.read())
     window.show()
 
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

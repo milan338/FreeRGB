@@ -1,0 +1,172 @@
+/*
+This file is part of FreeRGB, an app to control lighting devices.
+Copyright (C) 2020 milan338.
+
+FreeRGB is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+FreeRGB is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+/* Main form */
+QWidget[style='main'] {
+  color: rgb(255, 255, 255);
+  background-color: rgb(43, 47, 59);
+}
+
+/* Bottom bar */
+QWidget[style='bottombar'] {
+  background-color: rgb(39, 43, 54);
+}
+
+/* Sidebar */
+QWidget[style='sidebar'] {
+  background-color: rgb(27, 27, 35);
+}
+
+/* Scroll Region */
+QScrollArea {
+  background-color: rgb(43, 47, 59);
+}
+
+QWidget[style='scrollregion'] {
+  background-color: rgb(43, 47, 59);
+}
+
+/* Regular button */
+QPushButton {
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+/* Primary */
+QPushButton:hover[style='primary'] {
+  background-color: rgb(51, 76, 100);
+}
+
+QPushButton:pressed[style='primary'] {
+  background-color: rgb(90, 164, 253);
+}
+
+/* Secondary */
+QPushButton[style='secondary'] {
+  background-color: rgb(51, 58, 72);
+}
+
+QPushButton:hover[style='secondary'] {
+  background-color: rgb(51, 76, 100);
+}
+
+QPushButton:pressed[style='secondary'] {
+  background-color: rgb(90, 164, 253);
+}
+
+/* Tertiary */
+QPushButton[style='tertiary'] {
+  background-color: rgb(43, 47, 59);
+}
+
+QPushButton:hover[style='tertiary'] {
+  background-color: rgb(51, 58, 72);
+}
+
+QPushButton:pressed[style='tertiary'] {
+  background-color: rgb(51, 76, 100);
+}
+
+/* Sidebar */
+QPushButton[style='sidebar'] {
+  background-color: rgb(27, 27, 35);
+}
+
+QPushButton:hover[style='sidebar'] {
+  background-color: rgb(74, 74, 74);
+}
+
+QPushButton:pressed[style='sidebar'] {
+  background-color: rgb(89, 89, 89);
+}
+
+/* Bottom bar */
+QPushButton[style='bottombar'] {
+  background-color: rgb(39, 43, 54);
+}
+
+QPushButton:hover[style='bottombar'] {
+  background-color: rgb(51, 58, 72);
+}
+
+QPushButton:pressed[style='bottombar'] {
+  background-color: rgb(51, 76, 100);
+}
+
+/* Toggle button */
+QWidget[style='primary'] {
+  color: rgb(255, 255, 255);
+  background-color: rgb(39, 43, 54);
+  border-radius: 10px;
+}
+
+QWidget[style='secondary'] {
+  color: rgb(255, 255, 255);
+  background-color: rgb(51, 58, 72);
+  border-radius: 10px;
+}
+
+QSlider::groove:horizontal {
+  background-color: rgb(27, 27, 35);
+  height: 10px;
+  border-radius: 4px;
+}
+
+QSlider::add-page:qlineargradient {
+  background: rgb(27, 27, 35);
+  height: 10px;
+  border-radius: 4px;
+}
+
+QSlider::sub-page:qlineargradient {
+  background: rgb(51, 76, 100);
+  height: 10px;
+  border-radius: 4px;
+}
+
+QSlider::handle:horizontal {
+  background-color: rgb(51, 58, 72);
+  border: 2px solid rgb(51, 58, 72);
+  width: 16px;
+  height: 16px;
+  line-height: 20px;
+  margin-top: -5px;
+  margin-bottom: -5px;
+  border-radius: 10px;
+}
+
+QSlider::handle:horizontal:hover {
+  background-color: rgb(51, 76, 100);
+  border: 2px solid rgb(51, 76, 100);
+}
+
+QSlider::handle:horizontal:pressed {
+  background-color: rgb(90, 164, 253);
+  border: 2px solid rgb(90, 164, 253);
+}
+/* Main form */
+QWidget[style='main'] {
+  color: rgb(255, 255, 255);
+  background-color: rgb(43, 47, 59);
+}
+
+/* Scroll Region */
+QScrollArea {
+  color: rgb(43, 47, 59);
+  background-color: rgb(43, 47, 59);
+}
