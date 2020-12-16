@@ -22,26 +22,10 @@ class Ui_Form(object):
         Form.setSizePolicy(sizePolicy)
         Form.setMinimumSize(QtCore.QSize(1000, 600))
         Form.setMaximumSize(QtCore.QSize(1000, 600))
-        Form.setStyleSheet("color: rgb(255, 255, 255);\n"
-"background-color: rgb(43, 47, 59);")
+        Form.setStyleSheet("")
         self.btn_menu_effects = QtWidgets.QPushButton(Form)
         self.btn_menu_effects.setGeometry(QtCore.QRect(10, 20, 151, 51))
-        self.btn_menu_effects.setStyleSheet("QPushButton\n"
-"{\n"
-"    color: rgb(255, 255, 255);\n"
-"    background-color: rgb(27, 27, 35);\n"
-"    border-radius: 10px;\n"
-"}\n"
-"\n"
-"QPushButton:hover\n"
-"{\n"
-"    background-color: rgb(74, 74, 74);\n"
-"}\n"
-"\n"
-"QPushButton:pressed \n"
-"{\n"
-"    background-color: rgb(89, 89, 89);\n"
-"}")
+        self.btn_menu_effects.setStyleSheet("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/icons/assets/icons/ico_effects.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_menu_effects.setIcon(icon)
@@ -49,22 +33,7 @@ class Ui_Form(object):
         self.btn_menu_effects.setObjectName("btn_menu_effects")
         self.btn_menu_settings = QtWidgets.QPushButton(Form)
         self.btn_menu_settings.setGeometry(QtCore.QRect(10, 90, 151, 51))
-        self.btn_menu_settings.setStyleSheet("QPushButton\n"
-"{\n"
-"    color: rgb(255, 255, 255);\n"
-"    background-color: rgb(27, 27, 35);\n"
-"    border-radius: 10px;\n"
-"}\n"
-"\n"
-"QPushButton:hover\n"
-"{\n"
-"    background-color: rgb(74, 74, 74);\n"
-"}\n"
-"\n"
-"QPushButton:pressed \n"
-"{\n"
-"    background-color: rgb(89, 89, 89);\n"
-"}")
+        self.btn_menu_settings.setStyleSheet("")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(":/icons/assets/icons/ico_settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_menu_settings.setIcon(icon1)
@@ -72,35 +41,21 @@ class Ui_Form(object):
         self.btn_menu_settings.setObjectName("btn_menu_settings")
         self.bar_left = QtWidgets.QWidget(Form)
         self.bar_left.setGeometry(QtCore.QRect(0, 0, 171, 601))
-        self.bar_left.setStyleSheet("background-color: rgb(27, 27, 35);")
+        self.bar_left.setStyleSheet("")
         self.bar_left.setObjectName("bar_left")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.bar_left)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.bar_bottom = QtWidgets.QWidget(Form)
         self.bar_bottom.setGeometry(QtCore.QRect(170, 540, 831, 61))
-        self.bar_bottom.setStyleSheet("background-color: rgb(39, 43, 54);")
+        self.bar_bottom.setStyleSheet("")
         self.bar_bottom.setObjectName("bar_bottom")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.bar_bottom)
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.btn_effect_off = QtWidgets.QPushButton(Form)
         self.btn_effect_off.setGeometry(QtCore.QRect(950, 550, 41, 41))
-        self.btn_effect_off.setStyleSheet("QPushButton\n"
-"{\n"
-"    background-color: rgb(39, 43, 54);\n"
-"    border-radius: 10px;\n"
-"}\n"
-"\n"
-"QPushButton:hover\n"
-"{\n"
-"    background-color: rgb(51, 58, 72);\n"
-"}\n"
-"\n"
-"QPushButton:pressed \n"
-"{\n"
-"    background-color: rgb(51, 76, 100);\n"
-"}")
+        self.btn_effect_off.setStyleSheet("")
         self.btn_effect_off.setText("")
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap(":/icons/assets/icons/ico_power.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -109,21 +64,7 @@ class Ui_Form(object):
         self.btn_effect_off.setObjectName("btn_effect_off")
         self.btn_device_information = QtWidgets.QPushButton(Form)
         self.btn_device_information.setGeometry(QtCore.QRect(890, 550, 41, 41))
-        self.btn_device_information.setStyleSheet("QPushButton\n"
-"{\n"
-"    background-color: rgb(39, 43, 54);\n"
-"    border-radius: 10px;\n"
-"}\n"
-"\n"
-"QPushButton:hover\n"
-"{\n"
-"    background-color: rgb(51, 58, 72);\n"
-"}\n"
-"\n"
-"QPushButton:pressed \n"
-"{\n"
-"    background-color: rgb(51, 76, 100);\n"
-"}")
+        self.btn_device_information.setStyleSheet("")
         self.btn_device_information.setText("")
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap(":/icons/assets/icons/ico_information.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -132,21 +73,7 @@ class Ui_Form(object):
         self.btn_device_information.setObjectName("btn_device_information")
         self.btn_list_device = QtWidgets.QPushButton(Form)
         self.btn_list_device.setGeometry(QtCore.QRect(30, 550, 41, 41))
-        self.btn_list_device.setStyleSheet("QPushButton\n"
-"{\n"
-"    background-color: rgb(27, 27, 35);\n"
-"    border-radius: 10px;\n"
-"}\n"
-"\n"
-"QPushButton:hover\n"
-"{\n"
-"    background-color: rgb(74, 74, 74);\n"
-"}\n"
-"\n"
-"QPushButton:pressed \n"
-"{\n"
-"    background-color: rgb(89, 89, 89);\n"
-"}")
+        self.btn_list_device.setStyleSheet("")
         self.btn_list_device.setText("")
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap(":/icons/assets/icons/ico_devices.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -155,21 +82,7 @@ class Ui_Form(object):
         self.btn_list_device.setObjectName("btn_list_device")
         self.btn_list_strip = QtWidgets.QPushButton(Form)
         self.btn_list_strip.setGeometry(QtCore.QRect(100, 550, 41, 41))
-        self.btn_list_strip.setStyleSheet("QPushButton\n"
-"{\n"
-"    background-color: rgb(27, 27, 35);\n"
-"    border-radius: 10px;\n"
-"}\n"
-"\n"
-"QPushButton:hover\n"
-"{\n"
-"    background-color: rgb(74, 74, 74);\n"
-"}\n"
-"\n"
-"QPushButton:pressed \n"
-"{\n"
-"    background-color: rgb(89, 89, 89);\n"
-"}")
+        self.btn_list_strip.setStyleSheet("")
         self.btn_list_strip.setText("")
         icon5 = QtGui.QIcon()
         icon5.addPixmap(QtGui.QPixmap(":/icons/assets/icons/ico_strips.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -178,21 +91,7 @@ class Ui_Form(object):
         self.btn_list_strip.setObjectName("btn_list_strip")
         self.btn_device_debug = QtWidgets.QPushButton(Form)
         self.btn_device_debug.setGeometry(QtCore.QRect(830, 550, 41, 41))
-        self.btn_device_debug.setStyleSheet("QPushButton\n"
-"{\n"
-"    background-color: rgb(39, 43, 54);\n"
-"    border-radius: 10px;\n"
-"}\n"
-"\n"
-"QPushButton:hover\n"
-"{\n"
-"    background-color: rgb(51, 58, 72);\n"
-"}\n"
-"\n"
-"QPushButton:pressed \n"
-"{\n"
-"    background-color: rgb(51, 76, 100);\n"
-"}")
+        self.btn_device_debug.setStyleSheet("")
         self.btn_device_debug.setText("")
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap(":/icons/assets/icons/ico_debug.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -205,6 +104,7 @@ class Ui_Form(object):
         self.main_menus.setStyleSheet("")
         self.main_menus.setObjectName("main_menus")
         self.menu_effects = QtWidgets.QWidget()
+        self.menu_effects.setStyleSheet("")
         self.menu_effects.setObjectName("menu_effects")
         self.effects_scroll_region = QtWidgets.QScrollArea(self.menu_effects)
         self.effects_scroll_region.setEnabled(True)
@@ -216,7 +116,7 @@ class Ui_Form(object):
         self.effects_scroll_region.setSizePolicy(sizePolicy)
         self.effects_scroll_region.setMinimumSize(QtCore.QSize(0, 0))
         self.effects_scroll_region.setLayoutDirection(QtCore.Qt.RightToLeft)
-        self.effects_scroll_region.setStyleSheet("background-color: rgb(43, 47, 59);")
+        self.effects_scroll_region.setStyleSheet("")
         self.effects_scroll_region.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.effects_scroll_region.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.effects_scroll_region.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
@@ -250,22 +150,7 @@ class Ui_Form(object):
         self.btn_menu_effect_new.setSizePolicy(sizePolicy)
         self.btn_menu_effect_new.setMinimumSize(QtCore.QSize(0, 100))
         self.btn_menu_effect_new.setMaximumSize(QtCore.QSize(700, 100))
-        self.btn_menu_effect_new.setStyleSheet("QPushButton\n"
-"{\n"
-"    color: rgb(255, 255, 255);\n"
-"    background-color: rgb(51, 58, 72);\n"
-"    border-radius: 10px;\n"
-"}\n"
-"\n"
-"QPushButton:hover\n"
-"{\n"
-"    background-color: rgb(51, 76, 100);\n"
-"}\n"
-"\n"
-"QPushButton:pressed \n"
-"{\n"
-"    background-color: rgb(90, 164, 253);\n"
-"}")
+        self.btn_menu_effect_new.setStyleSheet("")
         self.btn_menu_effect_new.setObjectName("btn_menu_effect_new")
         self.verticalLayout_2.addWidget(self.btn_menu_effect_new)
         self.btn_menu_effect_reset = QtWidgets.QPushButton(self.effects_scroll_region_widgets)
@@ -276,21 +161,7 @@ class Ui_Form(object):
         self.btn_menu_effect_reset.setSizePolicy(sizePolicy)
         self.btn_menu_effect_reset.setMinimumSize(QtCore.QSize(0, 40))
         self.btn_menu_effect_reset.setMaximumSize(QtCore.QSize(700, 40))
-        self.btn_menu_effect_reset.setStyleSheet("QPushButton\n"
-"{\n"
-"    background-color:rgb(43, 47, 59);\n"
-"    border-radius: 10px;\n"
-"}\n"
-"\n"
-"QPushButton:hover\n"
-"{\n"
-"    background-color: rgb(51, 58, 72);\n"
-"}\n"
-"\n"
-"QPushButton:pressed \n"
-"{\n"
-"    background-color: rgb(51, 76, 100);\n"
-"}")
+        self.btn_menu_effect_reset.setStyleSheet("")
         self.btn_menu_effect_reset.setObjectName("btn_menu_effect_reset")
         self.verticalLayout_2.addWidget(self.btn_menu_effect_reset)
         self.effects_scroll_region.setWidget(self.effects_scroll_region_widgets)
@@ -300,7 +171,7 @@ class Ui_Form(object):
         self.settings_scroll_region = QtWidgets.QScrollArea(self.menu_settings)
         self.settings_scroll_region.setGeometry(QtCore.QRect(20, 0, 661, 551))
         self.settings_scroll_region.setLayoutDirection(QtCore.Qt.RightToLeft)
-        self.settings_scroll_region.setStyleSheet("background-color: rgb(43, 47, 59);")
+        self.settings_scroll_region.setStyleSheet("")
         self.settings_scroll_region.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.settings_scroll_region.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.settings_scroll_region.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
@@ -322,21 +193,7 @@ class Ui_Form(object):
         self.btn_settings_reset.setSizePolicy(sizePolicy)
         self.btn_settings_reset.setMinimumSize(QtCore.QSize(0, 40))
         self.btn_settings_reset.setMaximumSize(QtCore.QSize(700, 40))
-        self.btn_settings_reset.setStyleSheet("QPushButton\n"
-"{\n"
-"    background-color:rgb(43, 47, 59);\n"
-"    border-radius: 10px;\n"
-"}\n"
-"\n"
-"QPushButton:hover\n"
-"{\n"
-"    background-color: rgb(51, 58, 72);\n"
-"}\n"
-"\n"
-"QPushButton:pressed \n"
-"{\n"
-"    background-color: rgb(51, 76, 100);\n"
-"}")
+        self.btn_settings_reset.setStyleSheet("")
         self.btn_settings_reset.setObjectName("btn_settings_reset")
         self.verticalLayout_3.addWidget(self.btn_settings_reset)
         spacerItem1 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
@@ -345,22 +202,7 @@ class Ui_Form(object):
         self.main_menus.addWidget(self.menu_settings)
         self.btn_version = QtWidgets.QPushButton(Form)
         self.btn_version.setGeometry(QtCore.QRect(180, 550, 101, 41))
-        self.btn_version.setStyleSheet("QPushButton\n"
-"{\n"
-"    color: rgb(255, 255, 255);\n"
-"    background-color: rgb(39, 43, 54);\n"
-"    border-radius: 10px;\n"
-"}\n"
-"\n"
-"QPushButton:hover\n"
-"{\n"
-"    background-color: rgb(51, 58, 72);\n"
-"}\n"
-"\n"
-"QPushButton:pressed \n"
-"{\n"
-"    background-color: rgb(51, 76, 100);\n"
-"}")
+        self.btn_version.setStyleSheet("")
         self.btn_version.setIconSize(QtCore.QSize(32, 32))
         self.btn_version.setObjectName("btn_version")
         self.slider_brightness = QtWidgets.QSlider(Form)
@@ -369,41 +211,7 @@ class Ui_Form(object):
         self.slider_brightness.setToolTipDuration(2)
         self.slider_brightness.setStatusTip("")
         self.slider_brightness.setWhatsThis("")
-        self.slider_brightness.setStyleSheet("QSlider\n"
-"{\n"
-"    background-color: rgb(39, 43, 54);\n"
-"}\n"
-"\n"
-"QSlider::groove:horizontal\n"
-"{ \n"
-"    background-color: rgb(27, 27, 35);\n"
-"    height: 10px; \n"
-"    border-radius: 4px;\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal\n"
-"{ \n"
-"    background-color: rgb(51, 58, 72);\n"
-"    border: 2px solid rgb(51, 58, 72);\n"
-"    width: 16px; \n"
-"    height: 16px;\n"
-"    line-height: 20px; \n"
-"    margin-top: -5px; \n"
-"    margin-bottom: -5px; \n"
-"    border-radius: 10px; \n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal:hover\n"
-"{ \n"
-"    background-color: rgb(51, 76, 100);\n"
-"    border: 2px solid rgb(51, 76, 100);\n"
-"}\n"
-"\n"
-"QSlider::handle:horizontal:pressed\n"
-"{ \n"
-"    background-color: rgb(90, 164, 253);\n"
-"    border: 2px solid rgb(90, 164, 253);\n"
-"}")
+        self.slider_brightness.setStyleSheet("")
         self.slider_brightness.setOrientation(QtCore.Qt.Horizontal)
         self.slider_brightness.setObjectName("slider_brightness")
         self.main_menus.raise_()
@@ -426,10 +234,26 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setProperty("style", _translate("Form", "main"))
         self.btn_menu_effects.setText(_translate("Form", "  Effects"))
+        self.btn_menu_effects.setProperty("style", _translate("Form", "sidebar"))
         self.btn_menu_settings.setText(_translate("Form", "  Settings"))
+        self.btn_menu_settings.setProperty("style", _translate("Form", "sidebar"))
+        self.bar_left.setProperty("style", _translate("Form", "sidebar"))
+        self.bar_bottom.setProperty("style", _translate("Form", "bottombar"))
+        self.btn_effect_off.setProperty("style", _translate("Form", "bottombar"))
+        self.btn_device_information.setProperty("style", _translate("Form", "bottombar"))
+        self.btn_list_device.setProperty("style", _translate("Form", "sidebar"))
+        self.btn_list_strip.setProperty("style", _translate("Form", "sidebar"))
+        self.btn_device_debug.setProperty("style", _translate("Form", "bottombar"))
+        self.effects_scroll_region_widgets.setProperty("style", _translate("Form", "scrollregion"))
         self.btn_menu_effect_new.setText(_translate("Form", "+"))
+        self.btn_menu_effect_new.setProperty("style", _translate("Form", "secondary"))
         self.btn_menu_effect_reset.setText(_translate("Form", "Reset Layout"))
+        self.btn_menu_effect_reset.setProperty("style", _translate("Form", "tertiary"))
+        self.settings_scroll_region_widgets.setProperty("style", _translate("Form", "scrollregion"))
         self.btn_settings_reset.setText(_translate("Form", "Reset Settings"))
+        self.btn_settings_reset.setProperty("style", _translate("Form", "tertiary"))
         self.btn_version.setText(_translate("Form", "Version 0.0.1"))
+        self.btn_version.setProperty("style", _translate("Form", "bottombar"))
 import resources_rc
