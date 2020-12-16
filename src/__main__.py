@@ -26,7 +26,6 @@ from ui import getPath
 from ui.GenerateButtons import GenerateButtons
 from ui.effects.Effects import Effects
 from ui.generators.CreateMenuContext import CreateMenuContext
-from ui.generators.CreateMenuPopup import CreateMenuPopup
 from ui.views.monitor.SerialMonitor import SerialMonitor
 from ui.views.input.InputDialogue import InputDialogue
 from ui.generators.CreateMenuEffectEdit import CreateMenuEffectEdit
@@ -62,8 +61,7 @@ class MainWindow(QWidget):
         self.setRightClickMenu()
         self.setupButtons()
         Globals.colour_picker = QColorDialog(self)
-        self.list_menu = CreateMenuContext(parent=self).makeMenu(
-            getPath('right_click_menu.qss'))
+        self.list_menu = CreateMenuContext(parent=self).makeMenu()
 
     def setupFiles(self):
         self.init_files = ['menus.json', 'settings.json', 'effects.json']
@@ -134,7 +132,7 @@ class MainWindow(QWidget):
             'right_click_menu.json').readEntry('main_menu_right_click_menu')
         # Create new right click menu
         self.right_click_menu_effects = CreateMenuEffectEdit(
-            parent=self).makeMenu(getPath('right_click_menu.qss'))
+            parent=self).makeMenu()
         # Add all JSON entries as options to right click menu
         for entry_name, entry_payload in self.right_click_menu_effects_options.items():
             CreateMenuEffectEdit(parent=self).addOption(

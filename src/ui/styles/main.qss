@@ -56,14 +56,3 @@ QWidget[style='scrollregion'] {
 QColorDialog {
   background-color: rgb(43, 47, 59);
 }
-
-/* Base buttons */
-QPushButton {
-  color: rgb(255, 255, 255);
-  border-radius: 10px;
-}
-
-QWidget[type='toggle-button'] {
-  color: rgb(255, 255, 255);
-  border-radius: 10px;
-}

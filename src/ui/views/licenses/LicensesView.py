@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
+from ui import getPath
 from ui.views.licenses.Ui_LicensesView import Ui_Form
 
 from PyQt5.QtWidgets import QWidget, QSpacerItem, QSizePolicy
@@ -28,6 +29,9 @@ class LicensesView(QWidget):
         self.ui.setupUi(self)
         # Block inputs to application while dialogue active
         self.setWindowModality(Qt.ApplicationModal)
+        # Set style sheet
+        with open(getPath('main_ld.qss'), 'r') as style_file:
+            self.setStyleSheet(style_file.read())
         # Add buttons to open licenses
         self.addLicenses()
 

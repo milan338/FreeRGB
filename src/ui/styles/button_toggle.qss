@@ -16,6 +16,12 @@ You should have received a copy of the GNU General Public License
 along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+/* Base */
+QWidget[type='toggle-button'] {
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
 /* Primary style */
 QWidget[type='toggle-button'][style='primary'] {
   background-color: rgb(39, 43, 54);

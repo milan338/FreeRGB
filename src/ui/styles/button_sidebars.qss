@@ -16,6 +16,13 @@ You should have received a copy of the GNU General Public License
 along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+/* Base */
+QPushButton[style='sidebar'],
+QPushButton[style='bottombar'] {
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
 /* Sidebar */
 QPushButton[style='sidebar'] {
   background-color: rgb(27, 27, 35);

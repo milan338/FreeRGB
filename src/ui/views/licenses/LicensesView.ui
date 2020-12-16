@@ -27,7 +27,10 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(43, 47, 59);</string>
+   <string notr="true"/>
+  </property>
+  <property name="style" stdset="0">
+   <string>main</string>
   </property>
   <widget class="QScrollArea" name="license_scroll_region">
    <property name="enabled">
@@ -57,7 +60,7 @@
     <enum>Qt::RightToLeft</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(43, 47, 59);</string>
+    <string notr="true"/>
    </property>
    <property name="frameShape">
     <enum>QFrame::NoFrame</enum>
@@ -94,6 +97,9 @@
       <width>0</width>
       <height>0</height>
      </size>
+    </property>
+    <property name="style" stdset="0">
+     <string>scrollregion</string>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>

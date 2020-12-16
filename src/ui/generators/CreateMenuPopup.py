@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
+from ui import getPath
+
 from PyQt5.QtWidgets import QMenu, QAction
 
 
@@ -21,10 +23,9 @@ class CreateMenuPopup():
     def __init__(self, parent=None):
         self.parent = parent
 
-    def makeMenu(self, style_sheet):
+    def makeMenu(self):
         self.menu = QMenu(self.parent)
-        # Set style
-        with open(style_sheet) as style_file:
+        with open(getPath('main_ld.qss'), 'r') as style_file:
             self.menu.setStyleSheet(style_file.read())
         return(self.menu)
 

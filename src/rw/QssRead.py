@@ -44,7 +44,6 @@ class QssRead():
                             '@import')[1].replace("'", "").replace(';', '').strip('\r\n').split()[0])
                         self.import_path = path.join(
                             self.styles_path, self.import_name)
-                        print(self.import_path)
                         self.new_lines = self.readFile(self.import_path)
                         out_file.writelines(self.new_lines)
                     else:

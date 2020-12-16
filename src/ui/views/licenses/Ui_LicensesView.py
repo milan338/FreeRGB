@@ -17,7 +17,7 @@ class Ui_Form(object):
         Form.resize(800, 500)
         Form.setMinimumSize(QtCore.QSize(800, 500))
         Form.setMaximumSize(QtCore.QSize(800, 500))
-        Form.setStyleSheet("background-color: rgb(43, 47, 59);")
+        Form.setStyleSheet("")
         self.license_scroll_region = QtWidgets.QScrollArea(Form)
         self.license_scroll_region.setEnabled(True)
         self.license_scroll_region.setGeometry(QtCore.QRect(70, 0, 651, 501))
@@ -28,7 +28,7 @@ class Ui_Form(object):
         self.license_scroll_region.setSizePolicy(sizePolicy)
         self.license_scroll_region.setMinimumSize(QtCore.QSize(0, 0))
         self.license_scroll_region.setLayoutDirection(QtCore.Qt.RightToLeft)
-        self.license_scroll_region.setStyleSheet("background-color: rgb(43, 47, 59);")
+        self.license_scroll_region.setStyleSheet("")
         self.license_scroll_region.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.license_scroll_region.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.license_scroll_region.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
@@ -60,3 +60,5 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setProperty("style", _translate("Form", "main"))
+        self.license_scroll_region_widgets.setProperty("style", _translate("Form", "scrollregion"))
