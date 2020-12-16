@@ -14,34 +14,40 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-# minimum width for serial monitor lines i.e. if the message is too long then instead of shrinking text a horizontal scrollbar will appear - select only appear when need option
-import sys
+from ui.views.monitor.Ui_SerialMonitor import Ui_Form
 
-if __name__ == '__main__':
-    from Ui_SerialMonitor import Ui_Form  # type: ignore
-else:
-    from ui.views.monitor.Ui_SerialMonitor import Ui_Form
+from threading import Thread
 
-from PyQt5.QtWidgets import QWidget, QApplication
+from time import sleep
+
+from datetime import datetime
+
+from PyQt5.QtWidgets import QWidget
 
 
 class SerialMonitor(QWidget):
     def __init__(self, baudrate=0, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        self.current_text = self.ui.text_display.text()
+        # Start new serial listener thread
+        self.thread = Thread(target=self.listener)
+        self.thread.start()
 
-    def updateMonitor(self, entries=[]):
-        print('tmp')
+    def listener(self):
+        # Wait for window
+        sleep(0.5)
+        # Loop while debug menu is visible
+        while self.isVisible():
+            self.current_text = self.ui.text_display.text()
+            self.updateMonitor('line')
+            # Autoscroll TODO autoscroll toggle, untoggles when user moves scrollbar
+            self.ui.text_scroll_region.verticalScrollBar().setValue(
+                self.ui.text_scroll_region.verticalScrollBar().maximum())
+            sleep(0.5)
 
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-
-    window = SerialMonitor()
-    window.setWindowTitle('ArduRGB Debug View')
-    # window.setWindowIcon()
-    window.show()
-
-    sys.exit(app.exec())
+    def updateMonitor(self, line):
+        self.curr_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
+        self.new_text = f'{self.current_text}\n\n[{self.curr_time}] {line}'
+        self.ui.text_display.setText(self.new_text)

@@ -16,7 +16,6 @@
 
 import Globals
 
-from ui import getPath
 from ui.generators.CreateMenuContext import CreateMenuContext
 from ui.views.input.Ui_InputDialogue import Ui_Form
 

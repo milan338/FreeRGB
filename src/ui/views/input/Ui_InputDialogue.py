@@ -33,20 +33,17 @@ class Ui_Form(object):
         self.input_effect_payload.setObjectName("input_effect_payload")
         self.btn_submit = QtWidgets.QPushButton(Form)
         self.btn_submit.setGeometry(QtCore.QRect(280, 210, 111, 31))
-        self.btn_submit.setStyleSheet("QPushButton\n"
-"{\n"
+        self.btn_submit.setStyleSheet("QPushButton {\n"
 "    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(39, 43, 54);\n"
 "    border-radius: 10px;\n"
 "}\n"
 "\n"
-"QPushButton:hover\n"
-"{\n"
+"QPushButton:hover {\n"
 "    background-color: rgb(51, 76, 100);\n"
 "}\n"
 "\n"
-"QPushButton:pressed \n"
-"{\n"
+"QPushButton:pressed  {\n"
 "    background-color: rgb(90, 164, 253);\n"
 "}")
         self.btn_submit.setObjectName("btn_submit")
