@@ -17,19 +17,19 @@ along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 /* Regular button */
-QPushButton[style='primary'] {
-  background-color: rgb(39, 43, 54);
+QPushButton[style='tertiary'] {
+  background-color: rgb(43, 47, 59);
 }
 
-QPushButton:hover[style='primary'] {
+QPushButton:hover[style='tertiary'] {
+  background-color: rgb(51, 58, 72);
+}
+
+QPushButton:pressed[style='tertiary'] {
   background-color: rgb(51, 76, 100);
 }
 
-QPushButton:pressed[style='primary'] {
-  background-color: rgb(90, 164, 253);
-}
-
 /* Toggle Button */
-QWidget[type='toggle-button'][style='primary'] {
-  background-color: rgb(39, 43, 54);
+QWidget[type='toggle-button'][style='tertiary'] {
+  background-color: rgb(43, 47, 59);
 }

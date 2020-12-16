@@ -16,20 +16,41 @@ You should have received a copy of the GNU General Public License
 along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-/* Regular button */
-QPushButton[style='secondary'] {
-  background-color: rgb(51, 58, 72);
+QSlider::groove:horizontal {
+  background-color: rgb(27, 27, 35);
+  height: 10px;
+  border-radius: 4px;
 }
 
-QPushButton:hover[style='secondary'] {
+QSlider::add-page:qlineargradient {
+  background: rgb(27, 27, 35);
+  height: 10px;
+  border-radius: 4px;
+}
+
+QSlider::sub-page:qlineargradient {
+  background: rgb(51, 76, 100);
+  height: 10px;
+  border-radius: 4px;
+}
+
+QSlider::handle:horizontal {
+  background-color: rgb(51, 58, 72);
+  border: 2px solid rgb(51, 58, 72);
+  width: 16px;
+  height: 16px;
+  line-height: 20px;
+  margin-top: -5px;
+  margin-bottom: -5px;
+  border-radius: 10px;
+}
+
+QSlider::handle:horizontal:hover {
   background-color: rgb(51, 76, 100);
+  border: 2px solid rgb(51, 76, 100);
 }
 
-QPushButton:pressed[style='secondary'] {
+QSlider::handle:horizontal:pressed {
   background-color: rgb(90, 164, 253);
-}
-
-/* Toggle Button */
-QWidget[type='toggle-button'][style='secondary'] {
-  background-color: rgb(51, 58, 72);
+  border: 2px solid rgb(90, 164, 253);
 }
