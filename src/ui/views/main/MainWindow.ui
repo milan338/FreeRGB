@@ -67,7 +67,7 @@ QPushButton:pressed
     <string>  Effects</string>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../resources.qrc">
      <normaloff>:/icons/assets/icons/ico_effects.png</normaloff>:/icons/assets/icons/ico_effects.png</iconset>
    </property>
    <property name="iconSize">
@@ -108,7 +108,7 @@ QPushButton:pressed
     <string>  Settings</string>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../resources.qrc">
      <normaloff>:/icons/assets/icons/ico_settings.png</normaloff>:/icons/assets/icons/ico_settings.png</iconset>
    </property>
    <property name="iconSize">
@@ -176,7 +176,7 @@ QPushButton:pressed
     <string/>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../resources.qrc">
      <normaloff>:/icons/assets/icons/ico_power.png</normaloff>:/icons/assets/icons/ico_power.png</iconset>
    </property>
    <property name="iconSize">
@@ -216,7 +216,7 @@ QPushButton:pressed
     <string/>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../resources.qrc">
      <normaloff>:/icons/assets/icons/ico_information.png</normaloff>:/icons/assets/icons/ico_information.png</iconset>
    </property>
    <property name="iconSize">
@@ -256,7 +256,7 @@ QPushButton:pressed
     <string/>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../resources.qrc">
      <normaloff>:/icons/assets/icons/ico_devices.png</normaloff>:/icons/assets/icons/ico_devices.png</iconset>
    </property>
    <property name="iconSize">
@@ -296,7 +296,7 @@ QPushButton:pressed
     <string/>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../resources.qrc">
      <normaloff>:/icons/assets/icons/ico_strips.png</normaloff>:/icons/assets/icons/ico_strips.png</iconset>
    </property>
    <property name="iconSize">
@@ -336,7 +336,7 @@ QPushButton:pressed
     <string/>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="../../../resources.qrc">
      <normaloff>:/icons/assets/icons/ico_debug.png</normaloff>:/icons/assets/icons/ico_debug.png</iconset>
    </property>
    <property name="iconSize">
@@ -654,170 +654,6 @@ QPushButton:pressed
     </widget>
    </widget>
   </widget>
-  <widget class="QStackedWidget" name="context_menus">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>340</y>
-     <width>121</width>
-     <height>191</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(27, 27, 35);</string>
-   </property>
-   <property name="currentIndex">
-    <number>1</number>
-   </property>
-   <widget class="QWidget" name="context_device">
-    <widget class="QScrollArea" name="context_devices">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>121</width>
-       <height>191</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(39, 43, 54);
-border-radius: 10px;
-</string>
-     </property>
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents_4">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>121</width>
-        <height>191</height>
-       </rect>
-      </property>
-      <widget class="QPushButton" name="stub_device">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>20</y>
-         <width>101</width>
-         <height>30</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton
-{
-	color: rgb(255, 255, 255);
-	background-color: rgb(39, 43, 54);
-	border-radius: 10px;
-}
-
-QPushButton:hover
-{
-	background-color: rgb(51, 76, 100);
-}
-
-QPushButton:pressed 
-{
-	background-color: rgb(90, 164, 253);
-}</string>
-       </property>
-       <property name="text">
-        <string>stub device</string>
-       </property>
-      </widget>
-     </widget>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="context_strip">
-    <widget class="QScrollArea" name="context_strips">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>121</width>
-       <height>191</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(39, 43, 54);
-border-radius: 10px;
-</string>
-     </property>
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents_5">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>121</width>
-        <height>191</height>
-       </rect>
-      </property>
-      <widget class="QPushButton" name="stub_strip">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>20</y>
-         <width>101</width>
-         <height>30</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton
-{
-	color: rgb(255, 255, 255);
-	background-color: rgb(39, 43, 54);
-	border-radius: 10px;
-}
-
-QPushButton:hover
-{
-	background-color: rgb(51, 76, 100);
-}
-
-QPushButton:pressed 
-{
-	background-color: rgb(90, 164, 253);
-}</string>
-       </property>
-       <property name="text">
-        <string>stub strip</string>
-       </property>
-      </widget>
-     </widget>
-    </widget>
-   </widget>
-  </widget>
   <widget class="QPushButton" name="btn_version">
    <property name="geometry">
     <rect>
@@ -924,7 +760,6 @@ QSlider::handle:horizontal:pressed
   <zorder>btn_menu_settings</zorder>
   <zorder>btn_list_device</zorder>
   <zorder>btn_list_strip</zorder>
-  <zorder>context_menus</zorder>
   <zorder>btn_version</zorder>
   <zorder>btn_device_debug</zorder>
   <zorder>btn_device_information</zorder>

@@ -55,14 +55,12 @@ class MainWindow(QWidget):
                                'strips': 'strip_1'}  # TODO tmp
         # Variable initialisation
         self.version_name = JsonIO('app_Version.json').readEntry('version')
-        self.current_context = None
         self.current_colour = None
         self.current_brightness = None
         # Setup UI elements
         self.setRightClickMenu()
         self.setupButtons()
         Globals.colour_picker = QColorDialog(self)
-        self.ui.context_menus.hide()
         self.list_menu = CreateMenuContext(parent=self).makeMenu(
             getPath('right_click_menu.qss'))
 
@@ -74,7 +72,7 @@ class MainWindow(QWidget):
                 pass
             else:
                 JsonIO(file).copyFromBase()
-        # Create fresh copy of connected devices list
+        # Create fresh copy of connected devices list TODO tmp
         # JsonIO('connected_devices.json').copyFromBase()
 
     def refreshMenus(self):
@@ -111,10 +109,6 @@ class MainWindow(QWidget):
             lambda: self.changePage(self.ui.main_menus, 0))
         self.ui.btn_menu_settings.clicked.connect(
             lambda: self.changePage(self.ui.main_menus, 1))
-        # self.ui.btn_list_device.clicked.connect(
-        #     lambda: self.changePage(self.ui.context_menus, 0, False))
-        # self.ui.btn_list_strip.clicked.connect(
-        #     lambda: self.changePage(self.ui.context_menus, 1, False))
         self.ui.btn_list_device.clicked.connect(
             lambda: self.initListMenu('devices'))
         self.ui.btn_list_strip.clicked.connect(
@@ -128,10 +122,6 @@ class MainWindow(QWidget):
         # Settings menu
         self.ui.btn_settings_reset.clicked.connect(lambda: CreateMessageBox(
             'Reset Settings', 'This action will revert all settings to their defaults. Continue?').resetPreferences(file='settings.json', reset_file=True, reload_settings=True))
-
-    def handleButton(self):
-        self.ui.context_menus.hide()
-        self.current_context = None
 
     def handleSwitch(self):
         print('temp')
@@ -148,29 +138,14 @@ class MainWindow(QWidget):
             CreateMenuEffectEdit(parent=self).addOption(
                 self.right_click_menu_effects, entry_name, entry_payload)
 
-    def changePage(self, widget, index, hide_context=True):
-        widget.setCurrentIndex(index)
-        if hide_context:
-            self.handleButton()
-        else:
-            if self.current_context == index:
-                self.ui.context_menus.hide()
-                self.current_context = None
-            else:
-                self.ui.context_menus.show()
-                self.current_context = index
-
     def getBright(self):
-        self.handleButton()
         self.current_brightness = self.ui.slider_brightness.value()
         print(self.current_brightness)
 
     def toggleLeds(self, message):
-        self.handleButton()
         print('serial sent')
 
     def setWindowParams(self, window, title, icon=None):
-        self.handleButton()
         window.setWindowTitle(title)
         window.show()
         # window.setWindowIcon(icon)
@@ -203,7 +178,7 @@ class MainWindow(QWidget):
         self.list_menu.exec(QCursor.pos())
 
     def mousePressEvent(self, event):
-        self.handleButton()
+        pass
 
 
 if __name__ == '__main__':

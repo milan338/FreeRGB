@@ -343,82 +343,6 @@ class Ui_Form(object):
         self.verticalLayout_3.addItem(spacerItem1)
         self.settings_scroll_region.setWidget(self.settings_scroll_region_widgets)
         self.main_menus.addWidget(self.menu_settings)
-        self.context_menus = QtWidgets.QStackedWidget(Form)
-        self.context_menus.setGeometry(QtCore.QRect(20, 340, 121, 191))
-        self.context_menus.setStyleSheet("background-color: rgb(27, 27, 35);")
-        self.context_menus.setObjectName("context_menus")
-        self.context_device = QtWidgets.QWidget()
-        self.context_device.setObjectName("context_device")
-        self.context_devices = QtWidgets.QScrollArea(self.context_device)
-        self.context_devices.setGeometry(QtCore.QRect(0, 0, 121, 191))
-        self.context_devices.setStyleSheet("color: rgb(255, 255, 255);\n"
-"background-color: rgb(39, 43, 54);\n"
-"border-radius: 10px;\n"
-"")
-        self.context_devices.setWidgetResizable(True)
-        self.context_devices.setObjectName("context_devices")
-        self.scrollAreaWidgetContents_4 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_4.setGeometry(QtCore.QRect(0, 0, 121, 191))
-        self.scrollAreaWidgetContents_4.setObjectName("scrollAreaWidgetContents_4")
-        self.stub_device = QtWidgets.QPushButton(self.scrollAreaWidgetContents_4)
-        self.stub_device.setGeometry(QtCore.QRect(10, 20, 101, 30))
-        self.stub_device.setMinimumSize(QtCore.QSize(0, 30))
-        self.stub_device.setMaximumSize(QtCore.QSize(16777215, 30))
-        self.stub_device.setStyleSheet("QPushButton\n"
-"{\n"
-"    color: rgb(255, 255, 255);\n"
-"    background-color: rgb(39, 43, 54);\n"
-"    border-radius: 10px;\n"
-"}\n"
-"\n"
-"QPushButton:hover\n"
-"{\n"
-"    background-color: rgb(51, 76, 100);\n"
-"}\n"
-"\n"
-"QPushButton:pressed \n"
-"{\n"
-"    background-color: rgb(90, 164, 253);\n"
-"}")
-        self.stub_device.setObjectName("stub_device")
-        self.context_devices.setWidget(self.scrollAreaWidgetContents_4)
-        self.context_menus.addWidget(self.context_device)
-        self.context_strip = QtWidgets.QWidget()
-        self.context_strip.setObjectName("context_strip")
-        self.context_strips = QtWidgets.QScrollArea(self.context_strip)
-        self.context_strips.setGeometry(QtCore.QRect(0, 0, 121, 191))
-        self.context_strips.setStyleSheet("color: rgb(255, 255, 255);\n"
-"background-color: rgb(39, 43, 54);\n"
-"border-radius: 10px;\n"
-"")
-        self.context_strips.setWidgetResizable(True)
-        self.context_strips.setObjectName("context_strips")
-        self.scrollAreaWidgetContents_5 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_5.setGeometry(QtCore.QRect(0, 0, 121, 191))
-        self.scrollAreaWidgetContents_5.setObjectName("scrollAreaWidgetContents_5")
-        self.stub_strip = QtWidgets.QPushButton(self.scrollAreaWidgetContents_5)
-        self.stub_strip.setGeometry(QtCore.QRect(10, 20, 101, 30))
-        self.stub_strip.setMinimumSize(QtCore.QSize(0, 30))
-        self.stub_strip.setMaximumSize(QtCore.QSize(16777215, 30))
-        self.stub_strip.setStyleSheet("QPushButton\n"
-"{\n"
-"    color: rgb(255, 255, 255);\n"
-"    background-color: rgb(39, 43, 54);\n"
-"    border-radius: 10px;\n"
-"}\n"
-"\n"
-"QPushButton:hover\n"
-"{\n"
-"    background-color: rgb(51, 76, 100);\n"
-"}\n"
-"\n"
-"QPushButton:pressed \n"
-"{\n"
-"    background-color: rgb(90, 164, 253);\n"
-"}")
-        self.stub_strip.setObjectName("stub_strip")
-        self.context_strips.setWidget(self.scrollAreaWidgetContents_5)
-        self.context_menus.addWidget(self.context_strip)
         self.btn_version = QtWidgets.QPushButton(Form)
         self.btn_version.setGeometry(QtCore.QRect(180, 550, 101, 41))
         self.btn_version.setStyleSheet("QPushButton\n"
@@ -489,7 +413,6 @@ class Ui_Form(object):
         self.btn_menu_settings.raise_()
         self.btn_list_device.raise_()
         self.btn_list_strip.raise_()
-        self.context_menus.raise_()
         self.btn_version.raise_()
         self.btn_device_debug.raise_()
         self.btn_device_information.raise_()
@@ -498,7 +421,6 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         self.main_menus.setCurrentIndex(0)
-        self.context_menus.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
@@ -509,7 +431,5 @@ class Ui_Form(object):
         self.btn_menu_effect_new.setText(_translate("Form", "+"))
         self.btn_menu_effect_reset.setText(_translate("Form", "Reset Layout"))
         self.btn_settings_reset.setText(_translate("Form", "Reset Settings"))
-        self.stub_device.setText(_translate("Form", "stub device"))
-        self.stub_strip.setText(_translate("Form", "stub strip"))
         self.btn_version.setText(_translate("Form", "Version 0.0.1"))
 import resources_rc
