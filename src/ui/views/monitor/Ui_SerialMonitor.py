@@ -19,68 +19,34 @@ class Ui_Form(object):
         Form.setMaximumSize(QtCore.QSize(1000, 500))
         Form.setStyleSheet("background-color: rgb(43, 47, 59);\n"
 "color: rgb(255, 255, 255);")
-        self.scrollArea = QtWidgets.QScrollArea(Form)
-        self.scrollArea.setGeometry(QtCore.QRect(-1, 69, 1001, 361))
-        self.scrollArea.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
-        self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollArea.setObjectName("scrollArea")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 984, 361))
-        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label.setGeometry(QtCore.QRect(10, 20, 981, 25))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
-        self.label.setSizePolicy(sizePolicy)
-        self.label.setMinimumSize(QtCore.QSize(0, 25))
-        self.label.setMaximumSize(QtCore.QSize(16777215, 25))
-        self.label.setObjectName("label")
-        self.label_2 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_2.setGeometry(QtCore.QRect(10, 50, 981, 25))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
-        self.label_2.setSizePolicy(sizePolicy)
-        self.label_2.setMinimumSize(QtCore.QSize(0, 25))
-        self.label_2.setMaximumSize(QtCore.QSize(16777215, 25))
-        self.label_2.setObjectName("label_2")
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
-        self.horizontalWidget = QtWidgets.QWidget(Form)
-        self.horizontalWidget.setGeometry(QtCore.QRect(0, 429, 1001, 71))
-        self.horizontalWidget.setStyleSheet("background-color: rgb(27, 27, 35);")
-        self.horizontalWidget.setObjectName("horizontalWidget")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalWidget)
+        self.bottom_bar = QtWidgets.QWidget(Form)
+        self.bottom_bar.setGeometry(QtCore.QRect(0, 429, 1001, 71))
+        self.bottom_bar.setStyleSheet("background-color: rgb(27, 27, 35);")
+        self.bottom_bar.setObjectName("bottom_bar")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.bottom_bar)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.btn_serial_clear = QtWidgets.QPushButton(Form)
         self.btn_serial_clear.setGeometry(QtCore.QRect(860, 440, 121, 51))
-        self.btn_serial_clear.setStyleSheet("QPushButton\n"
-"{\n"
+        self.btn_serial_clear.setStyleSheet("QPushButton {\n"
 "    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(27, 27, 35);\n"
 "    border-radius: 10px;\n"
 "}\n"
 "\n"
-"QPushButton:hover\n"
-"{\n"
+"QPushButton:hover {\n"
 "    background-color: rgb(74, 74, 74);\n"
 "}\n"
 "\n"
-"QPushButton:pressed \n"
-"{\n"
+"QPushButton:pressed  {\n"
 "    background-color: rgb(89, 89, 89);\n"
 "}")
         self.btn_serial_clear.setObjectName("btn_serial_clear")
-        self.horizontalWidget_2 = QtWidgets.QWidget(Form)
-        self.horizontalWidget_2.setGeometry(QtCore.QRect(0, 0, 1001, 71))
-        self.horizontalWidget_2.setStyleSheet("background-color: rgb(27, 27, 35);")
-        self.horizontalWidget_2.setObjectName("horizontalWidget_2")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalWidget_2)
+        self.top_bar = QtWidgets.QWidget(Form)
+        self.top_bar.setGeometry(QtCore.QRect(0, 0, 1001, 71))
+        self.top_bar.setStyleSheet("background-color: rgb(27, 27, 35);")
+        self.top_bar.setObjectName("top_bar")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.top_bar)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.input_serial_text = QtWidgets.QLineEdit(Form)
@@ -90,23 +56,58 @@ class Ui_Form(object):
         self.input_serial_text.setObjectName("input_serial_text")
         self.btn_serial_send = QtWidgets.QPushButton(Form)
         self.btn_serial_send.setGeometry(QtCore.QRect(860, 10, 121, 51))
-        self.btn_serial_send.setStyleSheet("QPushButton\n"
-"{\n"
+        self.btn_serial_send.setStyleSheet("QPushButton {\n"
 "    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(27, 27, 35);\n"
 "    border-radius: 10px;\n"
 "}\n"
 "\n"
-"QPushButton:hover\n"
-"{\n"
+"QPushButton:hover {\n"
 "    background-color: rgb(74, 74, 74);\n"
 "}\n"
 "\n"
-"QPushButton:pressed \n"
-"{\n"
+"QPushButton:pressed  {\n"
 "    background-color: rgb(89, 89, 89);\n"
 "}")
         self.btn_serial_send.setObjectName("btn_serial_send")
+        self.text_scroll_region = QtWidgets.QScrollArea(Form)
+        self.text_scroll_region.setEnabled(True)
+        self.text_scroll_region.setGeometry(QtCore.QRect(0, 70, 1001, 361))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.text_scroll_region.sizePolicy().hasHeightForWidth())
+        self.text_scroll_region.setSizePolicy(sizePolicy)
+        self.text_scroll_region.setMinimumSize(QtCore.QSize(0, 0))
+        self.text_scroll_region.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.text_scroll_region.setStyleSheet("")
+        self.text_scroll_region.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.text_scroll_region.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        self.text_scroll_region.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.text_scroll_region.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
+        self.text_scroll_region.setWidgetResizable(True)
+        self.text_scroll_region.setObjectName("text_scroll_region")
+        self.text_scroll_region_widgets = QtWidgets.QWidget()
+        self.text_scroll_region_widgets.setGeometry(QtCore.QRect(0, 0, 984, 361))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.text_scroll_region_widgets.sizePolicy().hasHeightForWidth())
+        self.text_scroll_region_widgets.setSizePolicy(sizePolicy)
+        self.text_scroll_region_widgets.setMinimumSize(QtCore.QSize(0, 0))
+        self.text_scroll_region_widgets.setObjectName("text_scroll_region_widgets")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.text_scroll_region_widgets)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.text_display = QtWidgets.QLabel(self.text_scroll_region_widgets)
+        self.text_display.setObjectName("text_display")
+        self.verticalLayout_3.addWidget(self.text_display)
+        self.text_scroll_region.setWidget(self.text_scroll_region_widgets)
+        self.text_scroll_region.raise_()
+        self.bottom_bar.raise_()
+        self.btn_serial_clear.raise_()
+        self.top_bar.raise_()
+        self.input_serial_text.raise_()
+        self.btn_serial_send.raise_()
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -114,7 +115,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "Serial Communication"))
-        self.label_2.setText(_translate("Form", "Serial Communication"))
         self.btn_serial_clear.setText(_translate("Form", "Clear Output"))
         self.btn_serial_send.setText(_translate("Form", "Send"))
+        self.text_scroll_region_widgets.setProperty("style", _translate("Form", "scrollregion"))
+        self.text_display.setText(_translate("Form", "Text"))

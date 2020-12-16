@@ -152,7 +152,7 @@ class MainWindow(QWidget):
 
     def initSerialMonitor(self):
         self.serial_monitor = SerialMonitor()
-        self.setWindowParams(self.serial_monitor, 'ArduRGB Debug View')
+        self.setWindowParams(self.serial_monitor, 'COM Port Debug View')
 
     def initDialogue(self, menu, window_title):
         self.input_dialogue = InputDialogue(menu)
