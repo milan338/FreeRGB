@@ -14,40 +14,72 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from ui.views.monitor.Ui_SerialMonitor import Ui_Form
-
 from threading import Thread
 
 from time import sleep
 
 from datetime import datetime
 
+from ui.widgets.ToggleSwitch import ToggleSwitch
+from ui.views.monitor.Ui_SerialMonitor import Ui_Form
+
 from PyQt5.QtWidgets import QWidget
+from PyQt5.QtCore import Qt
 
 
 class SerialMonitor(QWidget):
     def __init__(self, baudrate=0, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # Qt.AA_CompressHighFrequencyEvents = False
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        self.setupUI()
         self.current_text = self.ui.text_display.text()
         # Start new serial listener thread
         self.thread = Thread(target=self.listener)
         self.thread.start()
+
+    def setupUI(self):
+        self.scrollbar = self.ui.text_scroll_region.verticalScrollBar()
+        self.auto_scroll = True
+        # Switch widget
+        self.switch = ToggleSwitch()
+        self.switch.setChecked(self.auto_scroll)
+        self.switch.toggled.connect(self.toggleScroll)
+        self.ui.switch_placeholder.addWidget(self.switch)
+        # Buttons
+        self.ui.btn_serial_clear.clicked.connect(self.clearSerial)
+        # Disable autoscroll on scrolling
+        self.scrollbar.sliderMoved.connect(self.disableAutoScroll)
+
+    def clearSerial(self):
+        self.ui.text_display.setText('')
+
+    def disableAutoScroll(self):
+        self.auto_scroll = False
+        self.switch.setChecked(False)
+
+    def toggleScroll(self):
+        self.auto_scroll = self.switch.isChecked()
 
     def listener(self):
         # Wait for window
         sleep(0.5)
         # Loop while debug menu is visible
         while self.isVisible():
+            # print(self.scrollbar.slider)
             self.current_text = self.ui.text_display.text()
             self.updateMonitor('line')
-            # Autoscroll TODO autoscroll toggle, untoggles when user moves scrollbar
-            self.ui.text_scroll_region.verticalScrollBar().setValue(
-                self.ui.text_scroll_region.verticalScrollBar().maximum())
+            # Autoscroll
+            if self.auto_scroll:
+                # Scroll to end of view
+                self.scrollbar.setValue(self.scrollbar.maximum())
             sleep(0.5)
 
     def updateMonitor(self, line):
         self.curr_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
         self.new_text = f'{self.current_text}\n\n[{self.curr_time}] {line}'
         self.ui.text_display.setText(self.new_text)
+
+    def wheelEvent(self, event):  # TODO only fires when scrolled to top / bottom of scroll region
+        self.disableAutoScroll()
