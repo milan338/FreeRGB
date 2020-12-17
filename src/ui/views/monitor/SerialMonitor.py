@@ -49,8 +49,14 @@ class SerialMonitor(QWidget):
         self.ui.switch_placeholder.addWidget(self.switch)
         # Buttons
         self.ui.btn_serial_clear.clicked.connect(self.clearSerial)
+        self.ui.btn_serial_send.clicked.connect(self.sendSerial)
         # Disable autoscroll on scrolling
         self.scrollbar.sliderMoved.connect(self.disableAutoScroll)
+
+    def sendSerial(self):
+        print(self.ui.input_serial_text.text())  # TODO tmp
+        # Clear input field
+        self.ui.input_serial_text.setText('')
 
     def clearSerial(self):
         self.ui.text_display.setText('')
