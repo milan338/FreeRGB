@@ -56,3 +56,8 @@ QWidget[style='scrollregion'] {
 QColorDialog {
   background-color: rgb(43, 47, 59);
 }
+
+/* Popup dialogue */
+QMessageBox {
+  background-color: rgb(43, 47, 59);
+}
