@@ -17,10 +17,9 @@
 import Globals
 import Settings
 
-from ui import getPath
 from ui.views.licenses.LicensesView import LicensesView
 
-from webbrowser import open as openWebPage
+import webbrowser
 
 
 class ButtonActions():
@@ -31,9 +30,9 @@ class ButtonActions():
 
     @staticmethod
     def openURL(url, *args, **kwargs):
-        openWebPage(url)
+        webbrowser.open(url)
 
-    @staticmethod
+    @ staticmethod
     def showLicenses(*args, **kwargs):
         Globals.licenses_view = LicensesView()
         Globals.licenses_view.setWindowTitle('Open-Source Licenses')

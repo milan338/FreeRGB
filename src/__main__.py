@@ -14,10 +14,14 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
+import logging
+
 import sys
 
 import Globals
 import Settings
+
+from InitLogging import InitLogging
 
 from rw.JsonIO import JsonIO
 from rw.QssRead import QssRead
@@ -26,21 +30,23 @@ from ui import getPath
 from ui.GenerateButtons import GenerateButtons
 from ui.effects.Effects import Effects
 from ui.generators.CreateMenuContext import CreateMenuContext
-from ui.views.monitor.SerialMonitor import SerialMonitor
-from ui.views.input.InputDialogue import InputDialogue
 from ui.generators.CreateMenuEffectEdit import CreateMenuEffectEdit
 from ui.generators.CreateMessageBox import CreateMessageBox
+from ui.views.input.InputDialogue import InputDialogue
 from ui.views.main.Ui_MainWindow import Ui_Form
+from ui.views.monitor.SerialMonitor import SerialMonitor
 
-from PyQt5.QtWidgets import QWidget, QColorDialog, QMessageBox, QApplication
 from PyQt5.QtGui import QCursor
-from PyQt5 import QtCore
-from PyQt5 import QtGui
+from PyQt5.QtWidgets import QWidget, QColorDialog, QMessageBox, QApplication
 
 
 class MainWindow(QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # Get application version
+        self.version_name = JsonIO('app_Version.json').readEntry('version')
+        # Setup logging
+        InitLogging(10)
         # Allow global access to refresh main menu using JSON
         Globals.refreshMenus = lambda: self.refreshMenus()
         # Initialise settings
@@ -53,10 +59,14 @@ class MainWindow(QWidget):
         # Update available devices
         self.connected_dict = {'devices': 'device_1',
                                'strips': 'strip_1'}  # TODO tmp
-        # Variable initialisation
-        self.version_name = JsonIO('app_Version.json').readEntry('version')
         self.current_colour = None  # TODO tmp
-        self.current_brightness = 60  # TODO tmp
+        self.current_brightness = 0  # TODO tmp
+        self.device_name = None
+        self.com_port = None
+        self.num_strips = None
+        self.ardu_version = None
+        self.board = None
+        self.baud_rate = None
         # Setup UI elements
         self.setRightClickMenu()
         self.setupButtons()
@@ -72,7 +82,7 @@ class MainWindow(QWidget):
             else:
                 JsonIO(file).copyFromBase()
         # Create fresh copy of connected devices list TODO tmp
-        # JsonIO('connected_devices.json').copyFromBase()
+        # JsonIO('connected_devices.json').copyFromBase() # TODO deal with empty device list?
 
     def refreshMenus(self):
         try:
@@ -101,7 +111,13 @@ class MainWindow(QWidget):
             lambda: self.initSerialMonitor())
         self.ui.btn_effect_off.clicked.connect(self.toggleLeds)
         self.ui.btn_device_information.clicked.connect(
-            lambda: QMessageBox.information(self, 'Device Information', 'Device Name: \nCOM Port: \nStrips Connected: \nArduRGB Version: \nBoard: \nBaud Rate: '))  # TODO tmp
+            lambda: QMessageBox.information(self, 'Device Information',
+                                            f'Device Name: {self.device_name}\n'
+                                            f'COM Port: {self.com_port}\n'
+                                            f'Strips Connected: {self.num_strips}\n'
+                                            f'ArduRGB Version: {self.ardu_version}\n'
+                                            f'Board: {self.board}\n'
+                                            f'Baud Rate: {self.baud_rate}'))
         self.ui.slider_brightness.sliderReleased.connect(self.getBright)
         self.ui.slider_brightness.setValue(self.current_brightness)
         # Left bar

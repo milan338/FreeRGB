@@ -14,6 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
+# Logger
+logger = None
+
 # Store currently hovered button
 current_hovered_btn = None
 
