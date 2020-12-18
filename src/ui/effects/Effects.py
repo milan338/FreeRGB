@@ -14,11 +14,11 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-import Globals
-
 from os import listdir, path
 
-from rw.JsonIO import JsonIO
+from src import Globals
+
+from src.rw.JsonIO import JsonIO
 
 
 class Effects():

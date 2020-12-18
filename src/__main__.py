@@ -18,23 +18,23 @@ import logging
 
 import sys
 
-import Globals
-import Settings
+from src import Globals
+from src import Settings
 
-from InitLogging import InitLogging
+from src.InitLogging import InitLogging
 
-from rw.JsonIO import JsonIO
-from rw.QssRead import QssRead
+from src.rw.JsonIO import JsonIO
+from src.rw.QssRead import QssRead
 
-from ui import getPath
-from ui.GenerateButtons import GenerateButtons
-from ui.effects.Effects import Effects
-from ui.generators.CreateMenuContext import CreateMenuContext
-from ui.generators.CreateMenuEffectEdit import CreateMenuEffectEdit
-from ui.generators.CreateMessageBox import CreateMessageBox
-from ui.views.input.InputDialogue import InputDialogue
-from ui.views.main.Ui_MainWindow import Ui_Form
-from ui.views.monitor.SerialMonitor import SerialMonitor
+from src.ui import getPath
+from src.ui.GenerateButtons import GenerateButtons
+from src.ui.effects.Effects import Effects
+from src.ui.generators.CreateMenuContext import CreateMenuContext
+from src.ui.generators.CreateMenuEffectEdit import CreateMenuEffectEdit
+from src.ui.generators.CreateMessageBox import CreateMessageBox
+from src.ui.views.input.InputDialogue import InputDialogue
+from src.ui.views.main.Ui_MainWindow import Ui_Form
+from src.ui.views.monitor.SerialMonitor import SerialMonitor
 
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QWidget, QColorDialog, QMessageBox, QApplication
@@ -46,7 +46,7 @@ class MainWindow(QWidget):
         # Get application version
         self.version_name = JsonIO('app_Version.json').readEntry('version')
         # Setup logging
-        InitLogging(10)
+        InitLogging(10)  # TODO only start logging once option selected, don't overwrite logs if already logged i.e. set already_logged to true once logged at all during session and prevent making new log while true (remainder of runtime)
         # Allow global access to refresh main menu using JSON
         Globals.refreshMenus = lambda: self.refreshMenus()
         # Initialise settings
@@ -197,7 +197,7 @@ class MainWindow(QWidget):
         pass
 
 
-if __name__ == '__main__':
+def init():
     # Initialise application
     app = QApplication(sys.argv)
     # Setup main window
@@ -212,3 +212,7 @@ if __name__ == '__main__':
     window.show()
     # Run application and provide exit code
     sys.exit(app.exec())
+
+
+if __name__ == '__main__':
+    init()

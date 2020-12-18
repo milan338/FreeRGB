@@ -14,13 +14,13 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-import Globals
+from src import Globals
 
-from rw.JsonIO import JsonIO
+from src.rw.JsonIO import JsonIO
 
-from ui.ButtonActions import ButtonActions
-from ui.widgets.HoverButton import HoverButton
-from ui.widgets.ToggleSwitch import ToggleSwitch
+from src.ui.ButtonActions import ButtonActions
+from src.ui.widgets.HoverButton import HoverButton
+from src.ui.widgets.ToggleSwitch import ToggleSwitch
 
 from PyQt5.QtCore import Qt, QCoreApplication, QSize, QRect
 from PyQt5.QtGui import QCursor

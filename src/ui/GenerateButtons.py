@@ -14,13 +14,13 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-import Globals
+from src import Globals
 
-from rw.JsonIO import JsonIO
+from src.rw.JsonIO import JsonIO
 
-from ui.views.input.InputDialogue import InputDialogue
-from ui.generators.CreateLargeButton import CreateLargeButton
-from ui.generators.CreateMessageBox import CreateMessageBox
+from src.ui.views.input.InputDialogue import InputDialogue
+from src.ui.generators.CreateLargeButton import CreateLargeButton
+from src.ui.generators.CreateMessageBox import CreateMessageBox
 
 
 class GenerateButtons():
