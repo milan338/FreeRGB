@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from ui import getPath
+from src.ui import getPath
 
 from PyQt5.QtWidgets import QMenu, QAction
 

@@ -14,12 +14,12 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-import Globals
+from src import Globals
 
-from ui.generators.CreateMenuContext import CreateMenuContext
-from ui.views.input.Ui_InputDialogue import Ui_Form
+from src.ui.generators.CreateMenuContext import CreateMenuContext
+from src.ui.views.input.Ui_InputDialogue import Ui_Form
 
-from rw.JsonIO import JsonIO
+from src.rw.JsonIO import JsonIO
 
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtGui import QCursor

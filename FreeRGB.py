@@ -14,27 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from src import Globals
-from src import Settings
+from src.__main__ import init
 
-from src.ui.views.licenses.LicensesView import LicensesView
-
-import webbrowser
-
-
-class ButtonActions():
-    @staticmethod
-    def toggleBool(*args, **kwargs):
-        # Reload settings
-        Settings.reloadSettings()
-
-    @staticmethod
-    def openURL(url, *args, **kwargs):
-        webbrowser.open(url)
-
-    @ staticmethod
-    def showLicenses(*args, **kwargs):
-        Globals.licenses_view = LicensesView()
-        Globals.licenses_view.setWindowTitle('Open-Source Licenses')
-        Globals.licenses_view.show()
-        # Globals.licenses_view.setWindowIcon()
+if __name__ == "__main__":
+    init()

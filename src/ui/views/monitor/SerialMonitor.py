@@ -20,8 +20,8 @@ from time import sleep
 
 from datetime import datetime
 
-from ui.widgets.ToggleSwitch import ToggleSwitch
-from ui.views.monitor.Ui_SerialMonitor import Ui_Form
+from src.ui.widgets.ToggleSwitch import ToggleSwitch
+from src.ui.views.monitor.Ui_SerialMonitor import Ui_Form
 
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import Qt

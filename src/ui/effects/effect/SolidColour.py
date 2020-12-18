@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-import Globals
+from src import Globals
 
 
 class SolidColour():

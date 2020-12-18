@@ -14,9 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-import Globals
+from src import Globals
 
-from ui.generators.CreateMenuPopup import CreateMenuPopup
+from src.ui.generators.CreateMenuPopup import CreateMenuPopup
 
 
 class CreateMenuContext(CreateMenuPopup):

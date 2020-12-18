@@ -14,7 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-# Logger
+# Logging
+has_logged = False
 logger = None
 
 # Store currently hovered button
@@ -37,7 +38,7 @@ selected_strip = None
 advanced_mode_elements = []
 
 # Import location for effect definitions
-effect_import_path = 'ui.effects.effect'
+effect_import_path = 'src.ui.effects.effect'
 
 # Refresh menus from any package (called as function)
 refreshMenus = None
