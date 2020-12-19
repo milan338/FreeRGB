@@ -133,7 +133,7 @@ class CreateLargeButton():
         except:
             if Settings.do_logs:
                 Globals.logger.error(
-                    f'Failed to call effect {effect} with payload {payload},'
+                    f'Failed to call effect {effect} with payload {payload}, '
                     f'does module {Globals.effect_import_path}.{effect} exist?')
 
     def setCurrentHoverButton(self, hovered):

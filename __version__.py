@@ -14,22 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-import sys
-import __version__
+__version__ = '0.0.1'
 
-from src import __main__
-
-if __name__ == '__main__':
-    curr_version = sys.version_info
-    min_py = __version__.python_requires.split('.')
-    # Ensure Python installation meets requirements
-    if curr_version >= (int(min_py[0]), int(min_py[1])):
-        __main__.init()
-    else:
-        from src import Globals
-        from src.InitLogging import InitLogging
-        InitLogging(2)
-        Globals.logger.error(
-            f'Your system running Python {curr_version[0]}.{curr_version[1]}'
-            f' which is lower than the required Python {min_py[0]}.{min_py[1]}.'
-            f' Please consider updating your installation.')
+python_requires = '3.8'

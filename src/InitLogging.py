@@ -29,10 +29,10 @@ from zipfile import ZipFile
 
 
 class InitLogging():
-    def __init__(self, max_logs, name):
-        self.max_logs = max_logs
-        self.name = name
-        self.backup_count = 2
+    def __init__(self, backup_count):
+        self.backup_count = backup_count
+        self.max_logs = 10
+        self.name = __name__
         self.base_path = abspath(dirname(__file__))
         self.log_dir = 'logs'
         self.log_latest = 'latest.log'
