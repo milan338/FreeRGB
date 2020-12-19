@@ -14,19 +14,21 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from os import path
+from src import Globals
+from src import Settings
+
+from os.path import abspath, dirname, join
 
 
 class QssRead():
     def __init__(self, file):
         # Initialise path
-        self.base_path = path.dirname(__file__)
+        self.base_path = abspath(dirname(__file__))
         self.styles_dir = 'ui/styles'
-        self.styles_path = path.abspath(
-            path.join(self.base_path, '..', self.styles_dir))
+        self.styles_path = abspath(join(self.base_path, '..', self.styles_dir))
         # Set up final file to load
-        self.file_path = path.join(self.styles_path, f'{file}.qss')
-        self.final_path = path.join(self.styles_path, f'{file}_ld.qss')
+        self.file_path = abspath(join(self.styles_path, f'{file}.qss'))
+        self.final_path = abspath(join(self.styles_path, f'{file}_ld.qss'))
         self.writeLines()
 
     def writeLines(self):
@@ -42,14 +44,16 @@ class QssRead():
                     if line.startswith('@import'):
                         self.import_name = (line.split(
                             '@import')[1].replace("'", "").replace(';', '').strip('\r\n').split()[0])
-                        self.import_path = path.join(
-                            self.styles_path, self.import_name)
+                        self.import_path = abspath(
+                            join(self.styles_path, self.import_name))
                         self.new_lines = self.readFile(self.import_path)
                         out_file.writelines(self.new_lines)
                     else:
                         out_file.write(line)
                 except:
-                    pass
+                    if Settings.do_logs:
+                        Globals.logger.error(
+                            f'Failed to parse stylesheet line [{line}]')
 
     def readFile(self, path):
         with open(path, 'r') as import_file:

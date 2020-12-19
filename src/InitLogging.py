@@ -83,7 +83,7 @@ class InitLogging():
         # self.logger = logging.getLogger('main_logger')
         self.logger = logging.getLogger(self.name)
         self.logger.setLevel(logging.WARNING)
-        # Enable logging to file, where each 5MB a new file is created
+        # Enable logging to file, where each 5MB the log rolls over to a new file
         self.file_handler = RotatingFileHandler(
             self.latest_path, maxBytes=5*1024*1024, backupCount=self.backup_count)
         # Enable logging to console
@@ -96,4 +96,3 @@ class InitLogging():
         self.logger.addHandler(self.console_handler)
         # Provide application-wide access to logger
         Globals.logger = self.logger
-        # return self.logger

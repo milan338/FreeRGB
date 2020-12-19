@@ -15,6 +15,7 @@
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
 from src import Globals
+from src import Settings
 
 from src.rw.JsonIO import JsonIO
 
@@ -50,9 +51,10 @@ class GenerateButtons():
                 try:
                     layout.takeAt(i).widget().deleteLater()
                 except:
-                    Globals.logger.error(
-                        f'Failed to remove UI element in layout {layout}'
-                        f'at UI position {layout.count() - i}')
+                    if Settings.do_logs:
+                        Globals.logger.error(
+                            f'Failed to remove UI element in layout {layout}'
+                            f'at UI position {layout.count() - i}')
 
     def editButton(self, button):
         # Reset input window

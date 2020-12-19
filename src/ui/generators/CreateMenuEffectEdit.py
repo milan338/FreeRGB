@@ -15,6 +15,7 @@
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
 from src import Globals
+from src import Settings
 
 from src.ui.GenerateButtons import GenerateButtons
 from src.ui.generators.CreateMenuPopup import CreateMenuPopup
@@ -31,6 +32,7 @@ class CreateMenuEffectEdit(CreateMenuPopup):
             # Refresh menu layout using JSON
             Globals.refreshMenus()
         except:
-            Globals.logger.error(
-                f'Failed to call method {method_name} with argument {Globals.current_hovered_btn}'
-                f'from module src.ui.GenerateButtons')
+            if Settings.do_logs:
+                Globals.logger.error(
+                    f'Failed to call method {method_name} with argument {Globals.current_hovered_btn}'
+                    f'from module src.ui.GenerateButtons')

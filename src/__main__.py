@@ -24,8 +24,6 @@ if __name__ == '__main__':
 from src import Globals
 from src import Settings
 
-from src.InitLogging import InitLogging
-
 from src.rw.JsonIO import JsonIO
 from src.rw.QssRead import QssRead
 
@@ -46,19 +44,14 @@ from PyQt5.QtWidgets import QWidget, QColorDialog, QMessageBox, QApplication
 class MainWindow(QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Get application version
-        self.version_name = JsonIO('app_Version.json').readEntry('version')
-        # Setup logging
-        InitLogging(10, __name__)  # TODO only start logging once option selected, don't overwrite logs if already logged i.e. set already_logged to true once logged at all during session and prevent making new log while true (remainder of runtime)
-        # Allow global access to refresh main menu using JSON
-        Globals.refreshMenus = lambda: self.refreshMenus()
-        # Initialise settings
         self.setupFiles()
+        Settings.reloadSettings()
+        Effects()
+        self.version_name = JsonIO('app_Version.json').readEntry('version')
+        Globals.refreshMenus = lambda: self.refreshMenus()
         # UI initialisation
         self.ui = Ui_Form()
         self.ui.setupUi(self)
-        # Update available effects
-        Effects()
         # Update available devices
         self.connected_dict = {'devices': 'device_1',
                                'strips': 'strip_1'}  # TODO tmp
@@ -100,8 +93,9 @@ class MainWindow(QWidget):
             GenerateButtons('settings.json', 'settings').generateGenericButtons(
                 self.ui.settings_button_layout, self.ui.settings_scroll_region, 'primary', spacer=True)
         except:
-            Globals.logger.error(
-                'Failed to reload menu(s), are preferences corrupted?')
+            if Settings.do_logs:
+                Globals.logger.error(
+                    'Failed to reload menu(s), are preferences corrupted?')
 
     def setupButtons(self):
         # Add elements controlled by advanced mode to global list
