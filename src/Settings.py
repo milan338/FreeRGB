@@ -56,5 +56,5 @@ def initLogs(have_init=[]):
     global do_logs
     # If logs have not been initialised in session
     if do_logs and not len(have_init):
-        InitLogging(10, __name__)
+        InitLogging(2)
         have_init.append(1)

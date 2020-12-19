@@ -35,4 +35,4 @@ class CreateMenuEffectEdit(CreateMenuPopup):
             if Settings.do_logs:
                 Globals.logger.error(
                     f'Failed to call method {method_name} with argument {Globals.current_hovered_btn}'
-                    f'from module src.ui.GenerateButtons')
+                    f' from module src.ui.GenerateButtons')

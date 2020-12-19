@@ -21,6 +21,8 @@ if __name__ == '__main__':
     from pathlib import Path
     sys.path.append(str(Path().absolute()))
 
+import __version__
+
 from src import Globals
 from src import Settings
 
@@ -47,7 +49,7 @@ class MainWindow(QWidget):
         self.setupFiles()
         Settings.reloadSettings()
         Effects()
-        self.version_name = JsonIO('app_Version.json').readEntry('version')
+        self.version = __version__.__version__
         Globals.refreshMenus = lambda: self.refreshMenus()
         # UI initialisation
         self.ui = Ui_Form()
@@ -104,7 +106,7 @@ class MainWindow(QWidget):
         # Refresh menus
         self.refreshMenus()
         # Bottom bar
-        self.ui.btn_version.setText(self.version_name)
+        self.ui.btn_version.setText(f'Version {self.version}')
         self.ui.btn_device_debug.clicked.connect(
             lambda: self.initSerialMonitor())
         self.ui.btn_effect_off.clicked.connect(self.toggleLeds)
