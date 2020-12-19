@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
+from time import sleep
+
 from src import Globals
 
 from src.serial.SerialWorker import SerialWorker
@@ -47,9 +49,13 @@ class SerialIO():
             worker.finished.connect(thread.quit)
             thread.started.connect(worker.procCounter)
             Globals.serial_thread = thread
-            print(thread.start())  # TODO
-            # TODO WHY DOESN'T IT WORK WITH JUST THREAD.START()
-            print('Thread started')
+            thread.start()
+            # This sleep enables the thread to run
+            # Otherwise the thread starts but does not execute anything
+            sleep(1/1000000)
+        else:
+            Globals.logger.warn(
+                'Serial communication already running (Thread already exists)')
 
     @ staticmethod
     def write(serial, message, *args, **kwargs):
