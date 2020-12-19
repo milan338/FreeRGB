@@ -14,6 +14,21 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
+# Serial threading
+serial = None
+serial_thread = None
+
+# Serial information
+connected_devices = None
+current_colour = None
+current_brightness = None
+device_name = None
+com_port = None
+num_strips = None
+ardu_version = None
+board_name = None
+baudrate = None
+
 # Logging
 has_logged = False
 logger = None

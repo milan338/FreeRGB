@@ -14,19 +14,19 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from src import Globals
+from time import sleep
 
-from src.serial.SerialIO import SerialIO
+from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 
 
-class SerialDirect():
-    def __init__(self, message, *args, **kwargs):
-        self.sendSerial(message)
+class SerialWorker(QObject):
+    ready = pyqtSignal(int)
+    finished = pyqtSignal()
+    print('something')
 
-    def sendSerial(self, message):
-        SerialIO.run(Globals.serial, 'write', message)
-
-    @staticmethod
-    def effectData():
-        effect_name = 'Serial Direct'
-        return effect_name
+    @pyqtSlot()
+    def procCounter(self):
+        print('proc')
+        self.ready.emit(0)
+        self.finished.emit()
+        # TODO tmp emit finished from success response from arduino

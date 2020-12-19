@@ -13,20 +13,3 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
-
-from src import Globals
-
-from src.serial.SerialIO import SerialIO
-
-
-class SerialDirect():
-    def __init__(self, message, *args, **kwargs):
-        self.sendSerial(message)
-
-    def sendSerial(self, message):
-        SerialIO.run(Globals.serial, 'write', message)
-
-    @staticmethod
-    def effectData():
-        effect_name = 'Serial Direct'
-        return effect_name

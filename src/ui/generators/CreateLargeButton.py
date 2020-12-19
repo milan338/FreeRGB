@@ -123,18 +123,24 @@ class CreateLargeButton():
         ButtonActions.toggleBool()
 
     def runEffect(self, effect, payload):
-        try:
-            # Import effect file
-            self.module = __import__(
-                f'{Globals.effect_import_path}.{effect}', fromlist=[None])
-            # Create new effect instance
-            self.effect_class = getattr(self.module, effect)
-            self.effect_class(payload)
-        except:
-            if Settings.do_logs:
-                Globals.logger.error(
-                    f'Failed to call effect {effect} with payload {payload}, '
-                    f'does module {Globals.effect_import_path}.{effect} exist?')
+        # Import effect file
+        self.module = __import__(
+            f'{Globals.effect_import_path}.{effect}', fromlist=[None])
+        # Create new effect instance
+        self.effect_class = getattr(self.module, effect)
+        self.effect_class(payload)
+        # try:
+        #     # Import effect file
+        #     self.module = __import__(
+        #         f'{Globals.effect_import_path}.{effect}', fromlist=[None])
+        #     # Create new effect instance
+        #     self.effect_class = getattr(self.module, effect)
+        #     self.effect_class(payload)
+        # except:
+        #     if Settings.do_logs:
+        #         Globals.logger.error(
+        #             f'Failed to call effect {effect} with payload {payload}, '
+        #             f'does module {Globals.effect_import_path}.{effect} exist?')
 
     def setCurrentHoverButton(self, hovered):
         if hovered:

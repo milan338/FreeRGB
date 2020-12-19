@@ -79,7 +79,7 @@ class InitLogging():
 
     def createLog(self):
         self.formatter = logging.Formatter(
-            '[%(asctime)s] %(levelname)-s :: %(filename)s in %(funcName)s on line %(lineno)d :: %(message)s')
+            '[%(asctime)s] %(levelname)-s :: %(funcName)s in %(filename)s on line %(lineno)d :: %(message)s')
         # self.logger = logging.getLogger('main_logger')
         self.logger = logging.getLogger(self.name)
         self.logger.setLevel(logging.WARNING)
