@@ -31,7 +31,7 @@ class InitLogging():
     def __init__(self, max_logs):
         self.max_logs = max_logs
         self.backup_count = 2
-        self.base_path = path.dirname(__file__)
+        self.base_path = path.abspath(path.dirname(__file__))
         self.log_dir = 'logs'
         self.log_latest = 'latest.log'
         self.log_path = path.abspath(
