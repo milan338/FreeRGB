@@ -29,8 +29,9 @@ from zipfile import ZipFile
 
 
 class InitLogging():
-    def __init__(self, max_logs):
+    def __init__(self, max_logs, name):
         self.max_logs = max_logs
+        self.name = name
         self.backup_count = 2
         self.base_path = abspath(dirname(__file__))
         self.log_dir = 'logs'
@@ -77,12 +78,22 @@ class InitLogging():
             remove(self.oldest_zip)
 
     def createLog(self):
-        # self.formatter = logging.Formatter('%(asctime)s %(levelname)s %(funcname)s %(lineno)d %(message)s')
-        self.logger = logging.getLogger('main_logger')
+        self.formatter = logging.Formatter(
+            '[%(asctime)s] %(levelname)-s :: %(filename)s in %(funcName)s on line %(lineno)d :: %(message)s')
+        # self.logger = logging.getLogger('main_logger')
+        self.logger = logging.getLogger(self.name)
         self.logger.setLevel(logging.WARNING)
-        self.handler = RotatingFileHandler(
+        # Enable logging to file, where each 5MB a new file is created
+        self.file_handler = RotatingFileHandler(
             self.latest_path, maxBytes=5*1024*1024, backupCount=self.backup_count)
-        self.logger.addHandler(self.handler)
-        # logging.basicConfig(filename=self.latest_path)
+        # Enable logging to console
+        self.console_handler = logging.StreamHandler()
+        # Apply logger formatters
+        self.file_handler.setFormatter(self.formatter)
+        self.console_handler.setFormatter(self.formatter)
+        # Apply handlers to logger
+        self.logger.addHandler(self.file_handler)
+        self.logger.addHandler(self.console_handler)
         # Provide application-wide access to logger
         Globals.logger = self.logger
+        # return self.logger

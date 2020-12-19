@@ -29,7 +29,6 @@ from PyQt5.QtWidgets import QWidget
 class SerialMonitor(QWidget):
     def __init__(self, baudrate=0, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Qt.AA_CompressHighFrequencyEvents = False
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.setupUI()

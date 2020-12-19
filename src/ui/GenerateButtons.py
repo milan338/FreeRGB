@@ -50,7 +50,9 @@ class GenerateButtons():
                 try:
                     layout.takeAt(i).widget().deleteLater()
                 except:
-                    pass
+                    Globals.logger.error(
+                        f'Failed to remove UI element in layout {layout}'
+                        f'at UI position {layout.count() - i}')
 
     def editButton(self, button):
         # Reset input window
