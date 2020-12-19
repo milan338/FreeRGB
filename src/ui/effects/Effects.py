@@ -14,7 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from os import listdir, path
+from os import listdir
+from os.path import abspath, dirname, join, isfile
 
 from src import Globals
 
@@ -24,8 +25,8 @@ from src.rw.JsonIO import JsonIO
 class Effects():
     def __init__(self):
         # Get effects directory
-        self.base_path = path.abspath(path.dirname(__file__))
-        self.effects_path = path.abspath(path.join(self.base_path, 'effect'))
+        self.base_path = abspath(dirname(__file__))
+        self.effects_path = abspath(join(self.base_path, 'effect'))
         self.effects_files = listdir(self.effects_path)
         # Find valid effects
         self.findEffects()
@@ -35,8 +36,8 @@ class Effects():
         self.effects_dict = {'effects': {}}
         # Find all valid python files
         for file in self.effects_files:
-            self.file_path = path.abspath(path.join(self.effects_path, file))
-            if path.isfile(self.file_path) and file.endswith('.py') and file != '__init__.py':
+            self.file_path = abspath(join(self.effects_path, file))
+            if isfile(self.file_path) and file.endswith('.py') and file != '__init__.py':
                 # Format file name
                 self.effect = file.split('.py')[0]
                 # Import file

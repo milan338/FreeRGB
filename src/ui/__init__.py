@@ -14,12 +14,12 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from os import path
+from os.path import abspath, dirname, join
 
 
 # Get path of stylesheet
 def getPath(style):
-    ui_path = path.dirname(__file__)
-    styles_path = path.abspath(path.join(ui_path, 'styles'))
-    final_path = path.abspath(path.join(styles_path, style))
+    ui_path = abspath(dirname(__file__))
+    styles_path = abspath(join(ui_path, 'styles'))
+    final_path = abspath(join(styles_path, style))
     return final_path

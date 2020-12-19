@@ -22,7 +22,8 @@ from datetime import datetime
 
 from logging.handlers import RotatingFileHandler
 
-from os import path, makedirs, listdir, remove
+from os import makedirs, listdir, remove
+from os.path import abspath, dirname, join, isdir, isfile, getmtime
 
 from zipfile import ZipFile
 
@@ -31,15 +32,14 @@ class InitLogging():
     def __init__(self, max_logs):
         self.max_logs = max_logs
         self.backup_count = 2
-        self.base_path = path.abspath(path.dirname(__file__))
+        self.base_path = abspath(dirname(__file__))
         self.log_dir = 'logs'
         self.log_latest = 'latest.log'
-        self.log_path = path.abspath(
-            path.join(self.base_path, '..', self.log_dir))
-        self.latest_path = path.join(self.log_path, self.log_latest)
+        self.log_path = abspath(join(self.base_path, '..', self.log_dir))
+        self.latest_path = abspath(join(self.log_path, self.log_latest))
         # Store previous log
-        if path.isdir(self.log_path):
-            if path.isfile(self.latest_path):
+        if isdir(self.log_path):
+            if isfile(self.latest_path):
                 self.storeLog()
         else:
             makedirs(self.log_path)
@@ -52,12 +52,12 @@ class InitLogging():
         self.zip_files = {}
         # Get log modified time
         self.modify_time = datetime.fromtimestamp(
-            path.getmtime(self.latest_path)).strftime('%Y-%m-%d_%H-%M-%S')
-        with ZipFile(path.join(self.log_path, f'{self.modify_time}.log.zip'), 'w') as zip_file:
+            getmtime(self.latest_path)).strftime('%Y-%m-%d_%H-%M-%S')
+        with ZipFile(abspath(join(self.log_path, f'{self.modify_time}.log.zip')), 'w') as zip_file:
             # Go through files in directory
             for file in listdir(self.log_path):
-                file_path = path.join(self.log_path, file)
-                if path.isfile(file_path):
+                file_path = abspath(join(self.log_path, file))
+                if isfile(file_path):
                     # Check for log files
                     if file.endswith(tuple(self.backup_ext)):
                         zip_file.write(file_path, file)
@@ -65,7 +65,7 @@ class InitLogging():
                     # Find existing logs
                     elif file.endswith('.zip'):
                         self.zip_files.update(
-                            {file_path: path.getmtime(file_path)})
+                            {file_path: getmtime(file_path)})
         # Remove files added to zip
         for file in self.files:
             remove(file)
