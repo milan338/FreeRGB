@@ -19,7 +19,7 @@ import sys
 
 if __name__ == '__main__':
     from pathlib import Path
-    sys.path.append(str(Path('.').absolute()))
+    sys.path.append(str(Path().absolute()))
 
 from src import Globals
 from src import Settings
@@ -49,7 +49,7 @@ class MainWindow(QWidget):
         # Get application version
         self.version_name = JsonIO('app_Version.json').readEntry('version')
         # Setup logging
-        InitLogging(10)  # TODO only start logging once option selected, don't overwrite logs if already logged i.e. set already_logged to true once logged at all during session and prevent making new log while true (remainder of runtime)
+        InitLogging(10, __name__)  # TODO only start logging once option selected, don't overwrite logs if already logged i.e. set already_logged to true once logged at all during session and prevent making new log while true (remainder of runtime)
         # Allow global access to refresh main menu using JSON
         Globals.refreshMenus = lambda: self.refreshMenus()
         # Initialise settings
@@ -100,7 +100,8 @@ class MainWindow(QWidget):
             GenerateButtons('settings.json', 'settings').generateGenericButtons(
                 self.ui.settings_button_layout, self.ui.settings_scroll_region, 'primary', spacer=True)
         except:
-            pass
+            Globals.logger.error(
+                'Failed to reload menu(s), are preferences corrupted?')
 
     def setupButtons(self):
         # Add elements controlled by advanced mode to global list

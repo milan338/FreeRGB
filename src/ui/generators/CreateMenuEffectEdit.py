@@ -24,11 +24,13 @@ class CreateMenuEffectEdit(CreateMenuPopup):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def runFunction(self, function_name):
+    def runFunction(self, method_name):
         try:
-            getattr(GenerateButtons('menus.json', 'main_menu_right_click_menu'), function_name)(
+            getattr(GenerateButtons('menus.json', 'main_menu_right_click_menu'), method_name)(
                 Globals.current_hovered_btn)
             # Refresh menu layout using JSON
             Globals.refreshMenus()
         except:
-            print('exception')
+            Globals.logger.error(
+                f'Failed to call method {method_name} with argument {Globals.current_hovered_btn}'
+                f'from module src.ui.GenerateButtons')

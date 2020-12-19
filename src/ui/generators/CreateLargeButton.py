@@ -45,7 +45,7 @@ class CreateLargeButton():
         self.btn = HoverButton(scroll_element)
         self.vertical_element.addWidget(self.btn)
         self.btn.setObjectName(button_name)
-        self.btn.setText(self.translate("Form", button_attributes['text']))
+        self.btn.setText(self.translate('Form', button_attributes['text']))
         # Set size
         self.sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
         self.btn.setSizePolicy(self.sizePolicy)
@@ -109,7 +109,7 @@ class CreateLargeButton():
         self.btn_label.setMaximumSize(QSize(400, 100))
         self.btn_label.setObjectName(f'{button_name}_label')
         self.btn_label.setText(self.translate(
-            "Form", button_attributes['text']))
+            'Form', button_attributes['text']))
         self.btn_layout.addWidget(self.btn_label)
         # Show button
         self.btn.show()
@@ -130,7 +130,9 @@ class CreateLargeButton():
             self.effect_class = getattr(self.module, effect)
             self.effect_class(payload)
         except:
-            pass
+            Globals.logger.error(
+                f'Failed to call effect {effect} with payload {payload},'
+                f'does module {Globals.effect_import_path}.{effect} exist?')
 
     def setCurrentHoverButton(self, hovered):
         if hovered:
