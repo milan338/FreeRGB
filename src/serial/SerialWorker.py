@@ -14,8 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from time import sleep
-
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 
 
