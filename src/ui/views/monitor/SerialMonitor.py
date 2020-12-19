@@ -34,7 +34,7 @@ class SerialMonitor(QWidget):
         self.setupUI()
         self.current_text = self.ui.text_display.text()
         # Start new serial listener thread
-        self.thread = Thread(target=self.listener)
+        self.thread = Thread(target=self.listener, daemon=True)
         self.thread.start()
 
     def setupUI(self):

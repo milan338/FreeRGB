@@ -17,6 +17,8 @@
 import logging
 import sys
 
+from PyQt5.QtCore import QThread
+
 if __name__ == '__main__':
     from pathlib import Path
     sys.path.append(str(Path().absolute()))
@@ -25,6 +27,8 @@ import __version__
 
 from src import Globals
 from src import Settings
+
+from src.serial.SerialIO import SerialIO
 
 from src.rw.JsonIO import JsonIO
 from src.rw.QssRead import QssRead
@@ -41,6 +45,7 @@ from src.ui.views.monitor.SerialMonitor import SerialMonitor
 
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QWidget, QColorDialog, QMessageBox, QApplication
+from PyQt5.QtCore import QThread
 
 
 class MainWindow(QWidget):
@@ -51,6 +56,7 @@ class MainWindow(QWidget):
         Effects()
         self.version = __version__.__version__
         Globals.refreshMenus = lambda: self.refreshMenus()
+        Globals.serial_thread = QThread()
         # UI initialisation
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -65,6 +71,8 @@ class MainWindow(QWidget):
         self.ardu_version = None
         self.board = None
         self.baud_rate = None
+        # Initialise serial TODO reinitialise each time different port selected
+        SerialIO('COM13', 9600)
         # Setup UI elements
         self.setRightClickMenu()
         self.setupButtons()
@@ -114,6 +122,7 @@ class MainWindow(QWidget):
             lambda: QMessageBox.information(self, 'Device Information',
                                             f'Device Name: {self.device_name}\n'
                                             f'COM Port: {self.com_port}\n'
+                                            f'Port Description: {None}\n'
                                             f'Strips Connected: {self.num_strips}\n'
                                             f'ArduRGB Version: {self.ardu_version}\n'
                                             f'Board: {self.board}\n'
