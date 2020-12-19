@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from src.__main__ import init
+from src import __main__
 
-if __name__ == "__main__":
-    init()
+if __name__ == '__main__':
+    __main__.init()

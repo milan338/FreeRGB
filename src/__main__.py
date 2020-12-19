@@ -15,8 +15,11 @@
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
 import logging
-
 import sys
+
+if __name__ == '__main__':
+    from pathlib import Path
+    sys.path.append(str(Path('.').absolute()))
 
 from src import Globals
 from src import Settings

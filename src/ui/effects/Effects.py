@@ -24,7 +24,7 @@ from src.rw.JsonIO import JsonIO
 class Effects():
     def __init__(self):
         # Get effects directory
-        self.base_path = path.dirname(__file__)
+        self.base_path = path.abspath(path.dirname(__file__))
         self.effects_path = path.abspath(path.join(self.base_path, 'effect'))
         self.effects_files = listdir(self.effects_path)
         # Find valid effects
