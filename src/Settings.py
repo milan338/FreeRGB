@@ -16,6 +16,8 @@
 
 from src import Globals
 
+from src.InitLogging import InitLogging
+
 from src.rw.JsonIO import JsonIO
 
 # Store settings
@@ -35,12 +37,24 @@ def reloadSettings():
         if option_contents['command']['type'] == 'toggleBool':
             # Update each option with value from file
             globals()[option_name] = option_contents['command']['payload']
-            # Change visibility of advanced mode elements
-            if option_name == 'advanced_mode':
-                setAdvancedModeVisible()
+            options = {
+                'advanced_mode': setAdvancedModeVisible,
+                'do_logs': initLogs
+            }
+            # Run function associated with option
+            if option_name in list(options.keys()):
+                options.get(option_name)()
 
 
 def setAdvancedModeVisible():
     global advanced_mode
     for element in Globals.advanced_mode_elements:
         element.setVisible(advanced_mode)
+
+
+def initLogs(have_init=[]):
+    global do_logs
+    # If logs have not been initialised in session
+    if do_logs and not len(have_init):
+        InitLogging(10, __name__)
+        have_init.append(1)

@@ -15,6 +15,7 @@
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
 from src import Globals
+from src import Settings
 
 from src.rw.JsonIO import JsonIO
 
@@ -130,9 +131,10 @@ class CreateLargeButton():
             self.effect_class = getattr(self.module, effect)
             self.effect_class(payload)
         except:
-            Globals.logger.error(
-                f'Failed to call effect {effect} with payload {payload},'
-                f'does module {Globals.effect_import_path}.{effect} exist?')
+            if Settings.do_logs:
+                Globals.logger.error(
+                    f'Failed to call effect {effect} with payload {payload},'
+                    f'does module {Globals.effect_import_path}.{effect} exist?')
 
     def setCurrentHoverButton(self, hovered):
         if hovered:

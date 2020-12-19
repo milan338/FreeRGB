@@ -16,47 +16,52 @@
 
 import json
 
+from src import Settings
+from src import Globals
+
 from copy import deepcopy
 
-from os import path
+from os.path import abspath, dirname, join, isfile
 
 from shutil import copyfile
 
 
 class JsonIO():
     def __init__(self, filename):
-        self.base_path = path.dirname(__file__)
+        self.filename = filename
+        self.base_path = abspath(dirname(__file__))
         self.preferences_dir = 'preferences'
-        self.json_path = path.abspath(
-            path.join(self.base_path, '..', '..', self.preferences_dir, filename))
+        self.json_path = abspath(
+            join(self.base_path, '..', '..', self.preferences_dir, filename))
         self.filename_base = filename.split('.')[0] + '_base.json'
         try:
             with open(self.json_path, 'r') as file:
                 self.data = json.load(file)
         except:
-            pass
+            if Settings.do_logs:
+                Globals.logger.error(
+                    f'Failed to open JSON file {self.filename} for reading')
 
     def dumpJson(self, data, sort_keys=False):
         try:
             with open(self.json_path, 'w') as file:
                 file.write(json.dumps(data, indent=4, sort_keys=sort_keys))
-                return 1
         except:
-            return 0
+            if Settings.do_logs:
+                Globals.logger.error(
+                    f'Failed to write to JSON file {self.filename}')
 
     def fileExists(self):
-        try:
-            if path.isfile(self.json_path):
-                return True
-            else:
-                return False
-        except:
-            pass
+        if isfile(self.json_path):
+            return True
+        else:
+            return False
 
     def getEffectType(self, effect):
         # Get name of effect
-        self.effects_path = path.abspath(
-            path.join(self.base_path, '..', '..', self.preferences_dir, 'effects.json'))
+        # print(effect)
+        self.effects_path = abspath(
+            join(self.base_path, '..', '..', self.preferences_dir, 'effects.json'))
         try:
             # Open effects file
             with open(self.effects_path, 'r') as file:
@@ -66,7 +71,9 @@ class JsonIO():
                         return effect_name
                 return None
         except:
-            pass
+            if Settings.do_logs:
+                Globals.logger.error(
+                    f'Failed to open JSON file effects.json for reading')
 
     def findElement(self, element):
         for menu in self.data.values():
@@ -80,12 +87,14 @@ class JsonIO():
         return None
 
     def copyFromBase(self):
-        self.json_path_base = path.abspath(path.join(
+        self.json_path_base = abspath(join(
             self.base_path, '..', '..', self.preferences_dir, 'base', self.filename_base))
         try:
             copyfile(self.json_path_base, self.json_path)
         except:
-            pass
+            if Settings.do_logs:
+                Globals.logger.error(
+                    f'Failed to copy file {self.filename_base} to {self.filename}')
 
     def clearLayout(self, menu, layout):
         for element in list(self.data[menu][layout].keys()):
@@ -96,7 +105,7 @@ class JsonIO():
         # Remove entries from layout
         self.clearLayout(menu, layout)
         # Get Base file to copy from
-        self.json_path_base = path.abspath(path.join(
+        self.json_path_base = abspath(join(
             self.base_path, '..', '..', self.preferences_dir, 'base', self.filename_base))
         # Get entries to copy from original file
         self.data_base = None
@@ -104,7 +113,9 @@ class JsonIO():
             with open(self.json_path_base, 'r') as file:
                 self.data_base = json.load(file)
         except:
-            pass
+            if Settings.do_logs:
+                Globals.logger.error(
+                    f'Failed to open JSON file {self.filename_base} for reading')
         # Copy all elements from base layout
         for element_name, element_contents in self.data_base[menu][layout].items():
             self.data[menu][layout][element_name] = element_contents
@@ -114,7 +125,9 @@ class JsonIO():
         try:
             return self.data[entry]
         except:
-            return None
+            if Settings.do_logs:
+                Globals.logger.error(
+                    f'Failed to read entry {entry} from JSON file {self.filename}')
 
     def writeEntry(self, menu, layout, entry, entry_name, command, sort_keys):
         # Create new json entry

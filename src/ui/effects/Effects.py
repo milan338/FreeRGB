@@ -18,6 +18,7 @@ from os import listdir
 from os.path import abspath, dirname, join, isfile
 
 from src import Globals
+from src import Settings
 
 from src.rw.JsonIO import JsonIO
 
@@ -50,8 +51,9 @@ class Effects():
                         self.effect_class, 'effectData')()
                     self.effects_dict['effects'][self.effect_name] = self.effect
                 except:
-                    Globals.logger.error(
-                        f'Failed to load effect definitions from {Globals.effect_import_path}.{self.effect},'
-                        f'does module exist / contain __init__ and effectData methods?')
+                    if Settings.do_logs:
+                        Globals.logger.error(
+                            f'Failed to load effect definitions from {Globals.effect_import_path}.{self.effect},'
+                            f'does module exist / contain __init__ and effectData methods?')
         # Write effect data to file
         JsonIO('effects.json').dumpJson(self.effects_dict)
