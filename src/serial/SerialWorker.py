@@ -14,7 +14,11 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
+from src import Globals
+from time import sleep
+
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
+from PyQt5.QtWidgets import QApplication
 
 
 class SerialWorker(QObject):
@@ -26,5 +30,8 @@ class SerialWorker(QObject):
     def procCounter(self):
         print('proc')
         self.ready.emit(0)
+        print('ready')
         self.finished.emit()
+        print('finished')
+        return None
         # TODO tmp emit finished from success response from arduino

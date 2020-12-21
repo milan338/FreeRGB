@@ -20,10 +20,17 @@ from time import sleep
 
 from datetime import datetime
 
+from src import Globals
+
+from src.serial.SerialIO import SerialIO
+
 from src.ui.widgets.ToggleSwitch import ToggleSwitch
 from src.ui.views.monitor.Ui_SerialMonitor import Ui_Form
+from src.ui.generators.CreateMenuContext import CreateMenuContext
 
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtGui import QIntValidator, QCursor
+from PyQt5.QtWidgets import QWidget, QAction
+from PyQt5.QtCore import pyqtSlot
 
 
 class SerialMonitor(QWidget):
@@ -46,17 +53,64 @@ class SerialMonitor(QWidget):
         self.switch.toggled.connect(self.toggleScroll)
         self.ui.switch_placeholder.addWidget(self.switch)
         # Buttons
-        self.ui.btn_serial_clear.clicked.connect(self.clearSerial)
+        self.ui.btn_serial_clear.clicked.connect(self.clearMonitor)
         self.ui.btn_serial_send.clicked.connect(self.sendSerial)
+        # Input
+        self.input_menu = CreateMenuContext(parent=self).makeMenu()
+        self.input_menu.triggered.connect(self.updateInputType)
+        self.int_validator = QIntValidator()
+        self.input_types = {'Integer': self.int_validator, 'String': None}
+        self.ui.btn_input_type.clicked.connect(self.initTypeMenu)
+        self.selected_type = 'Integer'
+        self.ui.btn_input_type.setText('Input: Integer')
+        self.ui.input_serial_text.setValidator(self.int_validator)
+        self.ui.input_serial_text.returnPressed.connect(self.sendSerial)
         # Disable autoscroll on scrolling
         self.scrollbar.sliderMoved.connect(self.disableAutoScroll)
 
+    def initTypeMenu(self):
+        self.input_menu.clear()
+        for input_type, validator_type in self.input_types.items():
+            if input_type == self.selected_type:
+                CreateMenuContext(parent=self).addOption(
+                    self.input_menu, input_type, (self.ui.btn_input_type, validator_type), highlighted=True)
+            else:
+                CreateMenuContext(parent=self).addOption(
+                    self.input_menu, input_type, (self.ui.btn_input_type, validator_type))
+        self.input_menu.exec(QCursor.pos())
+
+    @pyqtSlot(QAction)
+    def updateInputType(self, action):
+        self.selected_type = action.text()
+        self.ui.btn_input_type.setText(f'Input: {self.selected_type}')
+        self.ui.input_serial_text.setValidator(Globals.popup_menu_selection)
+        self.ui.input_serial_text.clear()
+
     def sendSerial(self):
-        print(self.ui.input_serial_text.text())  # TODO tmp
+        self.input = self.ui.input_serial_text.text()
+        # Send integer input
+        if self.selected_type == 'Integer':
+            try:
+                self.input = bytearray([int(self.input)])
+                SerialIO.run(Globals.serial, 'write', self.input)
+            except:
+                Globals.logger.warn(
+                    f'Failed to convert input {self.input} to bytearray')
+        # Send string input
+        else:
+            SerialIO.run(Globals.serial, 'write', self.input.encode())
         # Clear input field
         self.ui.input_serial_text.setText('')
 
-    def clearSerial(self):
+    @pyqtSlot()
+    def updateMonitor(self):
+        self.curr_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
+        self.current_text = self.ui.text_display.text()
+        self.data = SerialIO.read(Globals.serial)
+        self.new_text = f'{self.current_text}\n\n[{self.curr_time}] {self.data}'
+        self.ui.text_display.setText(self.new_text)
+
+    def clearMonitor(self):
         self.ui.text_display.setText('')
 
     def disableAutoScroll(self):
@@ -68,22 +122,16 @@ class SerialMonitor(QWidget):
 
     def listener(self):
         # Wait for window
-        sleep(0.5)
+        sleep(0.1)
+        # Update screen when serial becomes available
+        Globals.serial.readyRead.connect(self.updateMonitor)
         # Loop while debug menu is visible
         while self.isVisible():
-            # print(self.scrollbar.slider)
-            self.current_text = self.ui.text_display.text()
-            self.updateMonitor('line')
             # Autoscroll
             if self.auto_scroll:
                 # Scroll to end of view
                 self.scrollbar.setValue(self.scrollbar.maximum())
-            sleep(0.5)
-
-    def updateMonitor(self, line):
-        self.curr_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
-        self.new_text = f'{self.current_text}\n\n[{self.curr_time}] {line}'
-        self.ui.text_display.setText(self.new_text)
+            sleep(0.1)
 
     def wheelEvent(self, event):  # TODO only fires when scrolled to top / bottom of scroll region
         self.disableAutoScroll()

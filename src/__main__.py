@@ -8,16 +8,19 @@
 #
 # FreeRGB is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the7
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
+# TODO add input type selector for input, add logic to either encode() or bytearray for serial direct
+# TODO sometimes proccounter emits finished however thread continues to exist; write also finishes
+#   - this also happens with print - may not be related to serial.write, rather the thread eventloop itself hangs
+#   - appears even connecting thread terminate to finished signal doesn't do anything - suggests finished signal not emitted?
+
 import logging
 import sys
-
-from PyQt5.QtCore import QThread
 
 if __name__ == '__main__':
     from pathlib import Path
@@ -177,7 +180,7 @@ class MainWindow(QWidget):
 
     def initSerialMonitor(self):
         self.serial_monitor = SerialMonitor()
-        self.setWindowParams(self.serial_monitor, 'COM Port Debug View')
+        self.setWindowParams(self.serial_monitor, 'Serial Port Debug View')
 
     def initDialogue(self, menu, window_title):
         self.input_dialogue = InputDialogue(menu)

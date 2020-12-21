@@ -49,7 +49,7 @@ class Ui_Form(object):
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.input_serial_text = QtWidgets.QLineEdit(Form)
-        self.input_serial_text.setGeometry(QtCore.QRect(30, 20, 801, 31))
+        self.input_serial_text.setGeometry(QtCore.QRect(20, 20, 681, 31))
         self.input_serial_text.setStyleSheet("background-color: rgb(43, 47, 59);\n"
 "border-radius: 10px;")
         self.input_serial_text.setText("")
@@ -113,6 +113,22 @@ class Ui_Form(object):
         self.switch_placeholder = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.switch_placeholder.setContentsMargins(0, 0, 0, 0)
         self.switch_placeholder.setObjectName("switch_placeholder")
+        self.btn_input_type = QtWidgets.QPushButton(Form)
+        self.btn_input_type.setGeometry(QtCore.QRect(720, 10, 121, 51))
+        self.btn_input_type.setStyleSheet("QPushButton {\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(27, 27, 35);\n"
+"    border-radius: 10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(74, 74, 74);\n"
+"}\n"
+"\n"
+"QPushButton:pressed  {\n"
+"    background-color: rgb(89, 89, 89);\n"
+"}")
+        self.btn_input_type.setObjectName("btn_input_type")
         self.text_scroll_region.raise_()
         self.bottom_bar.raise_()
         self.top_bar.raise_()
@@ -121,6 +137,7 @@ class Ui_Form(object):
         self.horizontalLayoutWidget.raise_()
         self.btn_serial_clear.raise_()
         self.label_autoscroll.raise_()
+        self.btn_input_type.raise_()
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -132,3 +149,4 @@ class Ui_Form(object):
         self.btn_serial_send.setText(_translate("Form", "Send"))
         self.text_scroll_region_widgets.setProperty("style", _translate("Form", "scrollregion"))
         self.label_autoscroll.setText(_translate("Form", "Auto-Scroll"))
+        self.btn_input_type.setText(_translate("Form", "Input Type"))
