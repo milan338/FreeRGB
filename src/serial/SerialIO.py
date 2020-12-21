@@ -21,6 +21,7 @@ from src import Globals
 
 from src.serial.SerialWorker import SerialWorker
 
+from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QIODevice, QThread
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 
@@ -48,13 +49,16 @@ class SerialIO():
             worker.ready.connect(lambda: method(serial, *args, **kwargs))
             worker.moveToThread(thread)
             worker.finished.connect(thread.quit)
-            # worker.finished.connect(thread.terminate)
             thread.started.connect(worker.procCounter)
             Globals.serial_thread = thread
             thread.start()
+            print('start')
             # This sleep enables the thread to run
             # Otherwise the thread starts but does not execute anything
             sleep(1/1000000)
+            # Without this print, the thread sometimes decides not to quit ¯\_(ツ)_/¯
+            print('Thread started')
+            Globals.logger.info(f'Thread {Globals.serial_thread} started')
         else:
             Globals.logger.warn(
                 'Serial communication already running (Thread already exists)')
@@ -63,11 +67,13 @@ class SerialIO():
     def write(serial, message, *args, **kwargs):
         # serial.write(message)
         print(message)
-        return None
+        # Globals.serial_thread.quit()
+        # Globals.serial_thread.requestInterruption()
 
     @staticmethod
     def read(serial, *args, **kwargs):
         data = serial.readAll().data().decode()
+        # Globals.serial_thread.quit()
         return data
 
     def getBrightness(self):
