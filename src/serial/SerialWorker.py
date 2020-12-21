@@ -22,16 +22,12 @@ from PyQt5.QtWidgets import QApplication
 
 
 class SerialWorker(QObject):
-    ready = pyqtSignal(int)
+    ready = pyqtSignal()
     finished = pyqtSignal()
     print('something')
 
     @pyqtSlot()
     def procCounter(self):
-        print('proc')
-        self.ready.emit(0)
-        print('ready')
+        self.ready.emit()
         self.finished.emit()
-        print('finished')
-        return None
         # TODO tmp emit finished from success response from arduino

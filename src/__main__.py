@@ -15,9 +15,6 @@
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
 # TODO add input type selector for input, add logic to either encode() or bytearray for serial direct
-# TODO sometimes proccounter emits finished however thread continues to exist; write also finishes
-#   - this also happens with print - may not be related to serial.write, rather the thread eventloop itself hangs
-#   - appears even connecting thread terminate to finished signal doesn't do anything - suggests finished signal not emitted?
 
 import logging
 import sys
