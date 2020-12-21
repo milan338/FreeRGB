@@ -16,6 +16,7 @@
 
 from time import sleep
 
+
 from src import Globals
 
 from src.serial.SerialWorker import SerialWorker
@@ -28,8 +29,8 @@ class SerialIO():
     def __init__(self, port, baudrate):
         self.baudrate = baudrate
         Globals.serial = QSerialPort(port, baudRate=baudrate)
-        self.port_list = [com_port.portName()
-                          for com_port in QSerialPortInfo.availablePorts()]
+        self.port_list = [serial_port.portName()
+                          for serial_port in QSerialPortInfo.availablePorts()]
         try:
             if not Globals.serial.isOpen():
                 Globals.serial.open(QIODevice.ReadWrite)
@@ -47,6 +48,7 @@ class SerialIO():
             worker.ready.connect(lambda: method(serial, *args, **kwargs))
             worker.moveToThread(thread)
             worker.finished.connect(thread.quit)
+            # worker.finished.connect(thread.terminate)
             thread.started.connect(worker.procCounter)
             Globals.serial_thread = thread
             thread.start()
@@ -57,23 +59,16 @@ class SerialIO():
             Globals.logger.warn(
                 'Serial communication already running (Thread already exists)')
 
-    @ staticmethod
+    @staticmethod
     def write(serial, message, *args, **kwargs):
+        # serial.write(message)
         print(message)
-        serial.write(message.encode())
-        print('write')
-        # solidr,g,b
-        # bright80
-        # self.serial.close()
+        return None
 
-    @ staticmethod
+    @staticmethod
     def read(serial, *args, **kwargs):
-        print('tmp')
-        # self.serial.close()
+        data = serial.readAll().data().decode()
+        return data
 
     def getBrightness(self):
         print('tmp')
-
-
-# if __name__ == '__main__':
-#     SerialIO(1, 1)

@@ -88,9 +88,9 @@ QPushButton:pressed  {
   <widget class="QLineEdit" name="input_serial_text">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>20</x>
      <y>20</y>
-     <width>801</width>
+     <width>681</width>
      <height>31</height>
     </rect>
    </property>
@@ -237,6 +237,34 @@ QPushButton:pressed  {
    </property>
    <layout class="QHBoxLayout" name="switch_placeholder"/>
   </widget>
+  <widget class="QPushButton" name="btn_input_type">
+   <property name="geometry">
+    <rect>
+     <x>720</x>
+     <y>10</y>
+     <width>121</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(27, 27, 35);
+	border-radius: 10px;
+}
+
+QPushButton:hover {
+	background-color: rgb(74, 74, 74);
+}
+
+QPushButton:pressed  {
+	background-color: rgb(89, 89, 89);
+}</string>
+   </property>
+   <property name="text">
+    <string>Input Type</string>
+   </property>
+  </widget>
   <zorder>text_scroll_region</zorder>
   <zorder>bottom_bar</zorder>
   <zorder>top_bar</zorder>
@@ -245,6 +273,7 @@ QPushButton:pressed  {
   <zorder>horizontalLayoutWidget</zorder>
   <zorder>btn_serial_clear</zorder>
   <zorder>label_autoscroll</zorder>
+  <zorder>btn_input_type</zorder>
  </widget>
  <resources/>
  <connections/>
