@@ -16,8 +16,8 @@
 
 from time import sleep
 
-
 from src import Globals
+from src import Settings
 
 from src.serial.SerialWorker import SerialWorker
 
@@ -58,22 +58,19 @@ class SerialIO():
             sleep(1/1000000)
             # Without this print, the thread sometimes decides not to quit ¯\_(ツ)_/¯
             print('Thread started')
-            Globals.logger.info(f'Thread {Globals.serial_thread} started')
+            if Settings.do_logs:
+                Globals.logger.info(f'Thread {Globals.serial_thread} started')
         else:
             Globals.logger.warn(
                 'Serial communication already running (Thread already exists)')
 
     @staticmethod
     def write(serial, message, *args, **kwargs):
-        # serial.write(message)
-        print(message)
-        # Globals.serial_thread.quit()
-        # Globals.serial_thread.requestInterruption()
+        serial.write(message)
 
     @staticmethod
     def read(serial, *args, **kwargs):
         data = serial.readAll().data().decode()
-        # Globals.serial_thread.quit()
         return data
 
     def getBrightness(self):

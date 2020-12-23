@@ -14,10 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from threading import Thread
-
-from time import sleep
-
 from datetime import datetime
 
 from src import Globals
@@ -40,9 +36,8 @@ class SerialMonitor(QWidget):
         self.ui.setupUi(self)
         self.setupUI()
         self.current_text = self.ui.text_display.text()
-        # Start new serial listener thread
-        self.thread = Thread(target=self.listener, daemon=True)
-        self.thread.start()
+        # Update screen when serial becomes available
+        Globals.serial.readyRead.connect(self.updateMonitor)
 
     def setupUI(self):
         self.scrollbar = self.ui.text_scroll_region.verticalScrollBar()
@@ -50,8 +45,9 @@ class SerialMonitor(QWidget):
         # Switch widget
         self.switch = ToggleSwitch()
         self.switch.setChecked(self.auto_scroll)
-        self.switch.toggled.connect(self.toggleScroll)
+        self.switch.toggled.connect(lambda: self.toggleScroll())
         self.ui.switch_placeholder.addWidget(self.switch)
+        self.toggleScroll()
         # Buttons
         self.ui.btn_serial_clear.clicked.connect(self.clearMonitor)
         self.ui.btn_serial_send.clicked.connect(self.sendSerial)
@@ -66,7 +62,8 @@ class SerialMonitor(QWidget):
         self.ui.input_serial_text.setValidator(self.int_validator)
         self.ui.input_serial_text.returnPressed.connect(self.sendSerial)
         # Disable autoscroll on scrolling
-        self.scrollbar.sliderMoved.connect(self.disableAutoScroll)
+        self.scrollbar.sliderMoved.connect(
+            lambda: self.toggleScroll(state=False))
 
     def initTypeMenu(self):
         self.input_menu.clear()
@@ -113,25 +110,21 @@ class SerialMonitor(QWidget):
     def clearMonitor(self):
         self.ui.text_display.setText('')
 
-    def disableAutoScroll(self):
-        self.auto_scroll = False
-        self.switch.setChecked(False)
-
-    def toggleScroll(self):
-        self.auto_scroll = self.switch.isChecked()
-
-    def listener(self):
-        # Wait for window
-        sleep(0.1)
-        # Update screen when serial becomes available
-        Globals.serial.readyRead.connect(self.updateMonitor)
-        # Loop while debug menu is visible
-        while self.isVisible():
-            # Autoscroll
-            if self.auto_scroll:
-                # Scroll to end of view
-                self.scrollbar.setValue(self.scrollbar.maximum())
-            sleep(0.1)
+    def toggleScroll(self, state=None):
+        if state is not None:
+            if not state:
+                self.auto_scroll = state
+                self.switch.setChecked(state)
+        else:
+            self.auto_scroll = self.switch.isChecked()
+        # Autoscroll
+        if self.auto_scroll:
+            self.scrollbar.rangeChanged.connect(
+                lambda: self.scrollbar.setValue(self.scrollbar.maximum()))
+        else:
+            self.scrollbar.disconnect()
+            self.scrollbar.sliderMoved.connect(
+                lambda: self.toggleScroll(state=False))
 
     def wheelEvent(self, event):  # TODO only fires when scrolled to top / bottom of scroll region
-        self.disableAutoScroll()
+        self.toggleScroll(state=False)
