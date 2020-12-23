@@ -16,7 +16,6 @@
 
 # TODO add input type selector for input, add logic to either encode() or bytearray for serial direct
 
-import logging
 import sys
 
 if __name__ == '__main__':
