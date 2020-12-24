@@ -21,7 +21,6 @@ from src import Settings
 
 from src.serial.SerialWorker import SerialWorker
 
-from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QIODevice, QThread
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 
@@ -52,7 +51,6 @@ class SerialIO():
             thread.started.connect(worker.procCounter)
             Globals.serial_thread = thread
             thread.start()
-            print('start')
             # This sleep enables the thread to run
             # Otherwise the thread starts but does not execute anything
             sleep(1/1000000)
