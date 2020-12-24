@@ -14,10 +14,10 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from src import Globals
-from src import Settings
+from src import __globals__
+from src import settings
 
-from src.rw.JsonIO import JsonIO
+from src.rw.jsonio import JsonIO
 
 from PyQt5.QtWidgets import QMessageBox
 
@@ -47,6 +47,6 @@ class CreateMessageBox():
                 JsonIO(file).copyLayout(menu, layout)
             # Reload settings
             if reload_settings:
-                Settings.reloadSettings()
+                settings.reloadSettings()
             # Refresh menu button layout using JSON
-            Globals.refreshMenus()
+            __globals__.refreshMenus()

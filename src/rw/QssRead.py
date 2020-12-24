@@ -14,8 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from src import Globals
-from src import Settings
+from src import __globals__
+from src import settings
 
 from os.path import abspath, dirname, join
 
@@ -51,8 +51,8 @@ class QssRead():
                     else:
                         out_file.write(line)
                 except:
-                    if Settings.do_logs:
-                        Globals.logger.error(
+                    if settings.do_logs:
+                        __globals__.logger.error(
                             f'Failed to parse stylesheet line [{line}]')
 
     def readFile(self, path):

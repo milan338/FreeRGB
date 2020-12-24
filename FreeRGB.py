@@ -26,10 +26,10 @@ if __name__ == '__main__':
     if curr_version >= (int(min_py[0]), int(min_py[1])):
         __main__.init()
     else:
-        from src import Globals
-        from src.InitLogging import InitLogging
+        from src import __globals__
+        from src.init_logging import InitLogging
         InitLogging(2)
-        Globals.logger.error(
+        __globals__.logger.error(
             f'Your system running Python {curr_version[0]}.{curr_version[1]}'
             f' which is lower than the required Python {min_py[0]}.{min_py[1]}.'
             f' Please consider updating your installation.')

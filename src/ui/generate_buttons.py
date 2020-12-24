@@ -14,14 +14,14 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from src import Globals
-from src import Settings
+from src import __globals__
+from src import settings
 
-from src.rw.JsonIO import JsonIO
+from src.rw.jsonio import JsonIO
 
-from src.ui.views.input.InputDialogue import InputDialogue
-from src.ui.generators.CreateLargeButton import CreateLargeButton
-from src.ui.generators.CreateMessageBox import CreateMessageBox
+from src.ui.views.input.input_dialogue import InputDialogue
+from src.ui.generators.create_large_button import CreateLargeButton
+from src.ui.generators.create_message_box import CreateMessageBox
 
 
 class GenerateButtons():
@@ -51,19 +51,19 @@ class GenerateButtons():
                 try:
                     layout.takeAt(i).widget().deleteLater()
                 except:
-                    if Settings.do_logs:
-                        Globals.logger.error(
+                    if settings.do_logs:
+                        __globals__.logger.error(
                             f'Failed to remove UI element in layout {layout}'
                             f' at UI position {layout.count() - i}')
 
     def editButton(self, button):
         # Reset input window
-        Globals.edit_effect_menu = None
+        __globals__.edit_effect_menu = None
         # Set up input window
-        Globals.edit_effect_menu = InputDialogue(
+        __globals__.edit_effect_menu = InputDialogue(
             'main_menu', new_entry=False, btn_name=button.objectName())
-        Globals.edit_effect_menu.setWindowTitle('Edit Effect')
-        Globals.edit_effect_menu.show()
+        __globals__.edit_effect_menu.setWindowTitle('Edit Effect')
+        __globals__.edit_effect_menu.show()
 
     def deleteButton(self, button):
         # Delete button if user confirms in message box

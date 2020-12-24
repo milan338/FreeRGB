@@ -16,17 +16,17 @@
 
 import webbrowser
 
-from src import Globals
-from src import Settings
+from src import __globals__
+from src import settings
 
-from src.ui.views.licenses.LicensesView import LicensesView
+from src.ui.views.licenses.licenses_view import LicensesView
 
 
 class ButtonActions():
     @staticmethod
     def toggleBool(*args, **kwargs):
         # Reload settings
-        Settings.reloadSettings()
+        settings.reloadSettings()
 
     @staticmethod
     def openURL(url, *args, **kwargs):
@@ -34,7 +34,7 @@ class ButtonActions():
 
     @ staticmethod
     def showLicenses(*args, **kwargs):
-        Globals.licenses_view = LicensesView()
-        Globals.licenses_view.setWindowTitle('Open-Source Licenses')
-        Globals.licenses_view.show()
+        __globals__.licenses_view = LicensesView()
+        __globals__.licenses_view.setWindowTitle('Open-Source Licenses')
+        __globals__.licenses_view.show()
         # Globals.licenses_view.setWindowIcon()

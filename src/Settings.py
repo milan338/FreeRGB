@@ -14,11 +14,11 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from src import Globals
+from src import __globals__
 
-from src.InitLogging import InitLogging
+from src.init_logging import InitLogging
 
-from src.rw.JsonIO import JsonIO
+from src.rw.jsonio import JsonIO
 
 # Store settings
 advanced_mode = None
@@ -48,7 +48,7 @@ def reloadSettings():
 
 def setAdvancedModeVisible():
     global advanced_mode
-    for element in Globals.advanced_mode_elements:
+    for element in __globals__.advanced_mode_elements:
         element.setVisible(advanced_mode)
 
 

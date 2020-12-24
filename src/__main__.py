@@ -24,23 +24,23 @@ if __name__ == '__main__':
 
 import __version__
 
-from src import Globals
-from src import Settings
+from src import __globals__
+from src import settings
 
-from src.serial.SerialIO import SerialIO
+from src.serial.serialio import SerialIO
 
-from src.rw.JsonIO import JsonIO
-from src.rw.QssRead import QssRead
+from src.rw.jsonio import JsonIO
+from src.rw.qssread import QssRead
 
 from src.ui import getPath
-from src.ui.GenerateButtons import GenerateButtons
-from src.ui.effects.Effects import Effects
-from src.ui.generators.CreateMenuContext import CreateMenuContext
-from src.ui.generators.CreateMenuEffectEdit import CreateMenuEffectEdit
-from src.ui.generators.CreateMessageBox import CreateMessageBox
-from src.ui.views.input.InputDialogue import InputDialogue
-from src.ui.views.main.Ui_MainWindow import Ui_Form
-from src.ui.views.monitor.SerialMonitor import SerialMonitor
+from src.ui.generate_buttons import GenerateButtons
+from src.ui.effects.effects import Effects
+from src.ui.generators.create_menu_context import CreateMenuContext
+from src.ui.generators.create_menu_effectedit import CreateMenuEffectEdit
+from src.ui.generators.create_message_box import CreateMessageBox
+from src.ui.views.input.input_dialogue import InputDialogue
+from src.ui.views.main.Ui_main import Ui_Form
+from src.ui.views.monitor.serial_monitor import SerialMonitor
 
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QWidget, QColorDialog, QMessageBox, QApplication
@@ -51,11 +51,11 @@ class MainWindow(QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setupFiles()
-        Settings.reloadSettings()
+        settings.reloadSettings()
         Effects()
         self.version = __version__.__version__
-        Globals.refreshMenus = lambda: self.refreshMenus()
-        Globals.serial_thread = QThread()
+        __globals__.refreshMenus = lambda: self.refreshMenus()
+        __globals__.serial_thread = QThread()
         # UI initialisation
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -75,7 +75,7 @@ class MainWindow(QWidget):
         # Setup UI elements
         self.setRightClickMenu()
         self.setupButtons()
-        Globals.colour_picker = QColorDialog(self)
+        __globals__.colour_picker = QColorDialog(self)
         self.list_menu = CreateMenuContext(parent=self).makeMenu()
 
     def setupFiles(self):
@@ -102,14 +102,15 @@ class MainWindow(QWidget):
             GenerateButtons('settings.json', 'settings').generateGenericButtons(
                 self.ui.settings_button_layout, self.ui.settings_scroll_region, 'primary', spacer=True)
         except:
-            if Settings.do_logs:
-                Globals.logger.error(
+            if settings.do_logs:
+                __globals__.logger.error(
                     'Failed to reload menu(s), are preferences corrupted?')
 
     def setupButtons(self):
         # Add elements controlled by advanced mode to global list
-        Globals.advanced_mode_elements.append(self.ui.btn_device_debug)
-        Globals.advanced_mode_elements.append(self.ui.btn_device_information)
+        __globals__.advanced_mode_elements.append(self.ui.btn_device_debug)
+        __globals__.advanced_mode_elements.append(
+            self.ui.btn_device_information)
         # Refresh menus
         self.refreshMenus()
         # Bottom bar

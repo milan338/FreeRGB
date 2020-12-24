@@ -14,24 +14,25 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from src import Globals
+from src import __globals__
+from src import settings
 
-from src.ui.generators.CreateMenuPopup import CreateMenuPopup
+from src.ui.generate_buttons import GenerateButtons
+from src.ui.generators.create_menu_popup import CreateMenuPopup
 
 
-class CreateMenuContext(CreateMenuPopup):
+class CreateMenuEffectEdit(CreateMenuPopup):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def runFunction(self, args):
-        self.dropdown_menu = args[0]
-        self.selection = args[1]
-        # Dropdown menu where selection does not immediately call function
-        if self.dropdown_menu:
-            # Change text of button if button features text
-            self.dropdown_menu.setText(self.option_name)
-            # Store selection in buffer
-            Globals.popup_menu_selection = self.selection
-        # Context menu where selection immediately calls function
-        else:
-            print(self.selection)
+    def runFunction(self, method_name):
+        try:
+            getattr(GenerateButtons('menus.json', 'main_menu_right_click_menu'), method_name)(
+                __globals__.current_hovered_btn)
+            # Refresh menu layout using JSON
+            __globals__.refreshMenus()
+        except:
+            if settings.do_logs:
+                __globals__.logger.error(
+                    f'Failed to call method {method_name} with argument {__globals__.current_hovered_btn}'
+                    f' from module src.ui.GenerateButtons')
