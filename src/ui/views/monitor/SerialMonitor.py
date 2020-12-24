@@ -24,13 +24,13 @@ from src.ui.widgets.ToggleSwitch import ToggleSwitch
 from src.ui.views.monitor.Ui_SerialMonitor import Ui_Form
 from src.ui.generators.CreateMenuContext import CreateMenuContext
 
-from PyQt5.QtGui import QIntValidator, QCursor
+from PyQt5.QtGui import QCursor, QRegExpValidator
 from PyQt5.QtWidgets import QWidget, QAction
-from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtCore import pyqtSlot, QRegExp
 
 
 class SerialMonitor(QWidget):
-    def __init__(self, baudrate=0, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.ui = Ui_Form()
         self.ui.setupUi(self)
@@ -54,7 +54,9 @@ class SerialMonitor(QWidget):
         # Input
         self.input_menu = CreateMenuContext(parent=self).makeMenu()
         self.input_menu.triggered.connect(self.updateInputType)
-        self.int_validator = QIntValidator()
+        # Regex validator instead of int validator allows for commas to be captured
+        self.int_filter = QRegExp('[\d*\,]*')
+        self.int_validator = QRegExpValidator(self.int_filter)
         self.input_types = {'Integer': self.int_validator, 'String': None}
         self.ui.btn_input_type.clicked.connect(self.initTypeMenu)
         self.selected_type = 'Integer'
@@ -88,8 +90,11 @@ class SerialMonitor(QWidget):
         # Send integer input
         if self.selected_type == 'Integer':
             try:
-                self.input = bytearray([int(self.input)])
-                SerialIO.run(Globals.serial, 'write', self.input)
+                # Split input for multiple args
+                self.input_array = self.input.split(',')
+                self.input_array = [int(item) for item in self.input_array]
+                self.input_array = bytearray(self.input_array)
+                SerialIO.run(Globals.serial, 'write', self.input_array)
             except:
                 Globals.logger.warn(
                     f'Failed to convert input {self.input} to bytearray')
