@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from src import Globals
+from src import __globals__
 
 
 class SolidColour():
@@ -23,8 +23,8 @@ class SolidColour():
 
     def getColour(self):
         # self.handleButton()
-        Globals.colour_picker.exec()
-        self.current_colour = Globals.colour_picker.currentColor().getRgb()
+        __globals__.colour_picker.exec()
+        self.current_colour = __globals__.colour_picker.currentColor().getRgb()
         print(self.current_colour)
 
     @staticmethod

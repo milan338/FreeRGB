@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\Milan\Documents\Software Projects\Python Projects\FreeRGB\src\ui\views\licenses\LicensesView.ui'
+# Form implementation generated from reading ui file 'c:\Users\Milan\Documents\Software Projects\Python Projects\FreeRGB\src\ui\views\licenses\licenses_view.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.1
 #

@@ -14,12 +14,12 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from src import Globals
+from src import __globals__
 
-from src.ui.generators.CreateMenuContext import CreateMenuContext
-from src.ui.views.input.Ui_InputDialogue import Ui_Form
+from src.ui.generators.create_menu_context import CreateMenuContext
+from src.ui.views.input.Ui_input_dialogue import Ui_Form
 
-from src.rw.JsonIO import JsonIO
+from src.rw.jsonio import JsonIO
 
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtGui import QCursor
@@ -50,7 +50,7 @@ class InputDialogue(QWidget):
         # Get existing data from button if editing
         if new_entry:
             # Clear current menu selection
-            Globals.popup_menu_selection = None
+            __globals__.popup_menu_selection = None
         else:
             # Get button data
             self.btn = JsonIO('menus.json').findElement(self.btn_name)
@@ -59,7 +59,7 @@ class InputDialogue(QWidget):
             self.ui.btn_effect_types.setText(self.btn[1])
             self.ui.input_effect_payload.setText(self.btn[2])
             # Set current menu selection
-            Globals.popup_menu_selection = self.btn[3]
+            __globals__.popup_menu_selection = self.btn[3]
         # Block inputs to application while dialogue active
         self.setWindowModality(Qt.ApplicationModal)
 
@@ -85,7 +85,7 @@ class InputDialogue(QWidget):
         self.effect_name = self.ui.input_effect_name.text()
         self.effect_payload = self.ui.input_effect_payload.text()
         # Ensure no input is blank - falsy when blank
-        if not self.effect_name or not self.effect_payload or not Globals.popup_menu_selection:
+        if not self.effect_name or not self.effect_payload or not __globals__.popup_menu_selection:
             # Raise error to user
             self.ui.label_error.setText('Input(s) cannot be left empty')
         else:
@@ -116,12 +116,12 @@ class InputDialogue(QWidget):
         else:
             # Replace existing button data with new data
             JsonIO('menus.json').replaceEntry(self.btn_name, generated_object_name,
-                                              self.effect_name, Globals.popup_menu_selection, self.effect_payload)
+                                              self.effect_name, __globals__.popup_menu_selection, self.effect_payload)
             self.exitWindow()
 
     def createEffect(self, menu, layout, entry_name):
         self.command = {
-            'type': Globals.popup_menu_selection,
+            'type': __globals__.popup_menu_selection,
             'payload': self.effect_payload
         }
         JsonIO('menus.json').writeEntry(menu, layout, entry_name,
@@ -129,6 +129,6 @@ class InputDialogue(QWidget):
 
     def exitWindow(self):
         # Update menu layout with new JSON
-        Globals.refreshMenus()
+        __globals__.refreshMenus()
         # Close input menu
         self.close()

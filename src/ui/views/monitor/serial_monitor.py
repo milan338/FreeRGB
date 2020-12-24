@@ -16,13 +16,13 @@
 
 from datetime import datetime
 
-from src import Globals
+from src import __globals__
 
-from src.serial.SerialIO import SerialIO
+from src.serial.serialio import SerialIO
 
-from src.ui.widgets.ToggleSwitch import ToggleSwitch
-from src.ui.views.monitor.Ui_SerialMonitor import Ui_Form
-from src.ui.generators.CreateMenuContext import CreateMenuContext
+from src.ui.widgets.toggle_switch import ToggleSwitch
+from src.ui.views.monitor.Ui_serial_monitor import Ui_Form
+from src.ui.generators.create_menu_context import CreateMenuContext
 
 from PyQt5.QtGui import QCursor, QRegExpValidator
 from PyQt5.QtWidgets import QWidget, QAction
@@ -37,7 +37,7 @@ class SerialMonitor(QWidget):
         self.setupUI()
         self.current_text = self.ui.text_display.text()
         # Update screen when serial becomes available
-        Globals.serial.readyRead.connect(self.updateMonitor)
+        __globals__.serial.readyRead.connect(self.updateMonitor)
 
     def setupUI(self):
         self.scrollbar = self.ui.text_scroll_region.verticalScrollBar()
@@ -82,7 +82,8 @@ class SerialMonitor(QWidget):
     def updateInputType(self, action):
         self.selected_type = action.text()
         self.ui.btn_input_type.setText(f'Input: {self.selected_type}')
-        self.ui.input_serial_text.setValidator(Globals.popup_menu_selection)
+        self.ui.input_serial_text.setValidator(
+            __globals__.popup_menu_selection)
         self.ui.input_serial_text.clear()
 
     def sendSerial(self):
@@ -94,13 +95,13 @@ class SerialMonitor(QWidget):
                 self.input_array = self.input.split(',')
                 self.input_array = [int(item) for item in self.input_array]
                 self.input_array = bytearray(self.input_array)
-                SerialIO.run(Globals.serial, 'write', self.input_array)
+                SerialIO.run(__globals__.serial, 'write', self.input_array)
             except:
-                Globals.logger.warn(
+                __globals__.logger.warn(
                     f'Failed to convert input {self.input} to bytearray')
         # Send string input
         else:
-            SerialIO.run(Globals.serial, 'write', self.input.encode())
+            SerialIO.run(__globals__.serial, 'write', self.input.encode())
         # Clear input field
         self.ui.input_serial_text.setText('')
 
@@ -108,7 +109,7 @@ class SerialMonitor(QWidget):
     def updateMonitor(self):
         self.curr_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
         self.current_text = self.ui.text_display.text()
-        self.data = SerialIO.read(Globals.serial)
+        self.data = SerialIO.read(__globals__.serial)
         self.new_text = f'{self.current_text}\n\n[{self.curr_time}] {self.data}'
         self.ui.text_display.setText(self.new_text)
 

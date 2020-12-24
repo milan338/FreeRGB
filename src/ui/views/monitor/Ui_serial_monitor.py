@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\Milan\Documents\Software Projects\Python Projects\FreeRGB\src\ui\views\monitor\SerialMonitor.ui'
+# Form implementation generated from reading ui file 'c:\Users\Milan\Documents\Software Projects\Python Projects\FreeRGB\src\ui\views\monitor\serial_monitor.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.1
 #

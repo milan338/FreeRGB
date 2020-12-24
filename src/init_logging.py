@@ -16,7 +16,7 @@
 
 import logging
 
-from src import Globals
+from src import __globals__
 
 from datetime import datetime
 
@@ -95,4 +95,4 @@ class InitLogging():
         self.logger.addHandler(self.file_handler)
         self.logger.addHandler(self.console_handler)
         # Provide application-wide access to logger
-        Globals.logger = self.logger
+        __globals__.logger = self.logger

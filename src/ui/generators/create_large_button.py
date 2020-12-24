@@ -14,14 +14,14 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-from src import Globals
-from src import Settings
+from src import __globals__
+from src import settings
 
-from src.rw.JsonIO import JsonIO
+from src.rw.jsonio import JsonIO
 
-from src.ui.ButtonActions import ButtonActions
-from src.ui.widgets.HoverButton import HoverButton
-from src.ui.widgets.ToggleSwitch import ToggleSwitch
+from src.ui.button_actions import ButtonActions
+from src.ui.widgets.hover_button import HoverButton
+from src.ui.widgets.toggle_switch import ToggleSwitch
 
 from PyQt5.QtCore import Qt, QCoreApplication, QSize, QRect
 from PyQt5.QtGui import QCursor
@@ -126,19 +126,19 @@ class CreateLargeButton():
         try:
             # Import effect file
             self.module = __import__(
-                f'{Globals.effect_import_path}.{effect}', fromlist=[None])
+                f'{__globals__.effect_import_path}.{effect}', fromlist=[None])
             # Create new effect instance
             self.effect_class = getattr(self.module, effect)
             self.effect_class(payload)
         except:
-            if Settings.do_logs:
-                Globals.logger.error(
+            if settings.do_logs:
+                __globals__.logger.error(
                     f'Failed to call effect {effect} with payload {payload}, '
-                    f'does module {Globals.effect_import_path}.{effect} exist?')
+                    f'does module {__globals__.effect_import_path}.{effect} exist?')
 
     def setCurrentHoverButton(self, hovered):
         if hovered:
-            Globals.current_hovered_btn = self.btn
+            __globals__.current_hovered_btn = self.btn
         else:
             pass
 

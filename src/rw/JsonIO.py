@@ -16,8 +16,8 @@
 
 import json
 
-from src import Settings
-from src import Globals
+from src import settings
+from src import __globals__
 
 from copy import deepcopy
 
@@ -38,8 +38,8 @@ class JsonIO():
             with open(self.json_path, 'r') as file:
                 self.data = json.load(file)
         except:
-            if Settings.do_logs:
-                Globals.logger.error(
+            if settings.do_logs:
+                __globals__.logger.error(
                     f'Failed to open JSON file {self.filename} for reading')
 
     def dumpJson(self, data, sort_keys=False):
@@ -47,8 +47,8 @@ class JsonIO():
             with open(self.json_path, 'w') as file:
                 file.write(json.dumps(data, indent=4, sort_keys=sort_keys))
         except:
-            if Settings.do_logs:
-                Globals.logger.error(
+            if settings.do_logs:
+                __globals__.logger.error(
                     f'Failed to write to JSON file {self.filename}')
 
     def fileExists(self):
@@ -71,8 +71,8 @@ class JsonIO():
                         return effect_name
                 return None
         except:
-            if Settings.do_logs:
-                Globals.logger.error(
+            if settings.do_logs:
+                __globals__.logger.error(
                     f'Failed to open JSON file effects.json for reading')
 
     def findElement(self, element):
@@ -92,8 +92,8 @@ class JsonIO():
         try:
             copyfile(self.json_path_base, self.json_path)
         except:
-            if Settings.do_logs:
-                Globals.logger.error(
+            if settings.do_logs:
+                __globals__.logger.error(
                     f'Failed to copy file {self.filename_base} to {self.filename}')
 
     def clearLayout(self, menu, layout):
@@ -113,8 +113,8 @@ class JsonIO():
             with open(self.json_path_base, 'r') as file:
                 self.data_base = json.load(file)
         except:
-            if Settings.do_logs:
-                Globals.logger.error(
+            if settings.do_logs:
+                __globals__.logger.error(
                     f'Failed to open JSON file {self.filename_base} for reading')
         # Copy all elements from base layout
         for element_name, element_contents in self.data_base[menu][layout].items():
@@ -125,8 +125,8 @@ class JsonIO():
         try:
             return self.data[entry]
         except:
-            if Settings.do_logs:
-                Globals.logger.error(
+            if settings.do_logs:
+                __globals__.logger.error(
                     f'Failed to read entry {entry} from JSON file {self.filename}')
 
     def writeEntry(self, menu, layout, entry, entry_name, command, sort_keys):

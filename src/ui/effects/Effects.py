@@ -17,10 +17,10 @@
 from os import listdir
 from os.path import abspath, dirname, join, isfile
 
-from src import Globals
-from src import Settings
+from src import __globals__
+from src import settings
 
-from src.rw.JsonIO import JsonIO
+from src.rw.jsonio import JsonIO
 
 
 class Effects():
@@ -44,16 +44,16 @@ class Effects():
                 # Import file
                 try:
                     self.module = __import__(
-                        f'{Globals.effect_import_path}.{self.effect}', fromlist=[None])
+                        f'{__globals__.effect_import_path}.{self.effect}', fromlist=[None])
                     self.effect_class = getattr(self.module, self.effect)
                     # Get effect name
                     self.effect_name = getattr(
                         self.effect_class, 'effectData')()
                     self.effects_dict['effects'][self.effect_name] = self.effect
                 except:
-                    if Settings.do_logs:
-                        Globals.logger.error(
-                            f'Failed to load effect definitions from {Globals.effect_import_path}.{self.effect}, '
+                    if settings.do_logs:
+                        __globals__.logger.error(
+                            f'Failed to load effect definitions from {__globals__.effect_import_path}.{self.effect}, '
                             f'does module exist / contain __init__ and effectData methods?')
         # Write effect data to file
         JsonIO('effects.json').dumpJson(self.effects_dict)

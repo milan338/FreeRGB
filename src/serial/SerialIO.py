@@ -16,10 +16,10 @@
 
 from time import sleep
 
-from src import Globals
-from src import Settings
+from src import __globals__
+from src import settings
 
-from src.serial.SerialWorker import SerialWorker
+from src.serial.serial_worker import SerialWorker
 
 from PyQt5.QtCore import QIODevice, QThread
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
@@ -28,12 +28,12 @@ from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 class SerialIO():
     def __init__(self, port, baudrate):
         self.baudrate = baudrate
-        Globals.serial = QSerialPort(port, baudRate=baudrate)
+        __globals__.serial = QSerialPort(port, baudRate=baudrate)
         self.port_list = [serial_port.portName()
                           for serial_port in QSerialPortInfo.availablePorts()]
         try:
-            if not Globals.serial.isOpen():
-                Globals.serial.open(QIODevice.ReadWrite)
+            if not __globals__.serial.isOpen():
+                __globals__.serial.open(QIODevice.ReadWrite)
         except:
             pass
 
@@ -41,7 +41,7 @@ class SerialIO():
 
     @staticmethod
     def run(serial, target_method, *args, **kwargs):
-        if not Globals.serial_thread.isRunning():
+        if not __globals__.serial_thread.isRunning():
             method = getattr(SerialIO, target_method)
             worker = SerialWorker()
             thread = QThread()
@@ -49,17 +49,18 @@ class SerialIO():
             worker.moveToThread(thread)
             worker.finished.connect(thread.quit)
             thread.started.connect(worker.procCounter)
-            Globals.serial_thread = thread
+            __globals__.serial_thread = thread
             thread.start()
             # This sleep enables the thread to run
             # Otherwise the thread starts but does not execute anything
             sleep(1/1000000)
             # Without this print, the thread sometimes decides not to quit ¯\_(ツ)_/¯
             print('Thread started')
-            if Settings.do_logs:
-                Globals.logger.info(f'Thread {Globals.serial_thread} started')
+            if settings.do_logs:
+                __globals__.logger.info(
+                    f'Thread {__globals__.serial_thread} started')
         else:
-            Globals.logger.warn(
+            __globals__.logger.warn(
                 'Serial communication already running (Thread already exists)')
 
     @staticmethod

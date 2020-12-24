@@ -15,7 +15,7 @@
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
 from src.ui import getPath
-from src.ui.views.licenses.Ui_LicensesView import Ui_Form
+from src.ui.views.licenses.Ui_licenses_view import Ui_Form
 
 from PyQt5.QtWidgets import QWidget, QSpacerItem, QSizePolicy
 from PyQt5.QtCore import Qt
@@ -37,7 +37,7 @@ class LicensesView(QWidget):
 
     def addLicenses(self):
         # Imports done here to prevent circular imports
-        from src.ui.GenerateButtons import GenerateButtons
+        from src.ui.generate_buttons import GenerateButtons
         GenerateButtons('licenses.json', 'licenses').generateGenericButtons(
             self.ui.license_button_layout, self.ui.license_scroll_region, 'primary', spacer=True)
         # Additional spacer below buttons for better separation between border and bottom button
