@@ -53,7 +53,7 @@ class GenerateButtons():
                 except:
                     if settings.do_logs:
                         __globals__.logger.error(
-                            f'Failed to remove UI element in layout {layout}'
+                            f'Failed to remove UI element in layout {layout.objectName()}'
                             f' at UI position {layout.count() - i}')
 
     def editButton(self, button):
