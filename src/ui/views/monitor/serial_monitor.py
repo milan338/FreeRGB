@@ -17,6 +17,7 @@
 from datetime import datetime
 
 from src import __globals__
+from src import settings
 
 from src.serial.serialio import SerialIO
 
@@ -40,8 +41,11 @@ class SerialMonitor(QWidget):
         __globals__.serial.readyRead.connect(self.updateMonitor)
 
     def setupUI(self):
+        self.disableScroll = lambda: self.scrollbar.setValue(
+            self.scrollbar.maximum())
         self.scrollbar = self.ui.text_scroll_region.verticalScrollBar()
         self.auto_scroll = True
+        # self.scrollbar.rangeChanged.connect(self.disableScroll)
         # Switch widget
         self.switch = ToggleSwitch()
         self.switch.setChecked(self.auto_scroll)
@@ -54,10 +58,16 @@ class SerialMonitor(QWidget):
         # Input
         self.input_menu = CreateMenuContext(parent=self).makeMenu()
         self.input_menu.triggered.connect(self.updateInputType)
-        # Regex validator instead of int validator allows for commas to be captured
+        # Integer-only message
         self.int_filter = QRegExp('[\d*\,]*')
         self.int_validator = QRegExpValidator(self.int_filter)
-        self.input_types = {'Integer': self.int_validator, 'String': None}
+        # Integer-char message
+        self.int_char_filter = QRegExp('[\d*a-z\,]*')
+        self.int_char_validator = QRegExpValidator(self.int_char_filter)
+        # Set up filters
+        self.input_types = {'Integer': self.int_validator,
+                            'Integer-Char': self.int_char_validator,
+                            'String': None}
         self.ui.btn_input_type.clicked.connect(self.initTypeMenu)
         self.selected_type = 'Integer'
         self.ui.btn_input_type.setText('Input: Integer')
@@ -66,6 +76,7 @@ class SerialMonitor(QWidget):
         # Disable autoscroll on scrolling
         self.scrollbar.sliderMoved.connect(
             lambda: self.toggleScroll(state=False))
+        self.toggleScroll()
 
     def initTypeMenu(self):
         self.input_menu.clear()
@@ -97,8 +108,27 @@ class SerialMonitor(QWidget):
                 self.input_array = bytearray(self.input_array)
                 SerialIO.run(__globals__.serial, 'write', self.input_array)
             except:
-                __globals__.logger.warn(
-                    f'Failed to convert input {self.input} to bytearray')
+                if settings.do_logs:
+                    __globals__.logger.warn(
+                        f'Failed to convert input {self.input} to bytearray')
+        elif self.selected_type == 'Integer-Char':
+            try:
+                # Split string and integer parts
+                self.input_array = self.input.split(',')
+                self.output_array = []
+                for entry in self.input_array:
+                    if entry:
+                        try:
+                            entry = int(entry)
+                            entry = entry.to_bytes(1, byteorder='big')
+                            self.output_array.append(entry)
+                        except ValueError:
+                            self.output_array.append(entry.encode())
+                print(self.output_array)
+            except:
+                if settings.do_logs:
+                    __globals__.logger.warn(
+                        f'Failed to convert input {self.input} to bytes / chars')
         # Send string input
         else:
             SerialIO.run(__globals__.serial, 'write', self.input.encode())
@@ -125,12 +155,10 @@ class SerialMonitor(QWidget):
             self.auto_scroll = self.switch.isChecked()
         # Autoscroll
         if self.auto_scroll:
-            self.scrollbar.rangeChanged.connect(
-                lambda: self.scrollbar.setValue(self.scrollbar.maximum()))
+            self.scrollbar.rangeChanged.connect(self.disableScroll)
         else:
-            self.scrollbar.disconnect()
-            self.scrollbar.sliderMoved.connect(
-                lambda: self.toggleScroll(state=False))
+            if self.scrollbar.receivers(self.scrollbar.rangeChanged) > 0:
+                self.scrollbar.rangeChanged.disconnect()
 
     def wheelEvent(self, event):  # TODO only fires when scrolled to top / bottom of scroll region
         self.toggleScroll(state=False)
