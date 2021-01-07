@@ -52,10 +52,7 @@ class JsonIO():
                     f'Failed to write to JSON file {self.filename}')
 
     def fileExists(self):
-        if isfile(self.json_path):
-            return True
-        else:
-            return False
+        return isfile(self.json_path)
 
     def getEffectType(self, effect):
         # Get name of effect
