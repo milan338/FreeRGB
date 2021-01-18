@@ -45,7 +45,6 @@ class SerialMonitor(QWidget):
             self.scrollbar.maximum())
         self.scrollbar = self.ui.text_scroll_region.verticalScrollBar()
         self.auto_scroll = True
-        # self.scrollbar.rangeChanged.connect(self.disableScroll)
         # Switch widget
         self.switch = ToggleSwitch()
         self.switch.setChecked(self.auto_scroll)
@@ -163,3 +162,6 @@ class SerialMonitor(QWidget):
 
     def wheelEvent(self, event):  # TODO only fires when scrolled to top / bottom of scroll region
         self.toggleScroll(state=False)  # PYQT action for scrollbar movement?
+
+    def closeEvent(self, event):
+        __globals__.serial.readyRead.disconnect(self.updateMonitor)
