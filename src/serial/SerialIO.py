@@ -21,7 +21,7 @@ from src import settings
 
 from src.serial.serial_worker import SerialWorker
 
-from PyQt5.QtCore import QIODevice, QThread
+from PyQt5.QtCore import QIODevice, QThread, pyqtSlot
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 
 
@@ -38,6 +38,7 @@ class SerialIO():
             pass
 
         print(self.port_list)
+        SerialIO.run(__globals__.serial, 'getBoardInfo', __globals__.serial)
 
     @staticmethod
     def run(serial, target_method, *args, **kwargs):
@@ -69,8 +70,56 @@ class SerialIO():
 
     @staticmethod
     def read(serial, *args, **kwargs):
-        data = serial.readAll().data().decode()
-        return data
+        data = data = serial.readAll().data()
+        try:
+            data = data.decode()
+            return data
+        except:
+            if settings.do_logs:
+                __globals__.logger.warn(
+                    f'Could not decode serial input {data}')
 
-    def getBrightness(self):
-        print('tmp')
+    @staticmethod
+    def getBoardInfo(serial, *args, **kwargs):
+        serial.write(bytearray(b'\xfe\x00\tboardinfo\xff'))
+        # Store number of lines read from serial
+        __globals__.board_data_lines = 0
+        # Store multiple message lines in one message
+        __globals__.board_data_buffer = ''
+        # Read serial when available
+        serial.readyRead.connect(SerialIO.setBoardInfo)
+
+    @staticmethod
+    @pyqtSlot()
+    def setBoardInfo():
+        __globals__.board_data_buffer += SerialIO.read(__globals__.serial)
+        # Finished reading data
+        if __globals__.board_data_lines:
+            # Disconnect slot
+            __globals__.serial.readyRead.disconnect(SerialIO.setBoardInfo)
+            # Create list of board data
+            serial_data = __globals__.board_data_buffer
+            serial_data = serial_data.strip('\r\n').split(',')
+            # Ensure received message contains all data
+            try:
+                # Get relevant data
+                if len(serial_data) == int(serial_data[0]) + 1:
+                    board_data = {'type': serial_data[2],
+                                  'version': serial_data[3],
+                                  'physical_strips': serial_data[4],
+                                  'virtual_strips': serial_data[5],
+                                  'default_brightness': serial_data[6]}
+                    # Key represents user defined board name
+                    __globals__.board_data.append({serial_data[1]: board_data})
+                    print(__globals__.board_data)
+                else:
+                    if settings.do_logs:
+                        __globals__.logger.warn(
+                            f'Serial input {serial_data[1:]} not of expected size {serial_data[0]}')
+            except:
+                if settings.do_logs:
+                    __globals__.logger.warn(
+                        f'Expected type integer, instead got {serial_data[0]}')
+        # Read next line from serial - message sent in two lines
+        else:
+            __globals__.board_data_lines += 1
