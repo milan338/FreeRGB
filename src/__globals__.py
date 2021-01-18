@@ -20,6 +20,10 @@ serial_thread = None
 
 # Serial information
 connected_devices = None
+board_data_lines = None
+board_data_buffer = None
+board_data = []
+
 current_colour = None
 current_brightness = None
 device_name = None
@@ -45,9 +49,6 @@ colour_picker = None
 popup_menu_selection = None
 selected_device = None
 selected_strip = None
-# Remove device and strip
-# - just dynamically replace stylesheet
-# of its UI element
 
 # Store elements controlled by advanced mode
 advanced_mode_elements = []
@@ -55,5 +56,5 @@ advanced_mode_elements = []
 # Import location for effect definitions
 effect_import_path = 'src.ui.effects.effect'
 
-# Refresh menus from any package (called as function)
+# Refresh menus from any package
 refreshMenus = None
