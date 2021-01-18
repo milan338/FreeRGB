@@ -97,6 +97,17 @@ class SerialMonitor(QWidget):
             __globals__.popup_menu_selection)
         self.ui.input_serial_text.clear()
 
+    @pyqtSlot()
+    def updateMonitor(self):
+        self.curr_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
+        self.current_text = self.ui.text_display.text()
+        self.data = SerialIO.read(__globals__.serial)
+        self.new_text = f'{self.current_text}\n\n[{self.curr_time}] {self.data}'
+        self.ui.text_display.setText(self.new_text)
+
+    def clearMonitor(self):
+        self.ui.text_display.setText('')
+
     def sendSerial(self):
         self.input = self.ui.input_serial_text.text()
         # Send integer input
@@ -115,16 +126,17 @@ class SerialMonitor(QWidget):
             try:
                 # Split string and integer parts
                 self.input_array = self.input.split(',')
-                self.output_array = []
+                self.output_bytes = b''
                 for entry in self.input_array:
                     if entry:
                         try:
-                            entry = int(entry)
-                            entry = entry.to_bytes(1, byteorder='big')
-                            self.output_array.append(entry)
+                            entry = int(entry).to_bytes(1, byteorder='big')
                         except ValueError:
-                            self.output_array.append(entry.encode())
-                print(self.output_array)
+                            entry = entry.encode()
+                        self.output_bytes += entry
+                print(bytearray(self.output_bytes))
+                SerialIO.run(__globals__.serial, 'write',
+                             bytearray(self.output_bytes))
             except:
                 if settings.do_logs:
                     __globals__.logger.warn(
@@ -134,17 +146,6 @@ class SerialMonitor(QWidget):
             SerialIO.run(__globals__.serial, 'write', self.input.encode())
         # Clear input field
         self.ui.input_serial_text.setText('')
-
-    @pyqtSlot()
-    def updateMonitor(self):
-        self.curr_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
-        self.current_text = self.ui.text_display.text()
-        self.data = SerialIO.read(__globals__.serial)
-        self.new_text = f'{self.current_text}\n\n[{self.curr_time}] {self.data}'
-        self.ui.text_display.setText(self.new_text)
-
-    def clearMonitor(self):
-        self.ui.text_display.setText('')
 
     def toggleScroll(self, state=None):
         if state is not None:
@@ -161,4 +162,4 @@ class SerialMonitor(QWidget):
                 self.scrollbar.rangeChanged.disconnect()
 
     def wheelEvent(self, event):  # TODO only fires when scrolled to top / bottom of scroll region
-        self.toggleScroll(state=False)
+        self.toggleScroll(state=False)  # PYQT action for scrollbar movement?
