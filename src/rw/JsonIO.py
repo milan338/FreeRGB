@@ -144,6 +144,13 @@ class JsonIO():
         # Dump new data to file
         self.dumpJson(self.data)
 
+    def removeSingleEntry(self, menu, entry):
+        # Cycle through layouts in json menu to find referenced element
+        for layout in self.data[menu]:
+            self.data[menu][layout].pop(entry, None)
+        # Dump new data to file
+        self.dumpJson(self.data)
+
     def shiftEntry(self, entry, direction):
         # Buffers for original element
         self.element_name = None
