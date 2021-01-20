@@ -75,3 +75,11 @@ class GenerateButtons():
 
     def moveButtonDown(self, button):
         JsonIO(self.file).shiftEntry(button, 1)
+
+    def deviceDiscovery(self, *args, **kwargs):
+        from src.ui.views.discovery.device_discovery import DeviceDiscovery
+        # Reset input window
+        __globals__.popup_view = None
+        __globals__.popup_view = DeviceDiscovery()
+        __globals__.popup_view.setWindowTitle('Device Discovery')
+        __globals__.popup_view.show()
