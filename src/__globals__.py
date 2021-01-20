@@ -41,7 +41,7 @@ logger = None
 current_hovered_btn = None
 
 # Store popup menus
-edit_effect_menu = None
+# popup_view = None
 colour_picker = None
 popup_view = None
 
