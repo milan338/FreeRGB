@@ -22,7 +22,7 @@ serial_thread = None
 connected_devices = None
 board_data_lines = None
 board_data_buffer = None
-board_data = []
+board_data = {}
 
 current_colour = None
 current_brightness = None
