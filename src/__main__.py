@@ -80,7 +80,7 @@ class MainWindow(QWidget):
 
     def setupFiles(self):
         self.init_files = ['menus.json', 'settings.json',
-                           'effects.json', 'devices_base.json']
+                           'effects.json', 'devices.json']
         # Copy all files from base dir if they don't already exist
         for file in self.init_files:
             if JsonIO(file).fileExists():
