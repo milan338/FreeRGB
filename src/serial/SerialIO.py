@@ -26,18 +26,15 @@ from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 
 
 class SerialIO():
-    def __init__(self, port, baudrate):
+    def __init__(self, port, baudrate=None):
         self.baudrate = baudrate
         __globals__.serial = QSerialPort(port, baudRate=baudrate)
-        self.port_list = [serial_port.portName()
-                          for serial_port in QSerialPortInfo.availablePorts()]
         try:
             if not __globals__.serial.isOpen():
                 __globals__.serial.open(QIODevice.ReadWrite)
         except:
             pass
 
-        print(self.port_list)
         SerialIO.run(__globals__.serial, 'getBoardInfo', __globals__.serial)
 
     @staticmethod
@@ -110,7 +107,7 @@ class SerialIO():
                                   'virtual_strips': serial_data[5],
                                   'default_brightness': serial_data[6]}
                     # Key represents user defined board name
-                    __globals__.board_data.append({serial_data[1]: board_data})
+                    __globals__.board_data[serial_data[1]] = board_data
                     print(__globals__.board_data)
                 else:
                     if settings.do_logs:
