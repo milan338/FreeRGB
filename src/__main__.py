@@ -201,7 +201,7 @@ class MainWindow(QWidget):
         self.list_menu.clear()
         # Get actions from file
         self.connected_devices = JsonIO(
-            'connected_devices.json').readEntry('main_devices')
+            'devices.json').readEntry('known_devices')
         self.device_list = self.connected_devices[menu]
         for device_name, device_attributes in self.device_list.items():
             # Set highlighted entry

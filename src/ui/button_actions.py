@@ -19,13 +19,10 @@ import webbrowser
 from src import __globals__
 from src import settings
 
-from src.ui.views.licenses.licenses_view import LicensesView
-
 
 class ButtonActions():
     @staticmethod
     def toggleBool(*args, **kwargs):
-        # Reload settings
         settings.reloadSettings()
 
     @staticmethod
@@ -34,7 +31,13 @@ class ButtonActions():
 
     @ staticmethod
     def showLicenses(*args, **kwargs):
+        from src.ui.views.licenses.licenses_view import LicensesView
         __globals__.popup_view = LicensesView()
         __globals__.popup_view.setWindowTitle('Open-Source Licenses')
         __globals__.popup_view.show()
         # Globals.licenses_view.setWindowIcon()
+
+    @staticmethod
+    def connectSerial(port, *args, **kwargs):
+        from src.serial.serialio import SerialIO
+        SerialIO.run(__globals__.serial, 'getBoardInfo')

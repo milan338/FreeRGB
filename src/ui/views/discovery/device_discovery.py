@@ -19,6 +19,8 @@ from src.ui import getPath
 from src.ui.views.discovery.Ui_device_discovery import Ui_Form
 from src.ui.views.discovery.finders.serial_finder import SerialFinder
 
+from src.rw.jsonio import JsonIO
+
 from PyQt5.QtWidgets import QWidget, QSpacerItem, QSizePolicy
 from PyQt5.QtCore import Qt
 
@@ -40,10 +42,25 @@ class DeviceDiscovery(QWidget):
         self.addDevices()
 
     def findDevices(self):
+        # Clear cache
+        JsonIO('devices.json').clearLayout('discovered_devices', 'devices')
+        # Repopulate cache
         SerialFinder()
+        # Remove added devices
+        self.json = JsonIO('devices.json')
+        self.discovered_devices = list(self.json.readEntry(
+            'discovered_devices')['devices'].keys())
+        self.known_devices = self.json.readEntry('known_devices')['devices']
+        for device in self.known_devices.values():
+            self.port = device['command']['payload']
+            if self.port in self.discovered_devices:
+                self.json.removeSingleEntry('discovered_devices', self.port)
 
     def addDevices(self):
         # Imports done here to prevent circular imports
         from src.ui.generate_buttons import GenerateButtons
         GenerateButtons('devices.json', 'discovered_devices').generateGenericButtons(
             self.ui.discovery_button_layout, self.ui.discovery_scroll_region, 'primary', spacer=True)
+        # Additional spacer below buttons for better separation between border and bottom button
+        self.ui.discovery_button_layout.addItem(QSpacerItem(
+            20, 40, QSizePolicy.Minimum, QSizePolicy.Fixed))
