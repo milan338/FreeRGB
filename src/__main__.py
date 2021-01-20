@@ -44,7 +44,7 @@ from src.ui.views.monitor.serial_monitor import SerialMonitor
 
 from PyQt5.QtGui import QCursor
 from PyQt5.QtWidgets import QWidget, QColorDialog, QMessageBox, QApplication
-from PyQt5.QtCore import QThread
+from PyQt5.QtCore import Qt, QThread
 
 
 class MainWindow(QWidget):
@@ -73,7 +73,7 @@ class MainWindow(QWidget):
         # Initialise serial TODO reinitialise each time different port selected
         SerialIO('COM13', 9600)
         # Setup UI elements
-        self.setRightClickMenu()
+        self.createRightClickMenus()
         self.setupButtons()
         __globals__.colour_picker = QColorDialog(self)
         self.list_menu = CreateMenuContext(parent=self).makeMenu()
@@ -136,6 +136,9 @@ class MainWindow(QWidget):
             lambda: self.changePage(self.ui.main_menus, 1))
         self.ui.btn_list_device.clicked.connect(
             lambda: self.initListMenu('devices'))
+        self.ui.btn_list_device.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.ui.btn_list_device.customContextMenuRequested.connect(
+            lambda: self.contextMenu(self.right_click_menu_devices))
         self.ui.btn_list_strip.clicked.connect(
             lambda: self.initListMenu('strips'))
         # Effects menu
@@ -151,17 +154,26 @@ class MainWindow(QWidget):
     def changePage(self, widget, index):
         widget.setCurrentIndex(index)
 
-    def setRightClickMenu(self):
-        # Read entries from JSON
-        self.right_click_menu_effects_options = JsonIO(
-            'right_click_menu.json').readEntry('main_menu_right_click_menu')
+    def createRightClickMenus(self):
+        self.right_click_json = JsonIO('right_click_menu.json')
+        self.right_click_create = CreateMenuEffectEdit(parent=self)
+        # Effects right click menu
+        self.right_click_menu_effects = self.genRightClickMenu(
+            'main_menu_right_click_menu')
+        # Devices right click menu
+        self.right_click_menu_devices = self.genRightClickMenu(
+            'devices_right_click_menu')
+
+    def genRightClickMenu(self, menu):
+        # Get menu options
+        options = self.right_click_json.readEntry(menu)
         # Create new right click menu
-        self.right_click_menu_effects = CreateMenuEffectEdit(
-            parent=self).makeMenu()
+        r_c_menu = self.right_click_create.makeMenu()
         # Add all JSON entries as options to right click menu
-        for entry_name, entry_payload in self.right_click_menu_effects_options.items():
-            CreateMenuEffectEdit(parent=self).addOption(
-                self.right_click_menu_effects, entry_name, entry_payload)
+        for entry_name, entry_payload in options.items():
+            self.right_click_create.addOption(
+                r_c_menu, entry_name, entry_payload)
+        return r_c_menu
 
     def getBright(self):
         self.current_brightness = self.ui.slider_brightness.value()
@@ -201,6 +213,9 @@ class MainWindow(QWidget):
                     self.list_menu, device_name, (None, device_attributes['text']))
         # Place context menu at cursor position
         self.list_menu.exec(QCursor.pos())
+
+    def contextMenu(self, menu):
+        menu.exec(QCursor.pos())
 
     def mousePressEvent(self, event):
         pass
