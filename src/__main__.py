@@ -79,7 +79,8 @@ class MainWindow(QWidget):
         self.list_menu = CreateMenuContext(parent=self).makeMenu()
 
     def setupFiles(self):
-        self.init_files = ['menus.json', 'settings.json', 'effects.json']
+        self.init_files = ['menus.json', 'settings.json',
+                           'effects.json', 'devices_base.json']
         # Copy all files from base dir if they don't already exist
         for file in self.init_files:
             if JsonIO(file).fileExists():
