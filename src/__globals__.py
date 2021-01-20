@@ -42,8 +42,8 @@ current_hovered_btn = None
 
 # Store popup menus
 edit_effect_menu = None
-licenses_view = None
 colour_picker = None
+popup_view = None
 
 # Store currently selected context menu items
 popup_menu_selection = None
