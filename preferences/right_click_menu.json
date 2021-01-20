@@ -4,5 +4,9 @@
         "MOVE DOWN": "moveButtonDown",
         "EDIT": "editButton",
         "DELETE": "deleteButton"
+    },
+
+    "devices_right_click_menu": {
+        "DEVICE DISCOVERY": "deviceDiscovery"
     }
 }
