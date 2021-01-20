@@ -34,7 +34,7 @@ class ButtonActions():
 
     @ staticmethod
     def showLicenses(*args, **kwargs):
-        __globals__.licenses_view = LicensesView()
-        __globals__.licenses_view.setWindowTitle('Open-Source Licenses')
-        __globals__.licenses_view.show()
+        __globals__.popup_view = LicensesView()
+        __globals__.popup_view.setWindowTitle('Open-Source Licenses')
+        __globals__.popup_view.show()
         # Globals.licenses_view.setWindowIcon()
