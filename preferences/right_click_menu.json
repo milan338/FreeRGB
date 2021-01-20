@@ -7,6 +7,6 @@
     },
 
     "devices_right_click_menu": {
-        "DEVICE DISCOVERY": "deviceDiscovery"
+        "Device Discovery": "deviceDiscovery"
     }
 }
