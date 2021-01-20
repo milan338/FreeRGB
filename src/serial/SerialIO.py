@@ -19,10 +19,12 @@ from time import sleep
 from src import __globals__
 from src import settings
 
+from src.rw.jsonio import JsonIO
+
 from src.serial.serial_worker import SerialWorker
 
 from PyQt5.QtCore import QIODevice, QThread, pyqtSlot
-from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
+from PyQt5.QtSerialPort import QSerialPort
 
 
 class SerialIO():
@@ -35,7 +37,7 @@ class SerialIO():
         except:
             pass
 
-        SerialIO.run(__globals__.serial, 'getBoardInfo', __globals__.serial)
+        # SerialIO.run(__globals__.serial, 'getBoardInfo', __globals__.serial)
 
     @staticmethod
     def run(serial, target_method, *args, **kwargs):
@@ -105,10 +107,15 @@ class SerialIO():
                                   'version': serial_data[3],
                                   'physical_strips': serial_data[4],
                                   'virtual_strips': serial_data[5],
-                                  'default_brightness': serial_data[6]}
+                                  'default_brightness': serial_data[6],
+                                  'port': __globals__.serial.portName()}
                     # Key represents user defined board name
                     __globals__.board_data[serial_data[1]] = board_data
                     print(__globals__.board_data)
+                    command = {'type': 'serial',
+                               'payload': __globals__.serial.portName()}
+                    JsonIO('devices.json').writeEntry('known_devices', 'devices',
+                                                      serial_data[1], serial_data[1], command, sort_keys=True)
                 else:
                     if settings.do_logs:
                         __globals__.logger.warn(
