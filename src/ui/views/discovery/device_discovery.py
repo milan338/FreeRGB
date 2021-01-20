@@ -36,6 +36,8 @@ class DeviceDiscovery(QWidget):
             self.setStyleSheet(style_file.read())
         # Get devices and save to JSON
         self.findDevices()
+        # Add devices to menu
+        self.addDevices()
 
     def findDevices(self):
         SerialFinder()
@@ -43,3 +45,5 @@ class DeviceDiscovery(QWidget):
     def addDevices(self):
         # Imports done here to prevent circular imports
         from src.ui.generate_buttons import GenerateButtons
+        GenerateButtons('devices.json', 'discovered_devices').generateGenericButtons(
+            self.ui.discovery_button_layout, self.ui.discovery_scroll_region, 'primary', spacer=True)

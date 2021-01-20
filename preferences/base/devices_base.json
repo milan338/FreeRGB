@@ -1,6 +1,8 @@
 {
-    "devices": {
-        "discovered_devices": {},
-        "known_devices": {}
+    "discovered_devices": {
+        "devices": {}
+    },
+    "known_devices": {
+        "devices": {}
     }
 }

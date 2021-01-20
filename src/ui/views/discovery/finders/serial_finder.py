@@ -27,6 +27,5 @@ class SerialFinder(BaseFinder):
             serial_port for serial_port in QSerialPortInfo.availablePorts()]
         # Add devices
         for port in self.port_list:
-            print(port)
             self.addDevice(port.portName(), 'serial',
                            port.portName(), port.description())

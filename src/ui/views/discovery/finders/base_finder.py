@@ -23,6 +23,6 @@ class BaseFinder():
 
     def addDevice(self, name, type, port, description):
         self.command = {"type": type,
-                        "description": description}
-        self.json.writeEntry('devices', 'discovered_devices',
+                        "payload": description}
+        self.json.writeEntry('discovered_devices', 'devices',
                              port, name, self.command, sort_keys=False)
