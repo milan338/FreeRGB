@@ -58,12 +58,12 @@ class GenerateButtons():
 
     def editButton(self, button):
         # Reset input window
-        __globals__.edit_effect_menu = None
+        __globals__.popup_view = None
         # Set up input window
-        __globals__.edit_effect_menu = InputDialogue(
+        __globals__.popup_view = InputDialogue(
             'main_menu', new_entry=False, btn_name=button.objectName())
-        __globals__.edit_effect_menu.setWindowTitle('Edit Effect')
-        __globals__.edit_effect_menu.show()
+        __globals__.popup_view.setWindowTitle('Edit Effect')
+        __globals__.popup_view.show()
 
     def deleteButton(self, button):
         # Delete button if user confirms in message box
