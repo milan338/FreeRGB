@@ -21,8 +21,8 @@ class BaseFinder():
     def __init__(self, *args, **kwargs):
         self.json = JsonIO('devices.json')
 
-    def addDevice(self, name, type, port, description):
-        self.command = {"type": type,
-                        "payload": description}
+    def addDevice(self, name, type, port):
+        self.command = {'type': type,
+                        'payload': port}
         self.json.writeEntry('discovered_devices', 'devices',
-                             port, name, self.command, sort_keys=False)
+                             port, name, self.command, sort_keys=True)
