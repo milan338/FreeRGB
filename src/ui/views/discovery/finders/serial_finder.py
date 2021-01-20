@@ -27,5 +27,9 @@ class SerialFinder(BaseFinder):
             serial_port for serial_port in QSerialPortInfo.availablePorts()]
         # Add devices
         for port in self.port_list:
-            self.addDevice(port.portName(), 'serial',
-                           port.portName(), port.description())
+            self.port_name = (f'{port.portName()}\n\n'
+                              f'{port.description()}\n'
+                              f'Manufacturer: {port.manufacturer()}\n'
+                              f'Product ID: {port.productIdentifier()}\n'
+                              f'Vendor ID: {port.vendorIdentifier()}')
+            self.addDevice(self.port_name, 'connectSerial', port.portName())
