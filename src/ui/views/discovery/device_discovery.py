@@ -34,6 +34,8 @@ class DeviceDiscovery(QWidget):
         # Set style sheet
         with open(getPath('main_ld.qss'), 'r') as style_file:
             self.setStyleSheet(style_file.read())
+        # Get devices and save to JSON
+        self.findDevices()
 
     def findDevices(self):
         SerialFinder()

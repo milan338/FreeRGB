@@ -23,8 +23,10 @@ class SerialFinder(BaseFinder):
     def __init__(self):
         super().__init__()
         # Get available ports
-        self.port_list = [serial_port.portName()
-                          for serial_port in QSerialPortInfo.availablePorts()]
+        self.port_list = [
+            serial_port for serial_port in QSerialPortInfo.availablePorts()]
         # Add devices
         for port in self.port_list:
-            self.addDevice(str(port), 'serial', str(port), port.description())
+            print(port)
+            self.addDevice(port.portName(), 'serial',
+                           port.portName(), port.description())
