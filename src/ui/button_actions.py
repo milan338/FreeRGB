@@ -47,5 +47,9 @@ class ButtonActions():
         from src.rw.jsonio import JsonIO
         device_name = device[0]
         device_attributes = device[1]
+        # Clear existing device
+        JsonIO('devices.json').blankCopy(
+            'selected_device', 'devices', dump=True)
+        # Write new device
         JsonIO('devices.json').writeRaw('selected_device', 'devices',
                                         device_name, device_attributes, sort_keys=True)
