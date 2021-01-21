@@ -136,6 +136,20 @@ class JsonIO():
         # Dump new data to file
         self.dumpJson(self.data, sort_keys=sort_keys)
 
+    def writeRaw(self, menu, layout, entry_name, entry_contents, sort_keys):
+        # Add new json entry to existing dictionary
+        self.data[menu][layout][entry_name] = entry_contents
+        # Dump new data to file
+        self.dumpJson(self.data, sort_keys=sort_keys)
+
+    def copyEntry(self, from_entry, to_entry, to_menu, to_layout, sort_keys):
+        # Find entry to copy
+        self.from_data = self.findElement(from_entry)
+        self.from_name = list(self.from_data.keys())[0]
+        print(self.from_name)
+        # Write entry to new location
+        # self.writeEntry(to_menu, to_layout, )
+
     def removeEntry(self, entry):
         # Cycle through menus and layouts in json to find referenced element
         for menu in self.data:
