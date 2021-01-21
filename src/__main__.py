@@ -60,7 +60,7 @@ class MainWindow(QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         # Update available devices
-        self.connected_dict = {'devices': 'device_1',
+        self.connected_dict = {'devices': 'device_1',  # TODO tmp
                                'strips': 'strip_1'}  # TODO tmp
         self.current_colour = None  # TODO tmp
         self.current_brightness = 0  # TODO tmp
@@ -87,8 +87,6 @@ class MainWindow(QWidget):
                 pass
             else:
                 JsonIO(file).copyFromBase()
-        # Create fresh copy of connected devices list TODO tmp
-        # JsonIO('connected_devices.json').copyFromBase() # TODO deal with empty device list?
 
     def refreshMenus(self):
         try:
@@ -197,21 +195,29 @@ class MainWindow(QWidget):
         self.setWindowParams(self.input_dialogue, window_title)
 
     def initListMenu(self, menu):
+        self.devices_json = JsonIO('devices.json')
+        self.context_menu_gen = CreateMenuContext(parent=self)
         # Clear menu actions
         self.list_menu.clear()
         # Get actions from file
-        self.connected_devices = JsonIO(
-            'devices.json').readEntry('known_devices')
+        self.connected_devices = self.devices_json.readEntry('known_devices')
         self.device_list = self.connected_devices[menu]
         for device_name, device_attributes in self.device_list.items():
             # Set highlighted entry
-            if device_name == self.connected_dict[menu]:
-                CreateMenuContext(parent=self).addOption(
-                    self.list_menu, device_name, (None, device_attributes['text']), highlighted=True)
+            self.selected_devices = list(self.devices_json.readEntry(
+                'selected_device')['devices'].keys())
+            try:
+                if device_name == list(self.devices_json.readEntry('selected_device')['devices'].keys())[0]:
+                    self.context_menu_gen.addOption(
+                        self.list_menu, device_name, (None, ('selectDevice', (device_name, device_attributes))), highlighted=True)
+                # Set non-highlighted entry
+                else:
+                    self.context_menu_gen.addOption(
+                        self.list_menu, device_name, (None, ('selectDevice', (device_name, device_attributes))))
             # Set non-highlighted entry
-            else:
-                CreateMenuContext(parent=self).addOption(
-                    self.list_menu, device_name, (None, device_attributes['text']))
+            except:
+                self.context_menu_gen.addOption(
+                    self.list_menu, device_name, (None, ('selectDevice', (device_name, device_attributes))))
         # Place context menu at cursor position
         self.list_menu.exec(QCursor.pos())
 

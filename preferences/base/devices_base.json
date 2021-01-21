@@ -4,5 +4,8 @@
     },
     "known_devices": {
         "devices": {}
+    },
+    "selected_device": {
+        "devices": {}
     }
 }

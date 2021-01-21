@@ -16,6 +16,7 @@
 
 from src import __globals__
 
+from src.ui.button_actions import ButtonActions
 from src.ui.generators.create_menu_popup import CreateMenuPopup
 
 
@@ -34,4 +35,6 @@ class CreateMenuContext(CreateMenuPopup):
             __globals__.popup_menu_selection = self.selection
         # Context menu where selection immediately calls function
         else:
-            print(self.selection)
+            self.command = self.selection[0]
+            self.args = self.selection[1]
+            getattr(ButtonActions, self.command)(self.args)

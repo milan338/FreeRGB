@@ -29,7 +29,7 @@ class ButtonActions():
     def openURL(url, *args, **kwargs):
         webbrowser.open(url)
 
-    @ staticmethod
+    @staticmethod
     def showLicenses(*args, **kwargs):
         from src.ui.views.licenses.licenses_view import LicensesView
         __globals__.popup_view = LicensesView()
@@ -41,3 +41,11 @@ class ButtonActions():
     def connectSerial(port, *args, **kwargs):
         from src.serial.serialio import SerialIO
         SerialIO.run(__globals__.serial, 'getBoardInfo')
+
+    @staticmethod
+    def selectDevice(device, *args, **kwargs):
+        from src.rw.jsonio import JsonIO
+        device_name = device[0]
+        device_attributes = device[1]
+        JsonIO('devices.json').writeRaw('selected_device', 'devices',
+                                        device_name, device_attributes, sort_keys=True)
