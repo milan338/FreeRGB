@@ -33,6 +33,7 @@ from src.rw.jsonio import JsonIO
 from src.rw.qssread import QssRead
 
 from src.ui import getPath
+from src.ui.button_actions import ButtonActions
 from src.ui.generate_buttons import GenerateButtons
 from src.ui.effects.effects import Effects
 from src.ui.generators.create_menu_context import CreateMenuContext
@@ -64,14 +65,21 @@ class MainWindow(QWidget):
                                'strips': 'strip_1'}  # TODO tmp
         self.current_colour = None  # TODO tmp
         self.current_brightness = 0  # TODO tmp
-        self.device_name = None
-        self.com_port = None
-        self.num_strips = None
-        self.ardu_version = None
-        self.board = None
-        self.baud_rate = None
-        # Initialise serial TODO reinitialise each time different port selected
-        SerialIO('COM13', 9600)
+        # self.device_name = None
+        # self.com_port = None
+        # self.num_strips = None
+        # self.ardu_version = None
+        # self.board = None
+        # self.baud_rate = None
+        # Initialise first communication
+        self.devices_json = JsonIO('devices.json')
+        self.comm_name = list(self.devices_json.readEntry(
+            'selected_device')['devices'].keys())[0]
+        self.comm_attr = list(self.devices_json.readEntry(
+            'selected_device')['devices'].values())[0]
+        if self.comm_name and self.comm_attr:
+            ButtonActions.selectDevice(
+                (self.comm_name, self.comm_attr))
         # Setup UI elements
         self.createRightClickMenus()
         self.setupButtons()

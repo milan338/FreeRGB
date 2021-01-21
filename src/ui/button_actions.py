@@ -40,10 +40,11 @@ class ButtonActions():
     @staticmethod
     def connectSerial(port, *args, **kwargs):
         from src.serial.serialio import SerialIO
-        SerialIO.run(__globals__.serial, 'getBoardInfo')
+        SerialIO(port).run(__globals__.serial, 'getBoardInfo')
 
     @staticmethod
     def selectDevice(device, *args, **kwargs):
+        from src.serial.serialio import SerialIO
         from src.rw.jsonio import JsonIO
         device_name = device[0]
         device_attributes = device[1]
@@ -53,3 +54,20 @@ class ButtonActions():
         # Write new device
         JsonIO('devices.json').writeRaw('selected_device', 'devices',
                                         device_name, device_attributes, sort_keys=True)
+        # Set new communcation type
+        comm_type = device_attributes['command']['type']
+        comm_port = device_attributes['command']['payload']
+        # Initialise communication
+        comm_objects = {
+            'serial': SerialIO}
+        comm_globals = [
+            'serial']
+        try:
+            comm_objects[comm_type](comm_port)
+        except:
+            if settings.do_logs:
+                __globals__.logger.error(
+                    f'Failed to initialise {comm_type} communication through {comm_port}')
+            # Set all communications to None
+            for global_var in comm_globals:
+                setattr(__globals__, global_var, None)

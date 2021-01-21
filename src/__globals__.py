@@ -24,15 +24,6 @@ board_data_lines = None
 board_data_buffer = None
 board_data = {}
 
-current_colour = None
-current_brightness = None
-device_name = None
-com_port = None
-num_strips = None
-ardu_version = None
-board_name = None
-baudrate = None
-
 # Logging
 has_logged = False
 logger = None
