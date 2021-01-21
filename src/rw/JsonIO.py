@@ -245,9 +245,13 @@ class JsonIO():
                         self.data = self.new_dict
                         self.dumpJson(self.data)
 
-    def blankCopy(self, menu, layout):
+    def blankCopy(self, menu, layout, dump=False):
         # Create a deep copy of the original dictionary
         self.new_dict = deepcopy(self.data)
         # Remove all UI elements from target layout in new dictionary
         for element in list(self.new_dict[menu][layout].keys()):
             self.new_dict[menu][layout].pop(element, None)
+        # Dump to JSON directly
+        if dump:
+            self.data = self.new_dict
+            self.dumpJson(self.data)
