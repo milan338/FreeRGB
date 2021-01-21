@@ -103,14 +103,18 @@ class SerialIO():
             try:
                 # Get relevant data
                 if len(serial_data) == int(serial_data[0]) + 1:
-                    board_data = {'type': serial_data[2],
+                    board_data = {'name': serial_data[1],
+                                  'type': serial_data[2],
                                   'version': serial_data[3],
                                   'physical_strips': serial_data[4],
                                   'virtual_strips': serial_data[5],
                                   'default_brightness': serial_data[6],
                                   'port': __globals__.serial.portName()}
-                    # Key represents user defined board name
-                    __globals__.board_data[serial_data[1]] = board_data
+                    # # Clear current board data
+                    # __globals__.board_data = {}
+                    # # Key represents user defined board name
+                    # __globals__.board_data[serial_data[1]] = board_data
+                    __globals__.board_data = board_data
                     print(__globals__.board_data)
                     command = {'type': 'serial',
                                'payload': __globals__.serial.portName()}
