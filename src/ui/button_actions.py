@@ -43,6 +43,10 @@ class ButtonActions():
         SerialIO(port).run(__globals__.serial, 'getBoardInfo')
 
     @staticmethod
+    def selectStrip(strip, *args, **kwargs):
+        __globals__.current_strip = strip
+
+    @staticmethod
     def selectDevice(device, *args, **kwargs):
         from src.serial.serialio import SerialIO
         from src.rw.jsonio import JsonIO
@@ -62,11 +66,18 @@ class ButtonActions():
             'serial': SerialIO}
         comm_globals = [
             'serial']
+        disable_strips = []
         try:
+            # Init device communication
             comm_objects[comm_type](comm_port)
             # Display debugging tools if previously disabled from invalid device
             if settings.advanced_mode:
                 settings.setAdvancedModeVisible(override=True)
+            # Disable strips menu
+            if comm_type in disable_strips:
+                __globals__.strips_menu.setVisible(False)
+            else:
+                __globals__.strips_menu.setVisible(True)
         except:
             if settings.do_logs:
                 __globals__.logger.error(
@@ -77,10 +88,8 @@ class ButtonActions():
             # Clear global board data
             __globals__.board_data = {'name': None,
                                       'type': None,
-                                      'version': None,
-                                      'physical_strips': None,
-                                      'virtual_strips': None,
-                                      'default_brightness': None,
                                       'port': None}
+            # Disable strips menu
+            __globals__.strips_menu.setVisible(False)
             # Disable debugging tools
             settings.setAdvancedModeVisible(override=False)

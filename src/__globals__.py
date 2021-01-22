@@ -14,6 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
+# Main window parent
+parent = None
+
 # Serial threading
 serial = None
 serial_thread = None
@@ -32,12 +35,12 @@ current_hovered_btn = None
 
 # Store popup menus
 colour_picker = None
+strips_menu = None
 popup_view = None
 
 # Store currently selected context menu items
 popup_menu_selection = None
-selected_device = None
-selected_strip = None
+current_strip = None
 
 # Store elements controlled by advanced mode
 advanced_mode_elements = []
