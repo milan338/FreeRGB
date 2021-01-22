@@ -46,10 +46,14 @@ def reloadSettings():
                 options.get(option_name)()
 
 
-def setAdvancedModeVisible():
+def setAdvancedModeVisible(override=None):
     global advanced_mode
-    for element in __globals__.advanced_mode_elements:
-        element.setVisible(advanced_mode)
+    if not override is None:
+        for element in __globals__.advanced_mode_elements:
+            element.setVisible(override)
+    else:
+        for element in __globals__.advanced_mode_elements:
+            element.setVisible(advanced_mode)
 
 
 def initLogs(have_init=[]):
