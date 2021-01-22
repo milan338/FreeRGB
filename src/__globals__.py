@@ -33,6 +33,9 @@ logger = None
 # Store currently hovered button
 current_hovered_btn = None
 
+# Store main window elements
+brightness_slider = None
+
 # Store popup menus
 colour_picker = None
 strips_menu = None
