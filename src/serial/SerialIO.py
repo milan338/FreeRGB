@@ -110,12 +110,7 @@ class SerialIO():
                                   'virtual_strips': serial_data[5],
                                   'default_brightness': serial_data[6],
                                   'port': __globals__.serial.portName()}
-                    # # Clear current board data
-                    # __globals__.board_data = {}
-                    # # Key represents user defined board name
-                    # __globals__.board_data[serial_data[1]] = board_data
                     __globals__.board_data = board_data
-                    print(__globals__.board_data)
                     command = {'type': 'serial',
                                'payload': __globals__.serial.portName()}
                     JsonIO('devices.json').writeEntry('known_devices', 'devices',
