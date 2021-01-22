@@ -59,17 +59,14 @@ class MainWindow(QWidget):
         # UI initialisation
         self.ui = Ui_Form()
         self.ui.setupUi(self)
-        # Update available devices
-        self.connected_dict = {'devices': 'device_1',  # TODO tmp
-                               'strips': 'strip_1'}  # TODO tmp
-        self.current_colour = None  # TODO tmp
-        self.current_brightness = 0  # TODO tmp
         # Setup UI elements
         self.createRightClickMenus()
         self.setupButtons()
         __globals__.colour_picker = QColorDialog(self)
         self.list_menu = CreateMenuContext(parent=self).makeMenu()
         # Initialise first communication
+        self.current_colour = None  # TODO tmp
+        self.current_brightness = 0  # TODO tmp
         self.DevicesJson = JsonIO('devices.json')
         self.comm_name = list(self.DevicesJson.readEntry(
             'selected_device')['devices'].keys())[0]
