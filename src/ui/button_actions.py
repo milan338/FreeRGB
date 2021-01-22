@@ -44,7 +44,14 @@ class ButtonActions():
 
     @staticmethod
     def selectStrip(strip, *args, **kwargs):
+        from src.rw.jsonio import JsonIO
         __globals__.current_strip = strip
+        # Clear existing strip
+        JsonIO('devices.json').blankCopy(
+            'selected_device', 'strips', dump=True)
+        # Write new strip
+        JsonIO('devices.json').writeRaw('selected_device', 'strips',
+                                        strip, None, sort_keys=True)
 
     @staticmethod
     def selectDevice(device, *args, **kwargs):

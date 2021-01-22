@@ -6,6 +6,7 @@
         "devices": {}
     },
     "selected_device": {
-        "devices": {}
+        "devices": {},
+        "strips": {}
     }
 }
