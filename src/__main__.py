@@ -75,6 +75,8 @@ class MainWindow(QWidget):
             'selected_device')['devices'].keys())[0]
         self.comm_attr = list(self.DevicesJson.readEntry(
             'selected_device')['devices'].values())[0]
+        __globals__.current_strip = int(
+            list(self.DevicesJson.readEntry('selected_device')['strips'].keys())[0])
         if self.comm_name and self.comm_attr:
             ButtonActions.selectDevice(
                 (self.comm_name, self.comm_attr))
