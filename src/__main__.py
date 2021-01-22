@@ -27,8 +27,6 @@ import __version__
 from src import __globals__
 from src import settings
 
-from src.serial.serialio import SerialIO
-
 from src.rw.jsonio import JsonIO
 from src.rw.qssread import QssRead
 
@@ -65,12 +63,11 @@ class MainWindow(QWidget):
                                'strips': 'strip_1'}  # TODO tmp
         self.current_colour = None  # TODO tmp
         self.current_brightness = 0  # TODO tmp
-        # self.device_name = None
-        # self.com_port = None
-        # self.num_strips = None
-        # self.ardu_version = None
-        # self.board = None
-        # self.baud_rate = None
+        # Setup UI elements
+        self.createRightClickMenus()
+        self.setupButtons()
+        __globals__.colour_picker = QColorDialog(self)
+        self.list_menu = CreateMenuContext(parent=self).makeMenu()
         # Initialise first communication
         self.devices_json = JsonIO('devices.json')
         self.comm_name = list(self.devices_json.readEntry(
@@ -80,11 +77,6 @@ class MainWindow(QWidget):
         if self.comm_name and self.comm_attr:
             ButtonActions.selectDevice(
                 (self.comm_name, self.comm_attr))
-        # Setup UI elements
-        self.createRightClickMenus()
-        self.setupButtons()
-        __globals__.colour_picker = QColorDialog(self)
-        self.list_menu = CreateMenuContext(parent=self).makeMenu()
 
     def setupFiles(self):
         self.init_files = ['menus.json', 'settings.json',

@@ -64,6 +64,9 @@ class ButtonActions():
             'serial']
         try:
             comm_objects[comm_type](comm_port)
+            # Display debugging tools if previously disabled from invalid device
+            if settings.advanced_mode:
+                settings.setAdvancedModeVisible(override=True)
         except:
             if settings.do_logs:
                 __globals__.logger.error(
@@ -79,3 +82,5 @@ class ButtonActions():
                                       'virtual_strips': None,
                                       'default_brightness': None,
                                       'port': None}
+            # Disable debugging tools
+            settings.setAdvancedModeVisible(override=False)
