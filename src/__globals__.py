@@ -25,7 +25,6 @@ board_data_buffer = None
 board_data = {}
 
 # Logging
-has_logged = False
 logger = None
 
 # Store currently hovered button
