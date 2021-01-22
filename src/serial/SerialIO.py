@@ -37,7 +37,7 @@ class SerialIO():
         except:
             pass
 
-        # SerialIO.run(__globals__.serial, 'getBoardInfo', __globals__.serial)
+        SerialIO.run(__globals__.serial, 'getBoardInfo')
 
     @staticmethod
     def run(serial, target_method, *args, **kwargs):

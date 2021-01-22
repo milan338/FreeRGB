@@ -127,13 +127,12 @@ class MainWindow(QWidget):
         self.ui.btn_effect_off.clicked.connect(self.toggleLeds)
         self.ui.btn_device_information.clicked.connect(
             lambda: QMessageBox.information(self, 'Device Information',
-                                            f'Device Name: {self.device_name}\n'
-                                            f'COM Port: {self.com_port}\n'
-                                            f'Port Description: {None}\n'
-                                            f'Strips Connected: {self.num_strips}\n'
-                                            f'ArduRGB Version: {self.ardu_version}\n'
-                                            f'Board: {self.board}\n'
-                                            f'Baud Rate: {self.baud_rate}'))
+                                            f'Device Name: {__globals__.board_data["name"]}\n'
+                                            f'COM Port: {__globals__.board_data["port"]}\n'
+                                            f'Physical Strips: {__globals__.board_data["physical_strips"]}\n'
+                                            f'Virtual Strips: {__globals__.board_data["virtual_strips"]}\n'
+                                            f'ArduRGB Version: {__globals__.board_data["version"]}\n'
+                                            f'Board: {__globals__.board_data["type"]}\n'))
         self.ui.slider_brightness.sliderReleased.connect(self.getBright)
         self.ui.slider_brightness.setValue(self.current_brightness)
         # Left bar
