@@ -71,3 +71,11 @@ class ButtonActions():
             # Set all communications to None
             for global_var in comm_globals:
                 setattr(__globals__, global_var, None)
+            # Clear global board data
+            __globals__.board_data = {'name': None,
+                                      'type': None,
+                                      'version': None,
+                                      'physical_strips': None,
+                                      'virtual_strips': None,
+                                      'default_brightness': None,
+                                      'port': None}

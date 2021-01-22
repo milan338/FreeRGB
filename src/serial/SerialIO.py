@@ -29,14 +29,14 @@ from PyQt5.QtSerialPort import QSerialPort
 
 class SerialIO():
     def __init__(self, port, baudrate=None):
-        self.baudrate = baudrate
+        # Initialise serial communication
         __globals__.serial = QSerialPort(port, baudRate=baudrate)
         try:
             if not __globals__.serial.isOpen():
                 __globals__.serial.open(QIODevice.ReadWrite)
         except:
             pass
-
+        # Get data from board
         SerialIO.run(__globals__.serial, 'getBoardInfo')
 
     @staticmethod
