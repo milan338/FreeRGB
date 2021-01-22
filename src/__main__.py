@@ -49,6 +49,7 @@ from PyQt5.QtCore import Qt, QThread
 class MainWindow(QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        __globals__.parent = self
         self.setupFiles()
         settings.reloadSettings()
         Effects()
@@ -69,10 +70,10 @@ class MainWindow(QWidget):
         __globals__.colour_picker = QColorDialog(self)
         self.list_menu = CreateMenuContext(parent=self).makeMenu()
         # Initialise first communication
-        self.devices_json = JsonIO('devices.json')
-        self.comm_name = list(self.devices_json.readEntry(
+        self.DevicesJson = JsonIO('devices.json')
+        self.comm_name = list(self.DevicesJson.readEntry(
             'selected_device')['devices'].keys())[0]
-        self.comm_attr = list(self.devices_json.readEntry(
+        self.comm_attr = list(self.DevicesJson.readEntry(
             'selected_device')['devices'].values())[0]
         if self.comm_name and self.comm_attr:
             ButtonActions.selectDevice(
@@ -137,8 +138,7 @@ class MainWindow(QWidget):
         self.ui.btn_list_device.setContextMenuPolicy(Qt.CustomContextMenu)
         self.ui.btn_list_device.customContextMenuRequested.connect(
             lambda: self.contextMenu(self.right_click_menu_devices))
-        self.ui.btn_list_strip.clicked.connect(
-            lambda: self.initListMenu('strips'))
+        __globals__.strips_menu = self.ui.btn_list_strip
         # Effects menu
         self.ui.btn_menu_effect_new.clicked.connect(
             lambda: self.initDialogue('main_menu', 'Create New Effect'))
@@ -194,28 +194,28 @@ class MainWindow(QWidget):
         self.setWindowParams(self.input_dialogue, window_title)
 
     def initListMenu(self, menu):
-        self.devices_json = JsonIO('devices.json')
-        self.context_menu_gen = CreateMenuContext(parent=self)
+        self.DevicesJson = JsonIO('devices.json')
+        self.ContextMenuGen = CreateMenuContext(parent=self)
         # Clear menu actions
         self.list_menu.clear()
         # Get actions from file
-        self.connected_devices = self.devices_json.readEntry('known_devices')
+        self.connected_devices = self.DevicesJson.readEntry('known_devices')
         self.device_list = self.connected_devices[menu]
         for device_name, device_attributes in self.device_list.items():
-            # Set highlighted entry
-            self.selected_devices = list(self.devices_json.readEntry(
+            self.selected_devices = list(self.DevicesJson.readEntry(
                 'selected_device')['devices'].keys())
             try:
-                if device_name == list(self.devices_json.readEntry('selected_device')['devices'].keys())[0]:
-                    self.context_menu_gen.addOption(
+                # Set highlighted entry
+                if device_name == list(self.DevicesJson.readEntry('selected_device')['devices'].keys())[0]:
+                    self.ContextMenuGen.addOption(
                         self.list_menu, device_name, (None, ('selectDevice', (device_name, device_attributes))), highlighted=True)
                 # Set non-highlighted entry
                 else:
-                    self.context_menu_gen.addOption(
+                    self.ContextMenuGen.addOption(
                         self.list_menu, device_name, (None, ('selectDevice', (device_name, device_attributes))))
             # Set non-highlighted entry
             except:
-                self.context_menu_gen.addOption(
+                self.ContextMenuGen.addOption(
                     self.list_menu, device_name, (None, ('selectDevice', (device_name, device_attributes))))
         # Place context menu at cursor position
         self.list_menu.exec(QCursor.pos())

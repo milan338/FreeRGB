@@ -115,6 +115,33 @@ class SerialIO():
                                'payload': __globals__.serial.portName()}
                     JsonIO('devices.json').writeEntry('known_devices', 'devices',
                                                       serial_data[1], serial_data[1], command, sort_keys=True)
+                    # Create LED strips menu
+
+                    def initStripsMenu():
+                        from src.ui.generators.create_menu_context import CreateMenuContext
+                        from PyQt5.QtGui import QCursor
+                        ContextMenuGen = CreateMenuContext(
+                            parent=__globals__.parent)
+                        # Create menu
+                        __globals__.popup_view = ContextMenuGen.makeMenu()
+                        popup_view = ContextMenuGen.makeMenu()
+                        # Add entries
+                        try:
+                            for i in range(int(serial_data[5])):
+                                # Set highlighted entry
+                                if i == __globals__.current_strip:
+                                    ContextMenuGen.addOption(
+                                        popup_view, f'LED Strip {i}', (None, ('selectStrip', i)), highlighted=True)
+                                # Set non-highlighted entry
+                                else:
+                                    ContextMenuGen.addOption(
+                                        popup_view, f'LED Strip {i}', (None, ('selectStrip', i)))
+                        except:
+                            pass
+                        # Show menu
+                        popup_view.exec(QCursor.pos())
+                    # Show strips menu when clicked
+                    __globals__.strips_menu.clicked.connect(initStripsMenu)
                 else:
                     if settings.do_logs:
                         __globals__.logger.warn(
