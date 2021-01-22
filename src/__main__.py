@@ -65,8 +65,6 @@ class MainWindow(QWidget):
         __globals__.colour_picker = QColorDialog(self)
         self.list_menu = CreateMenuContext(parent=self).makeMenu()
         # Initialise first communication
-        self.current_colour = None  # TODO tmp
-        self.current_brightness = 0  # TODO tmp
         self.DevicesJson = JsonIO('devices.json')
         self.comm_name = list(self.DevicesJson.readEntry(
             'selected_device')['devices'].keys())[0]
@@ -126,7 +124,8 @@ class MainWindow(QWidget):
                                             f'ArduRGB Version: {__globals__.board_data["version"]}\n'
                                             f'Board: {__globals__.board_data["type"]}\n'))
         self.ui.slider_brightness.sliderReleased.connect(self.getBright)
-        self.ui.slider_brightness.setValue(self.current_brightness)
+        __globals__.brightness_slider = self.ui.slider_brightness
+        # self.ui.slider_brightness.setValue(self.current_brightness)
         # Left bar
         self.ui.btn_menu_effects.clicked.connect(
             lambda: self.changePage(self.ui.main_menus, 0))

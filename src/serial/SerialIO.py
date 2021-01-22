@@ -115,8 +115,11 @@ class SerialIO():
                                'payload': __globals__.serial.portName()}
                     JsonIO('devices.json').writeEntry('known_devices', 'devices',
                                                       serial_data[1], serial_data[1], command, sort_keys=True)
-                    # Create LED strips menu
+                    # Update brightness slider
+                    __globals__.brightness_slider.setValue(int(serial_data[6]))
+                    # TODO add function to get current brightness from device and set to that every time
 
+                    # Create LED strips menu
                     def initStripsMenu():
                         from src.ui.generators.create_menu_context import CreateMenuContext
                         from PyQt5.QtGui import QCursor
