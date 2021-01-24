@@ -116,7 +116,8 @@ class SerialIO():
                     JsonIO('devices.json').writeEntry('known_devices', 'devices',
                                                       serial_data[1], serial_data[1], command, sort_keys=True)
                     # Update brightness slider
-                    __globals__.brightness_slider.setValue(int(serial_data[6]))
+                    __globals__.parent.ui.slider_brightness.setValue(
+                        int(serial_data[6]))
                     # TODO add function to get current brightness from device and set to that every time
 
                     # Create LED strips menu
