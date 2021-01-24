@@ -52,7 +52,7 @@ border-radius: 10px;</string>
     <rect>
      <x>10</x>
      <y>100</y>
-     <width>381</width>
+     <width>261</width>
      <height>31</height>
     </rect>
    </property>
@@ -185,6 +185,34 @@ QPushButton:pressed
    </property>
    <property name="text">
     <string>Effect Type</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_payload_type">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>100</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(39, 43, 54);
+	border-radius: 10px;
+}
+
+QPushButton:hover {
+	background-color: rgb(51, 76, 100);
+}
+
+QPushButton:pressed  {
+	background-color: rgb(90, 164, 253);
+}</string>
+   </property>
+   <property name="text">
+    <string>Payload Type</string>
    </property>
   </widget>
  </widget>

@@ -26,7 +26,7 @@ class Ui_Form(object):
         self.input_effect_name.setText("")
         self.input_effect_name.setObjectName("input_effect_name")
         self.input_effect_payload = QtWidgets.QLineEdit(Form)
-        self.input_effect_payload.setGeometry(QtCore.QRect(10, 100, 381, 31))
+        self.input_effect_payload.setGeometry(QtCore.QRect(10, 100, 261, 31))
         self.input_effect_payload.setStyleSheet("color: rgb(255, 255, 255);\n"
 "background-color: rgb(51, 58, 72);\n"
 "border-radius: 10px;")
@@ -86,6 +86,22 @@ class Ui_Form(object):
         self.label_effect_type.setGeometry(QtCore.QRect(20, 150, 81, 16))
         self.label_effect_type.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_effect_type.setObjectName("label_effect_type")
+        self.btn_payload_type = QtWidgets.QPushButton(Form)
+        self.btn_payload_type.setGeometry(QtCore.QRect(280, 100, 111, 31))
+        self.btn_payload_type.setStyleSheet("QPushButton {\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(39, 43, 54);\n"
+"    border-radius: 10px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(51, 76, 100);\n"
+"}\n"
+"\n"
+"QPushButton:pressed  {\n"
+"    background-color: rgb(90, 164, 253);\n"
+"}")
+        self.btn_payload_type.setObjectName("btn_payload_type")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -97,3 +113,4 @@ class Ui_Form(object):
         self.label_effect_name.setText(_translate("Form", "Effect Name"))
         self.label_effect_payload.setText(_translate("Form", "Effect Payload"))
         self.label_effect_type.setText(_translate("Form", "Effect Type"))
+        self.btn_payload_type.setText(_translate("Form", "Payload Type"))
