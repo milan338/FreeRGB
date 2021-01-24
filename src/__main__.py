@@ -124,8 +124,6 @@ class MainWindow(QWidget):
                                             f'ArduRGB Version: {__globals__.board_data["version"]}\n'
                                             f'Board: {__globals__.board_data["type"]}\n'))
         self.ui.slider_brightness.sliderReleased.connect(self.getBright)
-        __globals__.brightness_slider = self.ui.slider_brightness
-        # self.ui.slider_brightness.setValue(self.current_brightness)
         # Left bar
         self.ui.btn_menu_effects.clicked.connect(
             lambda: self.changePage(self.ui.main_menus, 0))
