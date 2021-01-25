@@ -24,7 +24,7 @@ from PyQt5.QtCore import pyqtSlot, QRegExp
 
 
 class InputTypes():
-    def genValidators(self, button, entry,):
+    def genValidators(self, button, entry):
         self.button = button
         self.entry = entry
         # Menu to select validator type
