@@ -22,15 +22,14 @@ from src import settings
 from src.serial.serialio import SerialIO
 
 from src.ui.widgets.toggle_switch import ToggleSwitch
+from src.ui.views.input_types import InputTypes
 from src.ui.views.monitor.Ui_serial_monitor import Ui_Form
-from src.ui.generators.create_menu_context import CreateMenuContext
 
-from PyQt5.QtGui import QCursor, QRegExpValidator
-from PyQt5.QtWidgets import QWidget, QAction
-from PyQt5.QtCore import pyqtSlot, QRegExp
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtCore import pyqtSlot
 
 
-class SerialMonitor(QWidget):
+class SerialMonitor(QWidget, InputTypes):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.ui = Ui_Form()
@@ -54,47 +53,15 @@ class SerialMonitor(QWidget):
         # Buttons
         self.ui.btn_serial_clear.clicked.connect(self.clearMonitor)
         self.ui.btn_serial_send.clicked.connect(self.sendSerial)
-        # Input
-        self.input_menu = CreateMenuContext(parent=self).makeMenu()
-        self.input_menu.triggered.connect(self.updateInputType)
-        # Integer-only message
-        self.int_filter = QRegExp('[\d*\,]*')
-        self.int_validator = QRegExpValidator(self.int_filter)
-        # Integer-char message
-        self.int_char_filter = QRegExp('[\d*a-z\,]*')
-        self.int_char_validator = QRegExpValidator(self.int_char_filter)
-        # Set up filters
-        self.input_types = {'Integer': self.int_validator,
-                            'Integer-Char': self.int_char_validator,
-                            'String': None}
-        self.ui.btn_input_type.clicked.connect(self.initTypeMenu)
-        self.selected_type = 'Integer'
-        self.ui.btn_input_type.setText('Input: Integer')
-        self.ui.input_serial_text.setValidator(self.int_validator)
+        # Create input types
+        super().genValidators(button=self.ui.btn_input_type,
+                              entry=self.ui.input_serial_text)
+        # Send input through serial when enter key pressed
         self.ui.input_serial_text.returnPressed.connect(self.sendSerial)
         # Disable autoscroll on scrolling
         self.scrollbar.sliderMoved.connect(
             lambda: self.toggleScroll(state=False))
         self.toggleScroll()
-
-    def initTypeMenu(self):
-        self.input_menu.clear()
-        for input_type, validator_type in self.input_types.items():
-            if input_type == self.selected_type:
-                CreateMenuContext(parent=self).addOption(
-                    self.input_menu, input_type, (self.ui.btn_input_type, validator_type), highlighted=True)
-            else:
-                CreateMenuContext(parent=self).addOption(
-                    self.input_menu, input_type, (self.ui.btn_input_type, validator_type))
-        self.input_menu.exec(QCursor.pos())
-
-    @pyqtSlot(QAction)
-    def updateInputType(self, action):
-        self.selected_type = action.text()
-        self.ui.btn_input_type.setText(f'Input: {self.selected_type}')
-        self.ui.input_serial_text.setValidator(
-            __globals__.popup_menu_selection)
-        self.ui.input_serial_text.clear()
 
     @pyqtSlot()
     def updateMonitor(self):
