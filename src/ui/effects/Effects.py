@@ -44,7 +44,7 @@ class Effects():
                 # Import file
                 try:
                     self.module = __import__(
-                        f'{__globals__.effect_import_path}.{self.effect}', fromlist=[None])
+                        f'{__globals__.effect_import_path}.{self.effect}', fromlist=(None))
                     self.effect_class = getattr(self.module, self.effect)
                     # Get effect name
                     self.effect_name = getattr(
