@@ -17,6 +17,7 @@
 from src import __globals__
 
 from src.ui.generators.create_menu_context import CreateMenuContext
+from src.ui.views.input_types import InputTypes
 from src.ui.views.input.Ui_input_dialogue import Ui_Form
 
 from src.rw.jsonio import JsonIO
@@ -26,7 +27,7 @@ from PyQt5.QtGui import QCursor
 from PyQt5.QtCore import Qt
 
 
-class InputDialogue(QWidget):
+class InputDialogue(QWidget, InputTypes):
     def __init__(self, menu, new_entry=True, btn_name=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Setup UI
@@ -62,6 +63,9 @@ class InputDialogue(QWidget):
             __globals__.popup_menu_selection = self.btn[3]
         # Block inputs to application while dialogue active
         self.setWindowModality(Qt.ApplicationModal)
+        # Create input types
+        super().genValidators(button=self.ui.btn_payload_type,
+                              entry=self.ui.input_effect_payload)
 
     def effectTypeSelect(self):
         # Read entries from JSON
