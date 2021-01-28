@@ -39,6 +39,7 @@ class InputTypes():
         # Set up filters
         self.input_types = {'Integer': self.int_validator,
                             'Integer-Char': self.int_char_validator,
+                            'ArduRGB': self.int_char_validator,
                             'String': None}
         self.button.clicked.connect(self.initTypeMenu)
         self.selected_type = 'Integer'

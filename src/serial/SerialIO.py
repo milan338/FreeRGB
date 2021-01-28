@@ -98,6 +98,34 @@ class SerialIO():
                 if settings.do_logs:
                     __globals__.logger.warn(
                         f'Failed to convert input {message} to bytes / chars')
+        # Formatted output for ArduRGB device
+        elif out_type == 'ArduRGB':
+            try:
+                # Split string and integer parts
+                input_array = message.split(',')
+                # Serial start byte 255
+                output_bytes = b'\xfe'
+                # Add strip number
+                output_bytes += __globals__.current_strip.to_bytes(
+                    1, byteorder='big')
+                for entry in input_array:
+                    if entry:
+                        try:
+                            # UINT8_T effect arg
+                            entry = int(entry).to_bytes(1, byteorder='big')
+                        except ValueError:
+                            # String literal string effect name
+                            output_bytes += len(entry).to_bytes(1,
+                                                                byteorder='big')
+                            entry = entry.encode()
+                        output_bytes += entry
+                # Serial end byte 254
+                output_bytes += b'\xff'
+                serial.write(bytearray(output_bytes))
+            except:
+                if settings.do_logs:
+                    __globals__.logger.warn(
+                        f'Failed to convert input {message} to bytes / chars')
         # Raw string output
         elif out_type == 'String':
             serial.write(message.encode())
