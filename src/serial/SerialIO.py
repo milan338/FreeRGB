@@ -108,6 +108,16 @@ class SerialIO():
                 # Add strip number
                 output_bytes += __globals__.current_strip.to_bytes(
                     1, byteorder='big')
+                # Get number of effect args
+                args_num = 0
+                for entry in input_array:
+                    if entry:
+                        try:
+                            int(entry).to_bytes(1, byteorder='big')
+                            args_num += 1
+                        except:
+                            pass
+                # Effect name is first element of input
                 for entry in input_array:
                     if entry:
                         try:
@@ -117,8 +127,14 @@ class SerialIO():
                             # String literal string effect name
                             output_bytes += len(entry).to_bytes(1,
                                                                 byteorder='big')
-                            entry = entry.encode()
-                        output_bytes += entry
+                            output_bytes += entry.encode()
+                            # Add number of effect args
+                            if args_num:
+                                output_bytes += args_num.to_bytes(
+                                    1, byteorder='big')
+                            entry = None
+                        if entry is not None:
+                            output_bytes += entry
                 # Serial end byte 254
                 output_bytes += b'\xff'
                 serial.write(bytearray(output_bytes))

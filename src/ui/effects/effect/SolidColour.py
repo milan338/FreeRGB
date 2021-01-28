@@ -15,17 +15,25 @@
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
 from src import __globals__
+from src import run_comm as comm
 
 
 class SolidColour():
-    def __init__(self, *args, **kwargs):
-        self.getColour()
+    def __init__(self, message, out_type=None, *args, **kwargs):
+        self.out_type = out_type
+        self.getColor()
 
-    def getColour(self):
-        # self.handleButton()
+    def getColor(self):
+        self.color = None
+        __globals__.colour_picker.colorSelected.connect(self.updateColor)
         __globals__.colour_picker.exec()
-        self.current_colour = __globals__.colour_picker.currentColor().getRgb()
-        print(self.current_colour)
+        if self.color is not None:
+            self.color = list(self.color)
+            self.message = f'{self.color[0]},{self.color[1]},{self.color[2]}'
+            comm.run('write', f'solidcolor,{self.message}', self.out_type)
+
+    def updateColor(self):
+        self.color = __globals__.colour_picker.currentColor().getRgb()
 
     @staticmethod
     def effectData():
