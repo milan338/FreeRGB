@@ -1,20 +1,5 @@
 {
     "main_menu": {
-        "main_menu_button_layout": {
-            "btn_effect_solid_colour": {
-                "text": "Solid Colour",
-                "command": {
-                    "type": "SolidColour",
-                    "payload": "None"
-                }
-            },
-            "btn_effect_rainbow_cycle": {
-                "text": "Rainbow Cycle",
-                "command": {
-                    "type": "SerialDirect",
-                    "payload": "0121212-serial command to send"
-                }
-            }
-        }
+        "main_menu_button_layout": {}
     }
 }
