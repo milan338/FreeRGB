@@ -14,8 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with FreeRGB.  If not, see <https://www.gnu.org/licenses/>.
 
-# TODO add input type selector for input, add logic to either encode() or bytearray for serial direct
-
 import sys
 
 if __name__ == '__main__':

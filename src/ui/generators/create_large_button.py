@@ -124,16 +124,26 @@ class CreateLargeButton():
 
     def runEffect(self, effect, payload):
         try:
+            # Filter out message type
+            try:
+                self.payload = payload.split(']')[1]
+                self.out_type = payload.split(']')[0].split('[')[1]
+            except:
+                self.payload = payload
+                self.out_type = None
             # Import effect file
             self.module = __import__(
                 f'{__globals__.effect_import_path}.{effect}', fromlist=[None])
             # Create new effect instance
             self.effect_class = getattr(self.module, effect)
-            self.effect_class(payload)
+            if self.out_type is None:
+                self.effect_class(self.payload)
+            else:
+                self.effect_class(self.payload, self.out_type)
         except:
             if settings.do_logs:
                 __globals__.logger.error(
-                    f'Failed to call effect {effect} with payload {payload}, '
+                    f'Failed to call effect {effect} with payload {self.payload}, '
                     f'does module {__globals__.effect_import_path}.{effect} exist?')
 
     def setCurrentHoverButton(self, hovered):

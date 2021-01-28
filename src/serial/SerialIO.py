@@ -43,7 +43,6 @@ class SerialIO():
     def run(target_method, *args, **kwargs):
         if not __globals__.serial_thread.isRunning():
             serial = __globals__.serial
-            # serial = __globals__.serial
             method = getattr(SerialIO, target_method)
             worker = SerialWorker()
             thread = QThread()
