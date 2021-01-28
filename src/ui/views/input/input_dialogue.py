@@ -125,7 +125,7 @@ class InputDialogue(QWidget, InputTypes):
         else:
             # Replace existing button data with new data
             JsonIO('menus.json').replaceEntry(self.btn_name, generated_object_name,
-                                              f'[{self.selected_type}]{self.effect_name}', __globals__.popup_menu_selection, self.effect_payload)
+                                              self.effect_name, __globals__.popup_menu_selection, f'[{self.selected_type}]{self.effect_payload}')
             self.exitWindow()
 
     def createEffect(self, menu, layout, entry_name):
