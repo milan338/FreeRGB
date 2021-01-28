@@ -48,6 +48,9 @@ class InputDialogue(QWidget, InputTypes):
             lambda: self.contextMenu(self.menu_effects))
         # Add functionality to 'submit' button
         self.ui.btn_submit.clicked.connect(self.getInputs)
+        # Create input types
+        super().genValidators(button=self.ui.btn_payload_type,
+                              entry=self.ui.input_effect_payload)
         # Get existing data from button if editing
         if new_entry:
             # Clear current menu selection
@@ -58,14 +61,16 @@ class InputDialogue(QWidget, InputTypes):
             # Set existing text entry fields
             self.ui.input_effect_name.setText(self.btn[0])
             self.ui.btn_effect_types.setText(self.btn[1])
-            self.ui.input_effect_payload.setText(self.btn[2])
+            self.ui.input_effect_payload.setText(self.btn[2].split(']')[1])
+            self.selected_type = self.btn[2].split(']')[0].split('[')[1]
+            self.ui.input_effect_payload.setValidator(
+                self.input_types[self.selected_type])
+            print(self.selected_type)
+            self.ui.btn_payload_type.setText(f'Input: {self.selected_type}')
             # Set current menu selection
             __globals__.popup_menu_selection = self.btn[3]
         # Block inputs to application while dialogue active
         self.setWindowModality(Qt.ApplicationModal)
-        # Create input types
-        super().genValidators(button=self.ui.btn_payload_type,
-                              entry=self.ui.input_effect_payload)
 
     def effectTypeSelect(self):
         # Read entries from JSON
@@ -120,13 +125,13 @@ class InputDialogue(QWidget, InputTypes):
         else:
             # Replace existing button data with new data
             JsonIO('menus.json').replaceEntry(self.btn_name, generated_object_name,
-                                              self.effect_name, __globals__.popup_menu_selection, self.effect_payload)
+                                              f'[{self.selected_type}]{self.effect_name}', __globals__.popup_menu_selection, self.effect_payload)
             self.exitWindow()
 
     def createEffect(self, menu, layout, entry_name):
         self.command = {
             'type': __globals__.popup_menu_selection,
-            'payload': self.effect_payload
+            'payload': f'[{self.selected_type}]{self.effect_payload}'
         }
         JsonIO('menus.json').writeEntry(menu, layout, entry_name,
                                         self.effect_name, self.command, sort_keys=False)
