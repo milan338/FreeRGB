@@ -24,11 +24,11 @@ def run(*args, **kwargs):
     try:
         import_path = __globals__.comm_module[0]
         import_class = __globals__.comm_module[1]
-        module = __import__(f'src.{import_path}', fromlist=[None])
+        module = __import__(import_path, fromlist=[None])
         module_class = getattr(module, import_class)
         # Run communication method
         getattr(module_class, 'run')(*args, **kwargs)
     except:
         if settings.do_logs:
             __globals__.logger.error(
-                f'Failed to import / run src.{__globals__.comm_module[0]}')
+                f'Failed to import / run {__globals__.comm_module[0]}')
