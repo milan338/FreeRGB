@@ -17,7 +17,6 @@
 from datetime import datetime
 
 from src import __globals__
-from src import settings
 
 from src.serial.serialio import SerialIO
 
