@@ -21,11 +21,14 @@ parent = None
 serial = None
 serial_thread = None
 
-# Serial information
+# Device information
 connected_devices = None
 board_data_lines = None
 board_data_buffer = None
 board_data = {}
+
+# Import path to communication module relative to src
+comm_module = []
 
 # Logging
 logger = None
