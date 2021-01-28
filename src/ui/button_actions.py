@@ -40,7 +40,7 @@ class ButtonActions():
     @staticmethod
     def connectSerial(port, *args, **kwargs):
         from src.serial.serialio import SerialIO
-        SerialIO(port).run(__globals__.serial, 'getBoardInfo')
+        SerialIO(port).run('getBoardInfo')
 
     @staticmethod
     def selectStrip(strip, *args, **kwargs):
