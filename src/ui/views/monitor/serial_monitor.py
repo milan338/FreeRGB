@@ -76,40 +76,8 @@ class SerialMonitor(QWidget, InputTypes):
 
     def sendSerial(self):
         self.input = self.ui.input_serial_text.text()
-        # Send integer input
-        if self.selected_type == 'Integer':
-            try:
-                # Split input for multiple args
-                self.input_array = self.input.split(',')
-                self.input_array = [int(item) for item in self.input_array]
-                self.input_array = bytearray(self.input_array)
-                SerialIO.run(__globals__.serial, 'write', self.input_array)
-            except:
-                if settings.do_logs:
-                    __globals__.logger.warn(
-                        f'Failed to convert input {self.input} to bytearray')
-        elif self.selected_type == 'Integer-Char':
-            try:
-                # Split string and integer parts
-                self.input_array = self.input.split(',')
-                self.output_bytes = b''
-                for entry in self.input_array:
-                    if entry:
-                        try:
-                            entry = int(entry).to_bytes(1, byteorder='big')
-                        except ValueError:
-                            entry = entry.encode()
-                        self.output_bytes += entry
-                print(bytearray(self.output_bytes))
-                SerialIO.run(__globals__.serial, 'write',
-                             bytearray(self.output_bytes))
-            except:
-                if settings.do_logs:
-                    __globals__.logger.warn(
-                        f'Failed to convert input {self.input} to bytes / chars')
-        # Send string input
-        else:
-            SerialIO.run(__globals__.serial, 'write', self.input.encode())
+        # Send input
+        SerialIO.run('write', self.input, out_type=self.selected_type)
         # Clear input field
         self.ui.input_serial_text.setText('')
 

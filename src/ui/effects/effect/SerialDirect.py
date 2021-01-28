@@ -24,7 +24,7 @@ class SerialDirect():
         self.sendSerial(message)
 
     def sendSerial(self, message):
-        SerialIO.run(__globals__.serial, 'write', message)
+        SerialIO.run('write', message)
 
     @staticmethod
     def effectData():

@@ -37,11 +37,13 @@ class SerialIO():
         except:
             pass
         # Get data from board
-        SerialIO.run(__globals__.serial, 'getBoardInfo')
+        SerialIO.run('getBoardInfo')
 
     @staticmethod
-    def run(serial, target_method, *args, **kwargs):
+    def run(target_method, *args, **kwargs):
         if not __globals__.serial_thread.isRunning():
+            serial = __globals__.serial
+            # serial = __globals__.serial
             method = getattr(SerialIO, target_method)
             worker = SerialWorker()
             thread = QThread()
@@ -64,8 +66,46 @@ class SerialIO():
                 'Serial communication already running (Thread already exists)')
 
     @staticmethod
-    def write(serial, message, *args, **kwargs):
-        serial.write(message)
+    def write(serial, message, out_type=None, *args, **kwargs):
+        if out_type is None:
+            serial.write(message)
+        # UINT8_T output
+        elif out_type == 'Integer':
+            try:
+                # Split input for multiple args
+                input_array = message.split(',')
+                input_array = [int(item) for item in input_array]
+                input_array = bytearray(input_array)
+                serial.write(input_array)
+            except:
+                if settings.do_logs:
+                    __globals__.logger.warn(
+                        f'Failed to convert input {message} to bytearray')
+        # UINT8_T + char output
+        elif out_type == 'Integer-Char':
+            try:
+                # Split string and integer parts
+                input_array = message.split(',')
+                output_bytes = b''
+                for entry in input_array:
+                    if entry:
+                        try:
+                            entry = int(entry).to_bytes(1, byteorder='big')
+                        except ValueError:
+                            entry = entry.encode()
+                        output_bytes += entry
+                serial.write(bytearray(output_bytes))
+            except:
+                if settings.do_logs:
+                    __globals__.logger.warn(
+                        f'Failed to convert input {message} to bytes / chars')
+        # Raw string output
+        elif out_type == 'String':
+            serial.write(message.encode())
+        # Invalid output
+        elif settings.do_logs:
+            __globals__.logger.warn(
+                f'Message output type {out_type} not defined')
 
     @staticmethod
     def read(serial, *args, **kwargs):
@@ -111,6 +151,7 @@ class SerialIO():
                                   'default_brightness': serial_data[6],
                                   'port': __globals__.serial.portName()}
                     __globals__.board_data = board_data
+                    __globals__.comm_module = ['serial.serialio', 'SerialIO']
                     command = {'type': 'serial',
                                'payload': __globals__.serial.portName()}
                     JsonIO('devices.json').writeEntry('known_devices', 'devices',
@@ -118,7 +159,6 @@ class SerialIO():
                     # Update brightness slider
                     __globals__.parent.ui.slider_brightness.setValue(
                         int(serial_data[6]))
-                    # TODO add function to get current brightness from device and set to that every time
 
                     # Create LED strips menu
                     def initStripsMenu():
