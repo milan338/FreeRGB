@@ -23,7 +23,7 @@ from src.rw.jsonio import JsonIO
 
 from src.serial.serial_worker import SerialWorker
 
-from PyQt5.QtCore import QIODevice, QThread, pyqtSlot
+from PyQt5.QtCore import QIODevice, QThread
 from PyQt5.QtSerialPort import QSerialPort
 
 
@@ -127,9 +127,8 @@ class SerialIO():
         # Read serial when available
         serial.readyRead.connect(SerialIO.setBoardInfo)
 
-    @staticmethod
-    @pyqtSlot()
-    def setBoardInfo():
+    @classmethod
+    def setBoardInfo(cls):
         __globals__.board_data_buffer += SerialIO.read(__globals__.serial)
         # Finished reading data
         if __globals__.board_data_lines:
@@ -150,7 +149,7 @@ class SerialIO():
                                   'default_brightness': serial_data[6],
                                   'port': __globals__.serial.portName()}
                     __globals__.board_data = board_data
-                    __globals__.comm_module = ['serial.serialio', 'SerialIO']
+                    __globals__.comm_module = [__name__, cls.__name__]
                     command = {'type': 'serial',
                                'payload': __globals__.serial.portName()}
                     JsonIO('devices.json').writeEntry('known_devices', 'devices',
