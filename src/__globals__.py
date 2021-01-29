@@ -27,7 +27,7 @@ board_data_lines = None
 board_data_buffer = None
 board_data = {}
 
-# Import path to communication module relative to src
+# Import path to communication module
 comm_module = []
 
 # Logging
@@ -51,5 +51,5 @@ advanced_mode_elements = []
 # Import location for effect definitions
 effect_import_path = 'src.ui.effects.effect'
 
-# Refresh menus from any package
+# Refresh menus from any module
 refreshMenus = None
