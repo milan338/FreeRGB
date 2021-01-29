@@ -93,8 +93,9 @@ class InputDialogue(QWidget, InputTypes):
         # Update variables with user input
         self.effect_name = self.ui.input_effect_name.text()
         self.effect_payload = self.ui.input_effect_payload.text()
-        # Ensure no input is blank - falsy when blank
-        if not self.effect_name or not self.effect_payload or not __globals__.popup_menu_selection:
+        # Ensure no input is blank except for payload
+        # if not self.effect_name or not self.effect_payload or not __globals__.popup_menu_selection:
+        if not self.effect_name or not __globals__.popup_menu_selection:
             # Raise error to user
             self.ui.label_error.setText('Input(s) cannot be left empty')
         else:

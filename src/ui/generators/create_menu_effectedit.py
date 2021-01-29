@@ -27,10 +27,13 @@ class CreateMenuEffectEdit(CreateMenuPopup):
 
     def runFunction(self, method_name):
         try:
-            getattr(GenerateButtons('menus.json', 'main_menu_right_click_menu'), method_name)(
-                __globals__.current_hovered_btn)
-            # Refresh menu layout using JSON
-            __globals__.refreshMenus()
+            # Run static method
+            if type(GenerateButtons.__dict__[method_name]) == staticmethod:
+                getattr(GenerateButtons, method_name)()
+            # Run method
+            else:
+                getattr(GenerateButtons('menus.json',
+                                        'main_menu'), method_name)()
         except:
             if settings.do_logs:
                 __globals__.logger.error(
