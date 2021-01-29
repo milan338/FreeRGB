@@ -28,6 +28,7 @@ class GenerateButtons():
     def __init__(self, file, page):
         self.file = file
         self.page_contents = JsonIO(file).readEntry(page)
+        self.button = __globals__.current_hovered_btn
 
     def generateGenericButtons(self, vertical_element, scroll_element, style, right_click_menu=None, spacer=False, effect_btn=False):
         for elements in self.page_contents.values():
@@ -41,22 +42,27 @@ class GenerateButtons():
                     self.btn = CreateLargeButton(vertical_element, spacer=spacer, effect_btn=effect_btn).createGenericButton(
                         element_name, element_attributes, scroll_element, style, right_click_menu)
 
-    def removeButtons(self, layout):
+    @staticmethod
+    def removeButtons(layout):
         for i in reversed(range(layout.count())):
-            # Attempt to remove spacer item
             try:
-                layout.itemAt(i).removeItem()
+                widget = layout.takeAt(i).widget()
+                item = layout.itemAt(i)
+                # Remove widget
+                if widget:
+                    widget.deleteLater()
+                # Remove spacer item
+                elif item:
+                    item.removeItem()
             except:
-                # Attempt to remove widget
-                try:
-                    layout.takeAt(i).widget().deleteLater()
-                except:
-                    if settings.do_logs:
-                        __globals__.logger.error(
-                            f'Failed to remove UI element in layout {layout.objectName()}'
-                            f' at UI position {layout.count() - i}')
+                if settings.do_logs:
+                    __globals__.logger.error(
+                        f'Failed to remove UI element in layout {layout.objectName()}'
+                        f' at UI position {i}')
 
-    def editButton(self, button):
+    @staticmethod
+    def editButton():
+        button = __globals__.current_hovered_btn
         # Reset input window
         __globals__.popup_view = None
         # Set up input window
@@ -65,16 +71,22 @@ class GenerateButtons():
         __globals__.popup_view.setWindowTitle('Edit Effect')
         __globals__.popup_view.show()
 
-    def deleteButton(self, button):
+    def deleteButton(self):
         # Delete button if user confirms in message box
         if CreateMessageBox('Delete Effect', 'This action will remove this button. Continue?').confirmDelete():
-            JsonIO(self.file).removeEntry(button.objectName())
+            JsonIO(self.file).removeEntry(self.button.objectName())
+        # Refresh menu
+        __globals__.refreshMenus()
 
-    def moveButtonUp(self, button):
-        JsonIO(self.file).shiftEntry(button, -1)
+    def moveButtonUp(self):
+        JsonIO(self.file).shiftEntry(self.button, -1)
+        # Refresh menu
+        __globals__.refreshMenus()
 
-    def moveButtonDown(self, button):
-        JsonIO(self.file).shiftEntry(button, 1)
+    def moveButtonDown(self):
+        JsonIO(self.file).shiftEntry(self.button, 1)
+        # Refresh menu
+        __globals__.refreshMenus()
 
     def deviceDiscovery(self, *args, **kwargs):
         from src.ui.views.discovery.device_discovery import DeviceDiscovery
