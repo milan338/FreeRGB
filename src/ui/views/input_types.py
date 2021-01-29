@@ -55,7 +55,17 @@ class InputTypes():
             else:
                 CreateMenuContext(parent=self).addOption(
                     self.input_menu, input_type, (self.button, validator_type))
+        # Store previous popup menu selection in buffer
+        try:
+            self.prev_menu_selection = __globals__.popup_menu_selection[:]
+            self.restore = True
+        except:
+            self.restore = False
+        # Show window
         self.input_menu.exec(QCursor.pos())
+        # Restore previous popup menu selection
+        if self.restore:
+            __globals__.popup_menu_selection = self.prev_menu_selection[:]
 
     @pyqtSlot(QAction)
     def updateInputType(self, action):
