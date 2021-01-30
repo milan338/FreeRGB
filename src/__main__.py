@@ -24,6 +24,7 @@ import __version__
 
 from src import __globals__
 from src import settings
+from src import run_comm as comm
 
 from src.rw.jsonio import JsonIO
 from src.rw.qssread import QssRead
@@ -121,7 +122,7 @@ class MainWindow(QWidget):
                                             f'Virtual Strips: {__globals__.board_data["virtual_strips"]}\n'
                                             f'ArduRGB Version: {__globals__.board_data["version"]}\n'
                                             f'Board: {__globals__.board_data["type"]}\n'))
-        self.ui.slider_brightness.sliderReleased.connect(self.getBright)
+        self.ui.slider_brightness.sliderReleased.connect(self.setBright)
         # Left bar
         self.ui.btn_menu_effects.clicked.connect(
             lambda: self.changePage(self.ui.main_menus, 0))
@@ -167,12 +168,12 @@ class MainWindow(QWidget):
                 r_c_menu, entry_name, entry_payload)
         return r_c_menu
 
-    def getBright(self):
+    def setBright(self):
         self.current_brightness = self.ui.slider_brightness.value()
-        print(self.current_brightness)
+        comm.run('write', f'setbright,{self.current_brightness}', 'ArduRGB')
 
-    def toggleLeds(self, message):
-        print('serial sent')
+    def toggleLeds(self):
+        comm.run('write', 'toggleleds', 'ArduRGB')
 
     def setWindowParams(self, window, title, icon=None):
         window.setWindowTitle(title)
