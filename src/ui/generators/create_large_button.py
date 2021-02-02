@@ -153,4 +153,7 @@ class CreateLargeButton():
             pass
 
     def contextMenu(self, menu):
-        menu.exec(QCursor.pos())
+        try:
+            menu.exec(QCursor.pos())
+        except:
+            pass
