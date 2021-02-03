@@ -65,12 +65,15 @@ class MainWindow(QWidget):
         self.list_menu = CreateMenuContext(parent=self).makeMenu()
         # Initialise first communication
         self.DevicesJson = JsonIO('devices.json')
-        self.comm_name = list(self.DevicesJson.readEntry(
-            'selected_device')['devices'].keys())[0]
-        self.comm_attr = list(self.DevicesJson.readEntry(
-            'selected_device')['devices'].values())[0]
-        __globals__.current_strip = int(
-            list(self.DevicesJson.readEntry('selected_device')['strips'].keys())[0])
+        try:
+            self.comm_name = list(self.DevicesJson.readEntry(
+                'selected_device')['devices'].keys())[0]
+            self.comm_attr = list(self.DevicesJson.readEntry(
+                'selected_device')['devices'].values())[0]
+            __globals__.current_strip = int(
+                list(self.DevicesJson.readEntry('selected_device')['strips'].keys())[0])
+        except:
+            self.comm_name = None
         if self.comm_name and self.comm_attr:
             ButtonActions.selectDevice(
                 (self.comm_name, self.comm_attr))
