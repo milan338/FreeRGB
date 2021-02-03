@@ -33,7 +33,7 @@ FreeRGB is a highly customisable user interface to control any type of LED light
 
 First, you'll need to clone the repo.
 ```
-git clone
+git clone https://github.com/milan338/FreeRGB.git
 ```
 
 You'll need to then install the required dependencies. It's a good idea to setup a venv for this.
