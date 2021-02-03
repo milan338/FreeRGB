@@ -223,6 +223,8 @@ class MainWindow(QWidget):
 
 
 def init():
+    # Load style sheet
+    QssRead('main')
     # Initialise application
     app = QApplication(sys.argv)
     # Setup main window
@@ -230,7 +232,6 @@ def init():
     window.setWindowTitle('FreeRGB')
     # window.setWindowIcon()
     # Set main window styles
-    QssRead('main')
     with open(getPath('main_ld.qss'), 'r') as style_file:
         window.setStyleSheet(style_file.read())
     # Display main window
