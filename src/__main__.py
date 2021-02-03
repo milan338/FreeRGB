@@ -227,7 +227,7 @@ def init():
     app = QApplication(sys.argv)
     # Setup main window
     window = MainWindow()
-    window.setWindowTitle('title')
+    window.setWindowTitle('FreeRGB')
     # window.setWindowIcon()
     # Set main window styles
     QssRead('main')
