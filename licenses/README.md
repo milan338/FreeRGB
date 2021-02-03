@@ -21,4 +21,4 @@ ___
 
 The license governing the redistribution of FreeRGB can be found in a **LICENSE** file contained within the root directory of the FreeRGB source code.
 
-Contained within this folder are all open-source copyright licenses, compatible with the main license of FreeRGB, that pertain to third-party open-source work used within FreeRGB. Relevant copyright notices can be found in such files where applicable.
+Contained within this folder are all open-source copyright licenses that pertain to third-party open-source work used within FreeRGB. Relevant copyright notices can be found in such files where applicable.
