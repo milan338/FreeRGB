@@ -16,4 +16,4 @@
 
 __version__ = '0.0.1'
 
-python_requires = '3.8'
+python_requires = (3, 8)
