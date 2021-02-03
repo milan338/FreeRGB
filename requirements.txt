@@ -1,0 +1,4 @@
+autopep8==1.5.4
+pycodestyle==2.6.0
+PyQt5==5.15.1
+PyQt5-sip==12.8.1
