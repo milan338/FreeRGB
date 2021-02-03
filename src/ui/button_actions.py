@@ -100,3 +100,15 @@ class ButtonActions():
             __globals__.strips_menu.setVisible(False)
             # Disable debugging tools
             settings.setAdvancedModeVisible(override=False)
+
+    @staticmethod
+    def removeDevice(device, *args, **kwargs):
+        from src.rw.jsonio import JsonIO
+        Json = JsonIO('devices.json')
+        Json.removeSingleEntry('known_devices', device)
+        # Clear device selection if forgetting currently selected device
+        try:
+            Json.removeSingleEntry('selected_device', device)
+            Json.clearLayout('selected_devices', 'strips')
+        except:
+            pass
