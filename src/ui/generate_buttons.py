@@ -88,10 +88,20 @@ class GenerateButtons():
         # Refresh menu
         __globals__.refreshMenus()
 
-    def deviceDiscovery(self, *args, **kwargs):
+    @staticmethod
+    def deviceDiscovery(*args, **kwargs):
         from src.ui.views.discovery.device_discovery import DeviceDiscovery
         # Reset input window
         __globals__.popup_view = None
         __globals__.popup_view = DeviceDiscovery()
         __globals__.popup_view.setWindowTitle('Device Discovery')
+        __globals__.popup_view.show()
+
+    @staticmethod
+    def deviceRemoval(*args, **kwargs):
+        from src.ui.views.discovery.device_removal import DeviceRemoval
+        # Reset input window
+        __globals__.popup_view = None
+        __globals__.popup_view = DeviceRemoval()
+        __globals__.popup_view.setWindowTitle('Forget Devices')
         __globals__.popup_view.show()
