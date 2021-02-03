@@ -44,7 +44,7 @@
                 }
             },
             "support": {
-                "text": "Support My Work",
+                "text": "Support The Project",
                 "command": {
                     "type": "openURL" ,
                     "payload": "https://www.google.com"
