@@ -23,6 +23,8 @@ from src.rw.jsonio import JsonIO
 
 from src.serial.serial_worker import SerialWorker
 
+from src.ui.strips_menu import initStripsMenu
+
 from PyQt5.QtCore import QIODevice, QThread
 from PyQt5.QtSerialPort import QSerialPort
 
@@ -201,33 +203,8 @@ class SerialIO():
                     # Update brightness slider
                     __globals__.parent.ui.slider_brightness.setValue(
                         int(serial_data[6]))
-
-                    # Create LED strips menu
-                    def initStripsMenu():
-                        from src.ui.generators.create_menu_context import CreateMenuContext
-                        from PyQt5.QtGui import QCursor
-                        ContextMenuGen = CreateMenuContext(
-                            parent=__globals__.parent)
-                        # Create menu
-                        __globals__.popup_view = ContextMenuGen.makeMenu()
-                        popup_view = ContextMenuGen.makeMenu()
-                        # Add entries
-                        try:
-                            for i in range(int(serial_data[5])):
-                                # Set highlighted entry
-                                if i == __globals__.current_strip:
-                                    ContextMenuGen.addOption(
-                                        popup_view, f'LED Strip {i}', (None, ('selectStrip', i)), highlighted=True)
-                                # Set non-highlighted entry
-                                else:
-                                    ContextMenuGen.addOption(
-                                        popup_view, f'LED Strip {i}', (None, ('selectStrip', i)))
-                        except:
-                            pass
-                        # Show menu
-                        popup_view.exec(QCursor.pos())
                     # Show strips menu when clicked
-                    __globals__.strips_menu.clicked.connect(initStripsMenu)
+                    __globals__.strips_menu.clicked.connect(lambda: initStripsMenu(int(serial_data[5])))
                 else:
                     if settings.do_logs:
                         __globals__.logger.warn(
