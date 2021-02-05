@@ -84,6 +84,7 @@ If you'd like to contribute to the project, please see the [guidelines](CONTRIBU
 - [ ] Support for MQTT communication
 - [ ] Background service allowing other applications to control lighting
 - [ ] Built-in updates
+- [ ] Save each button layout per device
 - [ ] Distribution through package deployment
 - [ ] CI pipelines
 
