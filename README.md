@@ -1,7 +1,14 @@
+# FreeRGB
+
+![issues](https://img.shields.io/github/issues/milan338/FreeRGB?style=flat-square)
+![size](https://img.shields.io/github/repo-size/milan338/FreeRGB?style=flat-square)
+![license](https://img.shields.io/github/license/milan338/FreeRGB?style=flat-square)
+
 FreeRGB is a highly customisable user interface to control any type of LED lighting, built using Python and PyQt.
 
 ## Navigation
 
+- [Wiki](https://github.com/milan338/FreeRGB/wiki)
 - [Navigation](#navigation)
 - [Features](#features)
 - [Installation](#installation)
@@ -78,6 +85,8 @@ Before contributing, please ensure you've read the [code of conduct](CODE_OF_CON
 If you'd like to contribute to the project, please see the [guidelines](CONTRIBUTING.md).
 
 ## Screenshots
+
+![main](/src/assets/screenshot_main.png)
 
 ## ToDo
 
