@@ -75,7 +75,7 @@ Addons can be created to:
 - Support a new commincation interface i.e. MQTT
 - Support running new effect i.e. Colour picker
 
-Please see the wiki for more information about the types of addons that can be created,
+Please see the [wiki](https://github.com/milan338/FreeRGB/wiki) for more information about the types of addons that can be created,
 and how to create and integrate them.
 
 ## Contributing
