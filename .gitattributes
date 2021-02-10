@@ -1,0 +1,2 @@
+# Classify QSS files as CSS for GitHub detection / syntax highlighting
+*.qss linguist-language=CSS
